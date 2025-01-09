@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">Makes360 - Your IT Partner</string>
+    <string name="todo">TODO</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_internet_message">It seems you\'re offline. Please check your internet connection and try agian.</string>
+
+    <string name="splash_quote">Your IT Partner</string>
+    <string name="splash_footer">AGI Innovations Makes360 Private Limited</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="title_user_email">info@makes360.com</string>
+    <string name="title_user_website">CIN: U62099PB2024PTC062040</string>
+
+    <!--    Navigation Drawer-->
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="close_drawer">Close navigation drawer</string>
+    <string name="app_logo">App Logo</string>
+    <string name="home">Home</string>
+    <string name="help">Help</string>
+    <string name="client_login">Client Login</string>
+    <string name="intern_emp_login">Intern/Emp Login</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="share">Share</string>
+    <string name="intern_login">Intern Login</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_the_otp">Enter the OTP</string>
+    <string name="login">Login</string>
+    <string name="apply_for_internship">Apply for Internship</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="clear_filter">Clear Filter</string>
+    <string name="previous_announcements">Previous Announcements</string>
+    <string name="full_name">Full Name</string>
+    <string name="your_email_id">Your Email Id</string>
+    <string name="position">Position</string>
+    <string name="intern_emp_id">Intern/Emp Id</string>
+    <string name="log_out">Log Out</string>
+    <string name="recent_announcement">Recent Announcement</string>
+    <string name="mark_as_read">Mark As Read</string>
+    <string name="monthly_stipend">Monthly Stipend</string>
+    <string name="quotationUp">❝</string>
+    <string name="quotationDown">❞</string>
+    <string name="loading">Loading…</string>
+    <string name="raise_a_complaint">Raise a Complaint</string>
+    <string name="salary_stipend_note">
+    &#8226; The salary or stipend will be prepared on the first workday after the 20th of each month. If you find any issues, let us know by the 25th of the month.\n
+    &#8226; Your pay will be put into your account on the 1st of each month, or the next workday if the 1st is a weekend or holiday.\n
+    &#8226; Once your pay is in your account, the company won\'t make any changes.\n
+    &#8226; The pay period is from the 20th of one month to the 20th of the next.
+    </string>
+    <string name="salary_stipend_history">Salary/Stipend History</string>
+    <string name="stipend_no_record">No Record Found! Record will be updated after the first stipend.</string>
+    <string name="stipend_details">Stipend Details</string>
+    <string name="internship_id">Intern/Employee ID:</string>
+    <string name="job_role">Job Role:</string>
+    <string name="current_stipend">Current Stipend/Salary:</string>
+    <string name="log_hour">Total Log Hour:</string>
+    <string name="paid_leave">Earned/Paid Leave:</string>
+    <string name="misinformed_leave">Misinformed Leave:</string>
+    <string name="cl_other_leave">CL/SL/ML:</string>
+    <string name="deadlines_missed">Deadlines Missed</string>
+    <string name="cost">Cost to Company:</string>
+    <string name="remarks">Remarks:</string>
+    <string name="advance_payment">Payroll Advance</string>
+    <string name="amount">Amount:</string>
+    <string name="bonus">Bonus/Reward/Reimbursement</string>
+    <string name="payment">Gross Earning</string>
+    <string name="payment_status">Payment Status:</string>
+    <string name="date_of_payment">Date of Payment:</string>
+    <string name="method">Method:</string>
+    <string name="bank_ac_no">Bank Ac No:</string>
+    <string name="ifsc_code">IFSC Code:</string>
+    <string name="note">Note</string>
+    <string name="profile">Profile</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="category_name">Category Name</string>
+    <string name="view">View</string>
+    <string name="detail_name">Detail Name</string>
+    <string name="detail_value">Detail Value</string>
+    <string name="intern_handbook">Intern Handbook</string>
+
+</resources>

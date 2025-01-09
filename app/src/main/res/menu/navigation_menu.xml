@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:iconTint="@null"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/nav_help"
+        android:icon="@drawable/ic_nav_help"
+        android:title="@string/help" />
+    <item
+        android:id="@+id/nav_client"
+        android:icon="@drawable/ic_nav_client"
+        android:title="@string/client_login" />
+    <item
+        android:id="@+id/nav_intern"
+        android:icon="@drawable/ic_nav_intern"
+        android:title="@string/intern_emp_login" />
+    <item
+        android:id="@+id/nav_rate_us"
+        android:icon="@drawable/ic_nav_rate_us"
+        android:title="@string/rate_us" />
+    <item
+        android:id="@+id/nav_share_us"
+        android:icon="@drawable/ic_nav_share"
+        android:title="@string/share" />
+</menu>

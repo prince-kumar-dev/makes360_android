@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/detailName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:fontFamily="@font/roboto"
+            android:padding="@dimen/_4sdp"
+            android:text="@string/detail_name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_11sdp"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:id="@+id/detailValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:fontFamily="@font/roboto"
+            android:padding="@dimen/_4sdp"
+            android:text="@string/detail_value"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_11sdp"
+            tools:ignore="TextSizeCheck" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/material_core_yellow"
+        android:elevation="@dimen/_6sdp"
+        android:layout_margin="@dimen/_4sdp"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/_18sdp">
+
+        <TextView
+            android:id="@+id/cardViewButtonTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Request Extension"
+            android:layout_gravity="center"
+            android:textColor="@color/black" />
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
