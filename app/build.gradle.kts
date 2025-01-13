@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.makes360.android"
+    namespace = "com.makes360.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.makes360.android"
+        applicationId = "com.makes360.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

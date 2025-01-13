@@ -8,8 +8,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/_6sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
@@ -52,7 +50,7 @@
                         android:src="@drawable/ic_calendar"
                         tools:ignore="ImageContrastCheck" />
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/monthlyStipendParentTitleTv"
@@ -63,7 +61,6 @@
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center_vertical"
                     android:text="Month - Year"
-                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView"
                     app:layout_constraintEnd_toStartOf="@+id/guideline1"
@@ -78,7 +75,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.6" />
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/stipendSeeCardView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -98,7 +95,7 @@
                         android:layout_height="match_parent"
                         android:padding="@dimen/_1sdp">
 
-                        <androidx.cardview.widget.CardView
+                        <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardView2"
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
@@ -116,7 +113,7 @@
                                 android:src="@drawable/ic_eye"
                                 tools:ignore="ImageContrastCheck" />
 
-                        </androidx.cardview.widget.CardView>
+                        </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/viewStipend"
@@ -126,13 +123,12 @@
                             android:layout_marginStart="@dimen/_6sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/view"
-                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

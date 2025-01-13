@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/detailName"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -18,11 +18,10 @@
             android:padding="@dimen/_4sdp"
             android:text="@string/detail_name"
             android:textAlignment="viewStart"
-            android:textColor="@color/primary_text"
             android:textSize="@dimen/_11sdp"
             tools:ignore="TextSizeCheck" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/detailValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -31,13 +30,12 @@
             android:padding="@dimen/_4sdp"
             android:text="@string/detail_value"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_11sdp"
             tools:ignore="TextSizeCheck" />
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +45,7 @@
         android:visibility="gone"
         app:cardCornerRadius="@dimen/_18sdp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cardViewButtonTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,5 +58,5 @@
             android:layout_gravity="center"
             android:textColor="@color/black" />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

@@ -58,7 +58,7 @@
                 android:src="@drawable/makes360_letter_head" />
 
             <!-- Pay Slip Header -->
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/stipendSlip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +69,8 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:text="@string/stipend_details"
                 android:textColor="#000"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="@dimen/_14sdp"
+                tools:ignore="TextSizeCheck" />
 
 
             <!-- Table Layout -->
@@ -91,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -101,12 +102,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/internshipId"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
 
                     </LinearLayout>
@@ -116,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -126,12 +128,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/jobRole"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
 
                     </LinearLayout>
@@ -141,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -151,12 +154,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/currentStipend"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
                     </LinearLayout>
 
@@ -165,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -175,12 +179,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/logHour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
                     </LinearLayout>
 
@@ -189,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -199,12 +204,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/paidLeave"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
 
                     </LinearLayout>
@@ -214,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -224,12 +230,13 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/unpaidLeave"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:textSize="@dimen/_11sdp" />
 
                     </LinearLayout>
@@ -239,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_140sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -249,11 +256,12 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/workFromHome"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -264,7 +272,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -288,7 +296,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -299,13 +307,14 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/deadlinesMissedCost"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
 
@@ -316,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -326,13 +335,14 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/deadlinesMissedRemarks"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
                     </LinearLayout>
@@ -342,7 +352,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -367,7 +377,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -378,13 +388,14 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/advancePayment"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
 
@@ -395,7 +406,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -405,13 +416,14 @@
                             android:textSize="@dimen/_11sdp"
                             tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/advancePaymentRemarks"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
                     </LinearLayout>
@@ -420,7 +432,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -429,7 +441,8 @@
                         android:padding="@dimen/_8sdp"
                         android:text="@string/bonus"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="TextSizeCheck" />
                 </TableRow>
 
                 <LinearLayout
@@ -443,7 +456,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -451,15 +464,17 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/amount"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/bonus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
                     </LinearLayout>
@@ -469,7 +484,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -477,15 +492,17 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/remarks"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/bonusRemarks"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
 
@@ -495,7 +512,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -504,7 +521,8 @@
                         android:padding="@dimen/_8sdp"
                         android:text="@string/payment"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="TextSizeCheck" />
                 </TableRow>
 
 
@@ -519,7 +537,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -527,15 +545,17 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/amount"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/totalStipend"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
+                            android:textColor="@color/gray_font"
                             android:text=""
                             android:textSize="@dimen/_11sdp" />
 
@@ -546,7 +566,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -554,14 +574,16 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/payment_status"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/paymentStatus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -572,7 +594,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -580,14 +602,16 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/date_of_payment"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/paymentDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -598,7 +622,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -606,14 +630,16 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/method"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/paymentMethod"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -624,7 +650,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -632,14 +658,16 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/bank_ac_no"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/bankAcNo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -650,7 +678,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="@dimen/_104sdp"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_medium"
@@ -658,14 +686,16 @@
                             android:padding="@dimen/_8sdp"
                             android:text="@string/ifsc_code"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp" />
+                            android:textSize="@dimen/_11sdp"
+                            tools:ignore="TextSizeCheck" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/ifscCode"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
+                            android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
@@ -675,7 +705,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -683,18 +713,20 @@
                         android:padding="@dimen/_8sdp"
                         android:text="@string/note"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="TextSizeCheck" />
                 </TableRow>
 
                 <TableRow android:background="@drawable/table_row_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/notes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto"
                         android:gravity="start"
+                        android:textColor="@color/gray_font"
                         android:padding="@dimen/_8sdp"
                         android:textSize="@dimen/_11sdp" />
 
@@ -702,7 +734,7 @@
 
                 <TableRow android:background="@drawable/table_small_heading_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -710,18 +742,20 @@
                         android:padding="@dimen/_8sdp"
                         android:text="@string/disclaimer"
                         android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="TextSizeCheck" />
                 </TableRow>
 
                 <TableRow android:background="@drawable/table_row_border">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/disclaimer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto"
                         android:gravity="start"
+                        android:textColor="@color/gray_font"
                         android:padding="@dimen/_8sdp"
                         android:textSize="@dimen/_11sdp" />
 
