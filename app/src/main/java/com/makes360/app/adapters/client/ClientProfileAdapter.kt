@@ -1,6 +1,5 @@
-package com.makes360.app.adapters
+package com.makes360.app.adapters.client
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
-import com.makes360.app.models.ClientProfileCategory
+import com.makes360.app.models.client.ClientProfileCategory
 
 class ClientProfileAdapter (private val categories: List<ClientProfileCategory>
 ) : RecyclerView.Adapter<ClientProfileAdapter.CategoryViewHolder>() {

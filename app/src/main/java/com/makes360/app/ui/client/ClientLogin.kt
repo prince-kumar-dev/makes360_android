@@ -12,7 +12,6 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -88,10 +87,12 @@ class ClientLogin : AppCompatActivity() {
         view.clearFocus()
     }
 
-    private fun saveLoginState(email: String) {
+    private fun saveLoginState(email: String, custId: String, firstName: String) {
         val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("client_email", email)
+        editor.putString("client_cust_id", custId) // Save custId
+        editor.putString("client_first_name", firstName)
         editor.apply()
     }
 
@@ -101,12 +102,28 @@ class ClientLogin : AppCompatActivity() {
         return sharedPreferences.getString("client_email", null) != null
     }
 
+    // Utility function to retrieve saved custId
+    private fun getCustId(): String? {
+        val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+        return sharedPreferences.getString("client_cust_id", null)
+    }
+
+    private fun getFirstName(): String? {
+        val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+        return sharedPreferences.getString("client_first_name", null)
+    }
+
+
     // Utility function to navigate to Client Detail activity
     private fun navigateToClientDetail() {
         val email = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
             .getString("client_email", null)
+        val custId = getCustId()
+        val firstName = getFirstName()
         val intent = Intent(this, ClientDashboard::class.java)
         intent.putExtra("EMAIL", email)
+        intent.putExtra("CUST_ID", custId)
+        intent.putExtra("FIRST_NAME", firstName)
         startActivity(intent)
         finish()
     }
@@ -141,7 +158,7 @@ class ClientLogin : AppCompatActivity() {
             return
         }
 
-        val url = "https://www.makes360.com/application/makes360/client/client_send_otp.php"
+        val url = "https://www.makes360.com/application/makes360/client/send-otp.php"
         val requestQueue: RequestQueue = Volley.newRequestQueue(this)
 
         showLoader()
@@ -200,7 +217,7 @@ class ClientLogin : AppCompatActivity() {
             return
         }
 
-        val url = "https://www.makes360.com/application/makes360/client/client_verify_otp.php"
+        val url = "https://www.makes360.com/application/makes360/client/verify-otp.php"
         val requestQueue: RequestQueue = Volley.newRequestQueue(this)
 
         val stringRequest = object : StringRequest(
@@ -210,11 +227,14 @@ class ClientLogin : AppCompatActivity() {
                 try {
                     val jsonResponse = JSONObject(response)
                     if (jsonResponse.optBoolean("success", false)) {
-                        saveLoginState(email)
+                        val custId = jsonResponse.optString("cust_id", null.toString())
+                        val firstName = jsonResponse.optString("first_name", null.toString())
+                        saveLoginState(email, custId, firstName)
                         val intent = Intent(this, ClientDashboard::class.java)
                         intent.putExtra("EMAIL", email)
-                        Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT)
-                            .show()
+                        intent.putExtra("CUST_ID", custId)
+                        intent.putExtra("FIRST_NAME", firstName)
+                        Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
                         finish()
                     } else {
@@ -248,4 +268,5 @@ class ClientLogin : AppCompatActivity() {
 
         requestQueue.add(stringRequest)
     }
+
 }

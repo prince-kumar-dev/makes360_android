@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.R
-import com.makes360.app.adapters.ClientProfileAdapter
+import com.makes360.app.adapters.client.ClientProfileAdapter
 import com.makes360.app.databinding.ActivityClientProfileBinding
-import com.makes360.app.models.ClientProfileCategory
-import com.makes360.app.ui.intern.InternLogin
+import com.makes360.app.models.client.ClientProfileCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -56,7 +55,7 @@ class ClientProfile : AppCompatActivity() {
         editor.apply()
 
         // Redirect to login screen
-        val intent = Intent(this, InternLogin::class.java).apply {
+        val intent = Intent(this, ClientLogin::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         Toast.makeText(this, "Log Out Successfully", Toast.LENGTH_SHORT).show()

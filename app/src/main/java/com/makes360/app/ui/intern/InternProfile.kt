@@ -1,12 +1,10 @@
 package com.makes360.app.ui.intern
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,8 +12,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
 import com.makes360.app.databinding.ActivityInternProfileBinding
-import com.makes360.app.adapters.ProfileAdapter
-import com.makes360.app.models.ProfileCategory
+import com.makes360.app.adapters.InternProfileAdapter
+import com.makes360.app.models.InternProfileCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -121,7 +119,7 @@ class InternProfile : BaseActivity() {
         fun String?.orPlaceholder() = if (this.isNullOrEmpty()) "Will be Updated" else this
 
         val categories = listOf(
-            ProfileCategory(
+            InternProfileCategory(
                 "General",
                 mapOf(
                     "Mother's Name:" to details.motherName.orPlaceholder(),
@@ -130,7 +128,7 @@ class InternProfile : BaseActivity() {
                 ),
                 icon = R.drawable.ic_general
             ),
-            ProfileCategory(
+            InternProfileCategory(
                 "Contact Details",
                 mapOf(
                     "Phone No:" to "${details.phoneCode.orPlaceholder()} ${details.phoneNumber.orPlaceholder()}",
@@ -139,7 +137,7 @@ class InternProfile : BaseActivity() {
                 ),
                 icon = R.drawable.ic_phone
             ),
-            ProfileCategory(
+            InternProfileCategory(
                 "Academic Information",
                 mapOf(
                     "College:" to details.college.orPlaceholder(),
@@ -149,7 +147,7 @@ class InternProfile : BaseActivity() {
                 ),
                 icon = R.drawable.ic_academic
             ),
-            ProfileCategory(
+            InternProfileCategory(
                 "Internship/Emp Details",
                 buildMap {
                     put("Position:", details.internshipRole.orPlaceholder())
@@ -173,7 +171,7 @@ class InternProfile : BaseActivity() {
                 internID = details.certificateNumber,
                 adminMobileNo = details.adminMobileNo
             ),
-            ProfileCategory(
+            InternProfileCategory(
                 "Bank Details",
                 mapOf(
                     "Bank Acc No:" to details.bankAccountNumber.orPlaceholder(),
@@ -181,7 +179,7 @@ class InternProfile : BaseActivity() {
                 ),
                 icon = R.drawable.ic_bank
             ),
-            ProfileCategory(
+            InternProfileCategory(
                 "Internship/Emp Status",
                 buildMap {
                     put(
@@ -211,7 +209,7 @@ class InternProfile : BaseActivity() {
 
         // Setup RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ProfileAdapter(this, categories)
+        recyclerView.adapter = InternProfileAdapter(this, categories)
     }
 
     private fun formatDate(dateString: String?): String {

@@ -298,8 +298,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_man_avatar" />
-                            <entry key="sourceFile" value="C:\Users\Prince Kumar\Downloads\ic_man_avatar.svg" />
+                            <entry key="outputName" value="ic_selected" />
+                            <entry key="sourceFile" value="C:\Users\Prince Kumar\Downloads\ic_selected.svg" />
                           </map>
                         </option>
                       </PersistentState>

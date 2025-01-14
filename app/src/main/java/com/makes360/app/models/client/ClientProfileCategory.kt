@@ -1,4 +1,4 @@
-package com.makes360.app.models
+package com.makes360.app.models.client
 
 data class ClientProfileCategory (
     val title: String,

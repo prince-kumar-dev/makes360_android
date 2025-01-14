@@ -15,12 +15,12 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
-import com.makes360.app.models.ProfileCategory
+import com.makes360.app.models.InternProfileCategory
 
-class ProfileAdapter(
+class InternProfileAdapter(
     private val context: Context,
-    private val categories: List<ProfileCategory>
-) : RecyclerView.Adapter<ProfileAdapter.CategoryViewHolder>() {
+    private val categories: List<InternProfileCategory>
+) : RecyclerView.Adapter<InternProfileAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryName: TextView = itemView.findViewById(R.id.category_name)

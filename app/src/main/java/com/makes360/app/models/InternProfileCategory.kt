@@ -1,6 +1,6 @@
 package com.makes360.app.models
 
-data class ProfileCategory(
+data class InternProfileCategory(
     val title: String,
     val details: Map<String, String>,
     var isExpanded: Boolean = false, // To track expand/collapse state

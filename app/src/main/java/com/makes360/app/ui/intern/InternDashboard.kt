@@ -550,7 +550,6 @@ class InternDashboard : MainActivity() {
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun updateTrackingUI(details: InternDetails) {
 
         val roadmapRecyclerView = findViewById<RecyclerView>(R.id.roadmapRecyclerView)
