@@ -16,6 +16,7 @@ import com.makes360.app.databinding.ActivityMonthlyStipendBinding
 import com.makes360.app.models.MonthlyStipendData
 import com.makes360.app.R
 import com.makes360.app.adapters.MonthlyStipendListAdapter
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +36,14 @@ class MonthlyStipend : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
+
         // Initialize binding
         mBinding = ActivityMonthlyStipendBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -47,6 +56,7 @@ class MonthlyStipend : BaseActivity() {
         } else {
             showToast("Invalid email! Please try again.")
         }
+
     }
 
     private fun showLoader() {
@@ -240,7 +250,6 @@ class MonthlyStipend : BaseActivity() {
             }
         }
 
-
         // Fetch quote from the server
         val queue = Volley.newRequestQueue(this)
         val url = "https://www.makes360.com/application/makes360/internship/quotes.php"
@@ -269,11 +278,6 @@ class MonthlyStipend : BaseActivity() {
     }
 
     private fun fetchMonthlyStipend(email: String) {
-//        if (!checkInternetConnection()) {
-//            hideLoader()
-//            showToast("No internet connection. Please check your connection.")
-//            return
-//        }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {

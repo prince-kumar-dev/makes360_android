@@ -17,10 +17,31 @@
         android:theme="@style/Theme.Makes360YourITPartner"
         tools:targetApi="31">
         <activity
-            android:name=".ui.client.ClientProjectDetails"
+            android:name=".ui.trainee.TraineeAdminDashboard"
             android:exported="false" />
         <activity
-            android:name=".ui.client.ClientProjectList"
+            android:name=".ui.trainee.TraineeAdminLogin"
+            android:exported="false" />
+        <activity
+            android:name=".ui.trainee.TraineeLeaderboard"
+            android:exported="false" />
+        <activity
+            android:name=".ui.trainee.TraineeProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ui.trainee.TraineeDashboard"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.trainee.TraineeLogin"
+            android:exported="false" />
+        <activity
+            android:name=".ui.client.ClientContactLog"
+            android:exported="false" />
+        <activity
+            android:name=".ui.client.ClientProjectAssets"
+            android:exported="false" />
+        <activity
+            android:name=".ui.client.ClientProjectDetails"
             android:exported="false" />
         <activity
             android:name=".ui.client.ClientProfile"
@@ -33,7 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +68,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.intern.InternAnnouncementList"
+            android:name=".ui.AnnouncementList"
             android:exported="false" />
         <activity
             android:name=".ui.intern.Stipend"

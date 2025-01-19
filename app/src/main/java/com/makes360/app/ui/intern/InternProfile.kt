@@ -14,6 +14,7 @@ import com.makes360.app.R
 import com.makes360.app.databinding.ActivityInternProfileBinding
 import com.makes360.app.adapters.InternProfileAdapter
 import com.makes360.app.models.InternProfileCategory
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +31,14 @@ class InternProfile : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
 
         // Initialize binding
         mBinding = ActivityInternProfileBinding.inflate(layoutInflater)
@@ -104,13 +113,12 @@ class InternProfile : BaseActivity() {
             formatDate(details.rejectedDate)
 
         val completeDate = if (details.completeDate.isEmpty() || details.completeDate == "null") {
-            if(details.applicationStatus == 5) {
+            if (details.applicationStatus == 5) {
                 "Internship Ongoing"
             } else {
                 "Will be Updated"
             }
-        }
-        else
+        } else
             formatDate(details.completeDate)
 
 
@@ -154,12 +162,12 @@ class InternProfile : BaseActivity() {
                     if (details.fullTime == "0") {
                         put("Duration:", "${details.internshipDuration.orPlaceholder()} Months")
                     }
-                    if(details.currentStipend == "0") {
+                    if (details.currentStipend == "0") {
                         put("Stipend/Salary:", "Will be Updated")
                     } else {
                         put("Stipend/Salary:", "₹${details.currentStipend.orPlaceholder()}")
                     }
-                    if(details.incrementRemarks.isNullOrEmpty()) {
+                    if (details.incrementRemarks.isNullOrEmpty()) {
                         put("Incr. Remarks:", "Will be Updated")
                     } else {
                         put("Incr. Remarks:", details.incrementRemarks)
@@ -241,13 +249,6 @@ class InternProfile : BaseActivity() {
     }
 
     private fun fetchInternProfile(email: String) {
-//        if (!checkInternetConnection()) {
-//            runOnUiThread {
-//                hideLoader()
-//                showToast("No internet connection. Please check your network and try again.")
-//            }
-//            return
-//        }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {

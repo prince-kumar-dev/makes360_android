@@ -66,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_6sdp"
+                app:cardBackgroundColor="@color/white"
                 android:layout_marginBottom="@dimen/_6sdp"
                 app:cardCornerRadius="@dimen/_8sdp"
                 android:elevation="@dimen/_2sdp">

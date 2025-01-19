@@ -16,12 +16,14 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.makes360.app.BaseActivity
 import com.makes360.app.databinding.ActivityClientLoginBinding
 import com.makes360.app.R
+import com.makes360.app.util.NetworkUtils
 import org.json.JSONObject
 import java.util.Calendar
 
-class ClientLogin : AppCompatActivity() {
+class ClientLogin : BaseActivity() {
 
     private lateinit var emailEditText: EditText
     private lateinit var otpEditText: EditText
@@ -34,6 +36,13 @@ class ClientLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
         // Check login state before setting content view or initializing views
         if (isLoggedIn()) {
             navigateToClientDetail()

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.makes360.app.BaseActivity
 import com.makes360.app.databinding.ActivityStipendBinding
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,6 +26,13 @@ class Stipend : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
         mBinding = ActivityStipendBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
@@ -119,8 +127,6 @@ class Stipend : BaseActivity() {
     }
 
 
-
-
     @SuppressLint("SetTextI18n")
     private fun setUpStipendSlip(details: List<StipendDetails>) {
         val monthsMap = mapOf(
@@ -157,7 +163,7 @@ class Stipend : BaseActivity() {
         mBinding.paymentStatus.text = if (details[0].paymentStatus == "1") "Paid" else "Processing"
 
 
-        if(details[0].paymentStatus == "1"){
+        if (details[0].paymentStatus == "1") {
             val originalDate = details[0].paymentDate // "YYYY-MM-DD" format
             val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val outputFormat = SimpleDateFormat("dd - MMM - yyyy", Locale.getDefault())

@@ -9,13 +9,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
-import com.makes360.app.models.InternAnnouncementListRV
+import com.makes360.app.models.AnnouncementListData
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class InternAnnouncementListAdapter(
-    private var announcements: List<InternAnnouncementListRV>
-) : RecyclerView.Adapter<InternAnnouncementListAdapter.AnnouncementViewHolder>() {
+class AnnouncementListAdapter(
+    private var announcements: List<AnnouncementListData>
+) : RecyclerView.Adapter<AnnouncementListAdapter.AnnouncementViewHolder>() {
 
     inner class AnnouncementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val announcementDateTxt: TextView = itemView.findViewById(R.id.announcementDateTxt)
@@ -23,7 +23,7 @@ class InternAnnouncementListAdapter(
         val expandableContent: LinearLayout = itemView.findViewById(R.id.expandable_content)
     }
 
-    fun setAnnouncements(newAnnouncements: List<InternAnnouncementListRV>) {
+    fun setAnnouncements(newAnnouncements: List<AnnouncementListData>) {
         this.announcements = newAnnouncements
         notifyDataSetChanged()
     }
@@ -31,7 +31,7 @@ class InternAnnouncementListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnouncementViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_intern_announcement_list_parent, parent, false)
+            .inflate(R.layout.item_announcement_list_parent, parent, false)
         return AnnouncementViewHolder(view)
     }
 
@@ -57,7 +57,7 @@ class InternAnnouncementListAdapter(
 
         // Inflate child layout for expandable content
         val detailLayout = LayoutInflater.from(holder.itemView.context)
-            .inflate(R.layout.item_intern_announcement_list_child, null) as LinearLayout
+            .inflate(R.layout.item_announcement_list_child, null) as LinearLayout
 
         val announcementWebView = detailLayout.findViewById<WebView>(R.id.announcementWebView)
 

@@ -1,45 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_text"
     android:gravity="center_horizontal"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:padding="@dimen/_12sdp">
 
     <ImageView
         android:id="@+id/no_internet_image"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_38sdp"
+        android:layout_marginTop="@dimen/_32sdp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_no_internet"
-        android:tint="@color/colorPrimary"
-        tools:ignore="UseAppTint" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/material_core_blue" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/no_internet_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_internet_connection"
-        android:fontFamily="@font/default_font"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_margin="@dimen/_18sdp"
+        android:fontFamily="@font/default_font"
+        android:gravity="center"
+        android:text="@string/no_internet_connection"
+        android:textColor="@color/text_white"
         android:textSize="@dimen/_26sdp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="16dp" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_internet_image" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/no_internet_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_internet_message"
+        android:layout_marginTop="@dimen/_22sdp"
         android:fontFamily="@font/default_font"
         android:gravity="center"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:text="@string/no_internet_message"
+        android:textColor="@color/text_white"
         android:textSize="@dimen/_14sdp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_internet_text" />
 
-</LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/refreshContentCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_22sdp"
+        app:cardBackgroundColor="@color/material_core_yellow"
+        app:cardCornerRadius="@dimen/_50sdp"
+        app:cardElevation="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_internet_message">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:padding="@dimen/_6sdp"
+            android:text="@string/refresh_content"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_14sdp" />
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

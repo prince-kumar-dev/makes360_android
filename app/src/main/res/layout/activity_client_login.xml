@@ -55,7 +55,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/circle"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_client"
+                    android:src="@drawable/ic_nav_client"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

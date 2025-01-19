@@ -121,11 +121,10 @@
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_50sdp"
-                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_12sdp"
-                        android:background="@drawable/profile_white_bg"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +135,7 @@
                             android:id="@+id/profileRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="@dimen/_6sdp" />
+                            android:padding="@dimen/_2sdp" />
 
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

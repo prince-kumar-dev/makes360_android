@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.makes360.app.BaseActivity
 import com.makes360.app.R
-import com.makes360.app.adapters.client.ClientProfileAdapter
+import com.makes360.app.adapters.client.ClientTraineeProfileAdapter
 import com.makes360.app.databinding.ActivityClientProfileBinding
-import com.makes360.app.models.client.ClientProfileCategory
+import com.makes360.app.models.client.ClientTraineeProfileCategory
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,13 +24,20 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ClientProfile : AppCompatActivity() {
+class ClientProfile : BaseActivity() {
 
     private lateinit var mBinding: ActivityClientProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
         // Initialize binding
         mBinding = ActivityClientProfileBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -100,7 +108,7 @@ class ClientProfile : AppCompatActivity() {
         fun String?.orPlaceholder() = if (this.isNullOrEmpty()) "Will be Updated" else this
 
         val categories = listOf(
-            ClientProfileCategory(
+            ClientTraineeProfileCategory(
                 "General",
                 mapOf(
                     "Date of Birth:" to dob.orPlaceholder(),
@@ -109,7 +117,7 @@ class ClientProfile : AppCompatActivity() {
                 ),
                 icon = R.drawable.ic_general
             ),
-            ClientProfileCategory(
+            ClientTraineeProfileCategory(
                 "Contact Details",
                 mapOf(
                     "Phone No:" to details.phoneNumber.orPlaceholder(),
@@ -122,7 +130,7 @@ class ClientProfile : AppCompatActivity() {
 
         // Setup RecyclerView
         mBinding.profileRecyclerView.layoutManager = LinearLayoutManager(this)
-        mBinding.profileRecyclerView.adapter = ClientProfileAdapter(categories)
+        mBinding.profileRecyclerView.adapter = ClientTraineeProfileAdapter(categories)
     }
 
     private fun formatDate(dateString: String?): String {

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.trainee.TraineeProfile">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_300sdp"
+                        android:background="@drawable/profile_top_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView
+                        android:id="@+id/traineeImg"
+                        android:layout_width="@dimen/_95sdp"
+                        android:layout_height="@dimen/_95sdp"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:background="@drawable/circular_background"
+                        android:padding="@dimen/_2sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/traineeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/full_name"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/traineeImg"
+                        app:layout_constraintStart_toStartOf="@+id/traineeImg"
+                        app:layout_constraintTop_toBottomOf="@+id/traineeImg" />
+
+                    <TextView
+                        android:id="@+id/traineeEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/your_email_id"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/traineeName"
+                        app:layout_constraintStart_toStartOf="@+id/traineeName"
+                        app:layout_constraintTop_toBottomOf="@+id/traineeName"
+                        tools:ignore="TextSizeCheck" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/traineePositionCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/material_core_yellow"
+                        android:layout_margin="@dimen/_6sdp"
+                        app:cardCornerRadius="@dimen/_18sdp"
+                        app:cardElevation="@dimen/_1sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/traineeEmail"
+                        app:layout_constraintStart_toStartOf="@+id/traineeEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/traineeEmail">
+
+                        <TextView
+                            android:id="@+id/traineePositionTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/makes360_trainee"
+                            android:textSize="@dimen/_14sdp"
+                            android:paddingTop="@dimen/_4sdp"
+                            android:paddingBottom="@dimen/_4sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            android:textColor="@color/black"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:id="@+id/profileTopBg"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_250sdp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/circles" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_50sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_12sdp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/traineePositionCardView">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/profileRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/_2sdp" />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@drawable/bg_button"
+                android:elevation="@dimen/_6sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/log_out"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Progress Overlay -->
+    <FrameLayout
+        android:id="@+id/progressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9A000000"
+        android:visibility="gone"
+        android:elevation="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

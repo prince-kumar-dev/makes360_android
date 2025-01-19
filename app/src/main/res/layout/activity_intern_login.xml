@@ -55,7 +55,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/circle"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_intern"
+                    android:src="@drawable/intern_boy"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -207,4 +207,5 @@
                 android:indeterminateDrawable="@drawable/progress_bar_gradient" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

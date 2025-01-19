@@ -5,7 +5,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Style for Overflow Menu (Three-dot icon) -->
+        <item name="actionOverflowButtonStyle">@style/OverflowMenuStyle</item>
     </style>
 
+    <!-- Application theme extending the base theme -->
     <style name="Theme.Makes360YourITPartner" parent="Base.Theme.Makes360YourITPartner" />
+
+    <!-- Style for Overflow Menu Icon -->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <!-- Tint color for the three-dot icon -->
+        <item name="android:tint">@android:color/white</item>
+    </style>
 </resources>

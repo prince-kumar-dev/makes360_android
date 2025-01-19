@@ -13,7 +13,7 @@ import com.makes360.app.models.client.ProjectListDetailsData
 class ClientProjectListAdapter(
     private val context: Context,
     private var projectList: List<ProjectListDetailsData>, // Mutable list for rearranging
-    private val onProjectSelected: (String) -> Unit // Callback for selection
+    private val onProjectSelected: (String, String) -> Unit // Callback for selection
 ) : RecyclerView.Adapter<ClientProjectListAdapter.ProjectListViewHolder>() {
 
     inner class ProjectListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,7 +23,7 @@ class ClientProjectListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectListViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_project_list, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_project_list_child, parent, false)
         return ProjectListViewHolder(view)
     }
 
@@ -52,7 +52,7 @@ class ClientProjectListAdapter(
             // Pass the project_id to the callback
             val projectId = project.details["Project ID"]
             if (projectId != null) {
-                onProjectSelected(projectId)
+                onProjectSelected(projectId, project.title)
             }
         }
     }

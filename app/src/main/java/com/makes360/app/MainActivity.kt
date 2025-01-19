@@ -1,6 +1,8 @@
 package com.makes360.app
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -12,6 +14,9 @@ import com.makes360.app.databinding.ActivityMainBinding
 import com.makes360.app.models.CompanyProfileData
 import com.makes360.app.ui.client.ClientLogin
 import com.makes360.app.ui.intern.InternLogin
+import com.makes360.app.ui.trainee.TraineeAdminDashboard
+import com.makes360.app.ui.trainee.TraineeAdminLogin
+import com.makes360.app.ui.trainee.TraineeLogin
 import com.makes360.app.util.NetworkUtils
 import java.util.Calendar
 
@@ -23,6 +28,15 @@ open class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+            setUpViews()
+        }
+    }
+
+    private fun loadContent() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -49,7 +63,10 @@ open class MainActivity : BaseActivity() {
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> {
+                R.id.nav_admin -> {
+                    // Start AdminLogin activity
+                    val intent = Intent(this, TraineeAdminLogin::class.java)
+                    startActivity(intent)
                 }
                 R.id.nav_intern -> {
                     // Start InternLogin activity
@@ -60,19 +77,33 @@ open class MainActivity : BaseActivity() {
                     val intent = Intent(this, ClientLogin::class.java)
                     startActivity(intent)
                 }
+                R.id.nav_rate_us -> {
+                    // Open Play Store to rate the app
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                        startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        // In case the Play Store app is not installed, open it in a browser
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName"))
+                        startActivity(intent)
+                    }
+                }
+                R.id.nav_share_us -> {
+                    // Share the predefined message
+                    val message = "Makes360 - Your IT Partner\n\nSince 2018, Makes360 has delivered 114+ projects across 12+ industries. We specialize in brand building, marketing, and business consulting with lifetime free maintenance and 24/7 support. Let’s drive your digital success!\n\nDownload our app from Google Play Store. Click the link below:\n" +
+                            "https://play.google.com/store/apps/details?id=$packageName"
+
+                    val shareIntent = Intent(Intent.ACTION_SEND)
+                    shareIntent.type = "text/plain"
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+                    startActivity(Intent.createChooser(shareIntent, "Share via"))
+                }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START) // Close drawer after item click
             true
         }
-
-        // Register network callback
-        NetworkUtils.registerNetworkCallback(this) {
-            runOnUiThread {
-                refreshContent()
-            }
-        }
-
-        setUpViews()
     }
 
     private fun setUpViews() {
@@ -81,7 +112,15 @@ open class MainActivity : BaseActivity() {
         setUpCompanyProfileList()
         setUpInternLoginBtn()
         setUpClientLoginBtn()
+        setUpTraineeLoginForCGC()
         setUpFooter()
+    }
+
+    private fun setUpTraineeLoginForCGC() {
+        binding.traineeLoginCardViewForCGC.setOnClickListener {
+            val intent = Intent(this, TraineeLogin::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpClientLoginBtn() {
@@ -131,10 +170,6 @@ open class MainActivity : BaseActivity() {
         }
 
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
-    }
-
-    private fun refreshContent() {
-        recreate()
     }
 
     override fun onBackPressed() {

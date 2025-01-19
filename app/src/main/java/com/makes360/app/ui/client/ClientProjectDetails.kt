@@ -1,14 +1,18 @@
 package com.makes360.app.ui.client
 
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.makes360.app.BaseActivity
 import com.makes360.app.R
-import com.makes360.app.adapters.client.ClientProjectDetailsAdapter
 import com.makes360.app.databinding.ActivityClientProjectDetailsBinding
-import com.makes360.app.models.client.ClientProjectDetailsData
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,13 +23,21 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ClientProjectDetails : AppCompatActivity() {
+class ClientProjectDetails : BaseActivity() {
 
     private lateinit var mBinding: ActivityClientProjectDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+
+    }
+
+    private fun loadContent() {
         // Initialize binding
         mBinding = ActivityClientProjectDetailsBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -35,17 +47,15 @@ class ClientProjectDetails : AppCompatActivity() {
 
         // Get the email passed from the previous activity
         val projectId = intent.getStringExtra("PROJECT_ID")
-        showToast(projectId.toString())
 
         if (projectId != null) {
-             showLoader()
-             fetchProjectDetails(projectId.toInt())
+            showLoader()
+            fetchProjectDetails(projectId.toInt())
         }
 
         mBinding.backImageView.setOnClickListener {
             finish()
         }
-
     }
 
     private fun showLoader() {
@@ -66,26 +76,76 @@ class ClientProjectDetails : AppCompatActivity() {
             "Waiting Respond ⏳"
         )
 
-        val renewalPeriodList = listOf("Monthly", "Quarterly", "Half Yearly", "Yearly", "One Time Payment")
+        // Map statuses to progress values (e.g., "In Progress" = 50%, etc.)
+        val progressValues = mapOf(
+            0 to 50, // "In Progress"
+            1 to 25, // "On Hold"
+            2 to 100, // "Completed"
+            3 to 10  // "Waiting Respond"
+        )
+
+        val renewalPeriodList =
+            listOf("Monthly", "Quarterly", "Half Yearly", "Yearly", "One Time Payment")
 
         fun String?.orPlaceholder() = if (this.isNullOrEmpty()) "Will be Updated" else this
 
-        val projectDetails = ClientProjectDetailsData(
-            details = mapOf(
-                    "Project Id:" to project.projectId.toString(),
-                    "Project Name:" to project.projectName,
-                    "Current Status:" to currentStatusList[project.currentStatus.toInt()].orPlaceholder(),
-                    "Start Date:" to formatDate(project.startDate).orPlaceholder(),
-                    "Renewal Period:" to renewalPeriodList[project.renewalPeriod.toInt()].orPlaceholder(),
-                    "First Renewal Date:" to formatDate(project.firstRenewalDate).orPlaceholder(),
-                    "Project Note:" to project.projectNote.orPlaceholder(),
-                    "GST No:" to project.gstNo.orPlaceholder()
-                )
-        )
 
-        mBinding.projectDetailsRV.layoutManager = LinearLayoutManager(this)
-        mBinding.projectDetailsRV.adapter = ClientProjectDetailsAdapter(this, listOf(projectDetails))
+        // Animate and set Project Name
+        mBinding.projectName.apply {
+            text = project.projectName
+        }
+
+        // Update the ProgressBar and Status Text
+        val progressBar = mBinding.projectStatusProgress
+        val statusText = mBinding.projectStatusValue
+
+        val statusIndex = project.currentStatus.toInt()
+        val progress = progressValues[statusIndex] ?: 0
+        val status = currentStatusList[statusIndex].orPlaceholder()
+
+        // Animate the progress bar update
+        ObjectAnimator.ofInt(progressBar, "progress", progress).apply {
+            duration = 800
+            interpolator = DecelerateInterpolator()
+            start()
+        }
+
+        // Update status text
+        statusText.text = status
+
+
+        // Animate and set Start Date
+        mBinding.projectStartDate.apply {
+            text = formatDate(project.startDate)
+        }
+
+        // Animate and set Renewal Period
+        mBinding.renewalPeriod.apply {
+            text = renewalPeriodList[project.renewalPeriod.toInt()].orPlaceholder()
+        }
+
+        // Animate and set First Renewal Date
+        mBinding.firstRenewalDate.apply {
+            text = formatDate(project.firstRenewalDate).orPlaceholder()
+        }
+
+        // Animate and set Project Note
+        mBinding.projectNote.apply {
+            text = project.projectNote.orPlaceholder()
+        }
+
+        // Animate and set GST No
+        mBinding.gstNo.apply {
+            text = project.gstNo
+        }
+
+//        // Scale up-down animation on card container
+//        val cardContainer = mBinding.cardContainer // Replace with your card container ID
+//        cardContainer.setOnClickListener {
+//            cardContainer.startAnimation(scaleUpDown)
+//        }
     }
+
 
     private fun formatDate(dateString: String?): String {
         return if (dateString.isNullOrEmpty() || dateString == "null") {
@@ -104,7 +164,8 @@ class ClientProjectDetails : AppCompatActivity() {
     private fun fetchProjectDetails(projectId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = URL("https://www.makes360.com/application/makes360/client/project-details.php")
+                val url =
+                    URL("https://www.makes360.com/application/makes360/client/project-details.php")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "POST"
                 connection.connectTimeout = 10000

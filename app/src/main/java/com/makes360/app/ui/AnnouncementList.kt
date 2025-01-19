@@ -1,4 +1,4 @@
-package com.makes360.app.ui.intern
+package com.makes360.app.ui
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -15,30 +17,41 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.makes360.app.BaseActivity
-import com.makes360.app.adapters.InternAnnouncementListAdapter
-import com.makes360.app.models.InternAnnouncementListRV
+import com.makes360.app.adapters.AnnouncementListAdapter
+import com.makes360.app.models.AnnouncementListData
 import com.makes360.app.R
+import com.makes360.app.util.NetworkUtils
 import org.json.JSONArray
 import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class InternAnnouncementList : BaseActivity() {
+class AnnouncementList : BaseActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: InternAnnouncementListAdapter
+    private lateinit var adapter: AnnouncementListAdapter
     private lateinit var requestQueue: RequestQueue
     private lateinit var progressOverlay: View
     private lateinit var progressBar: ProgressBar
-    private val announcements = ArrayList<InternAnnouncementListRV>()
+    private val announcements = ArrayList<AnnouncementListData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intern_announcement_list)
+
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
+        setContentView(R.layout.activity_announcement_list)
 
         setSupportActionBar(findViewById(R.id.announcementListToolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        val checkCandidate = intent.getStringExtra("CHECK_CANDIDATE")
 
         recyclerView = findViewById(R.id.announcementListRV)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -47,7 +60,7 @@ class InternAnnouncementList : BaseActivity() {
 
         requestQueue = Volley.newRequestQueue(this)
 
-        fetchAnnouncements()
+        fetchAnnouncements(checkCandidate)
         setUpBackButton()
     }
 
@@ -67,14 +80,15 @@ class InternAnnouncementList : BaseActivity() {
         }
     }
 
-    private fun fetchAnnouncements() {
-//        if (!checkInternetConnection()) {
-//            hideLoader()
-//            Toast.makeText(this, "No internet connection. Please check your connection.", Toast.LENGTH_LONG).show()
-//            return
-//        }
+    private fun fetchAnnouncements(checkCandidate: String?) {
 
-        val url = "https://www.makes360.com/application/makes360/internship/announcement.php"
+        val url = if (checkCandidate.equals("Client")) {
+            "https://www.makes360.com/application/makes360/client/announcement.php"
+        } else if (checkCandidate.equals("Intern")){
+            "https://www.makes360.com/application/makes360/internship/announcement.php"
+        } else {
+            "https://www.makes360.com/application/makes360/trainee/announcement.php"
+        }
 
         showLoader() // Show loader before fetching data
 
@@ -98,11 +112,11 @@ class InternAnnouncementList : BaseActivity() {
                         val date = item.getString("date")
                         val message = item.getString("message")
 
-                        announcements.add(InternAnnouncementListRV(date, message))
+                        announcements.add(AnnouncementListData(date, message))
                     }
 
                     // Set the adapter with fetched data
-                    adapter = InternAnnouncementListAdapter(announcements)
+                    adapter = AnnouncementListAdapter(announcements)
                     recyclerView.adapter = adapter
 
                     hideLoader() // Hide loader after data is successfully fetched
@@ -129,16 +143,17 @@ class InternAnnouncementList : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.announcement_menu, menu)
+        menuInflater.inflate(R.menu.filter_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_calendar -> {
+            R.id.menu_apply_filter -> {
                 showDatePicker()
                 return true
             }
+
             R.id.menu_clear_filter -> {
                 clearFilter()
                 return true
@@ -152,7 +167,13 @@ class InternAnnouncementList : BaseActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { _, year, month, dayOfMonth ->
-                val selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth)
+                val selectedDate = String.format(
+                    Locale.getDefault(),
+                    "%04d-%02d-%02d",
+                    year,
+                    month + 1,
+                    dayOfMonth
+                )
                 filterAnnouncementsByDate(selectedDate)
             },
             calendar.get(Calendar.YEAR),
@@ -168,12 +189,17 @@ class InternAnnouncementList : BaseActivity() {
             val inputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             // Filter announcements based on the reformatted date
-            val filteredList = announcements.filter { it.date == inputDateFormat.format(inputDateFormat.parse(selectedDate)!!) }
+            val filteredList = announcements.filter {
+                it.date == inputDateFormat.format(
+                    inputDateFormat.parse(selectedDate)!!
+                )
+            }
             if (filteredList.isNotEmpty()) {
                 adapter.setAnnouncements(filteredList)
                 recyclerView.scrollToPosition(0)
             } else {
-                Toast.makeText(this, "No announcements found for this date", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No announcements found for this date", Toast.LENGTH_SHORT)
+                    .show()
             }
         } catch (e: Exception) {
             e.printStackTrace()

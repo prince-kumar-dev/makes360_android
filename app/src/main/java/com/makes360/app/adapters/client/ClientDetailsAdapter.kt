@@ -12,7 +12,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
 import com.makes360.app.models.client.ClientDetailsData
+import com.makes360.app.ui.client.ClientProjectAssets
 import com.makes360.app.ui.client.ClientProjectDetails
+import com.makes360.app.ui.client.ClientContactLog
 
 class ClientDetailsAdapter(
     private var context: Context,
@@ -53,8 +55,19 @@ class ClientDetailsAdapter(
                     navigateToProjectDetails(details.projectId)
                 }
             }
-            "Project Assets" -> showToast("Project Assets")
-            "Contact Log" -> showToast("Contact Log")
+
+            "Project Assets" -> if (details.projectId == "") {
+                showToast("Select Project from Project List")
+            } else {
+                navigateToProjectAssets(details.projectId, details.projectName)
+            }
+
+            "Contact Log" -> if (details.projectId == "") {
+                showToast("Select Project from Project List")
+            } else {
+                navigateToContactLog(details.projectId, details.projectName)
+            }
+
             "Service History" -> showToast("Service History")
             else -> showToast("Credentials")
         }
@@ -67,6 +80,22 @@ class ClientDetailsAdapter(
     private fun navigateToProjectDetails(projectId: String) {
         val intent = Intent(context, ClientProjectDetails::class.java).apply {
             putExtra("PROJECT_ID", projectId)
+        }
+        context.startActivity(intent)
+    }
+
+    private fun navigateToProjectAssets(projectId: String, projectName: String) {
+        val intent = Intent(context, ClientProjectAssets::class.java).apply {
+            putExtra("PROJECT_ID", projectId)
+            putExtra("PROJECT_NAME", projectName)
+        }
+        context.startActivity(intent)
+    }
+
+    private fun navigateToContactLog(projectId: String, projectName: String) {
+        val intent = Intent(context, ClientContactLog::class.java).apply {
+            putExtra("PROJECT_ID", projectId)
+            putExtra("PROJECT_NAME", projectName)
         }
         context.startActivity(intent)
     }

@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    tools:openDrawer="start"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -76,10 +75,10 @@
                     android:id="@+id/companyBrochureCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_4sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/companyProfileRecyclerView">
@@ -101,11 +100,11 @@
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Company Brochure"
-                            android:fontFamily="@font/roboto_medium"
-                            android:textSize="@dimen/_14sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Company Brochure"
+                            android:textSize="@dimen/_14sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/companyBrochureImageView"
@@ -142,7 +141,7 @@
                                 android:id="@+id/clientLoginImageView"
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
-                                android:src="@drawable/ic_client"
+                                android:src="@drawable/ic_nav_client"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -185,7 +184,7 @@
                                 android:id="@+id/internLoginImageView"
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
-                                android:src="@drawable/ic_intern"
+                                android:src="@drawable/intern_boy"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -210,6 +209,77 @@
 
                 </LinearLayout>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/traineeCardViewLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                   <androidx.constraintlayout.widget.ConstraintLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:padding="@dimen/_12sdp">
+
+                       <com.google.android.material.textview.MaterialTextView
+                           android:id="@+id/traineeLoginTextView"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:text="Trainee Login"
+                           android:textSize="@dimen/_16sdp"
+                           android:fontFamily="@font/roboto_medium"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toTopOf="parent" />
+
+                       <com.google.android.material.card.MaterialCardView
+                           android:id="@+id/traineeLoginCardViewForCGC"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/_8sdp"
+                           android:backgroundTint="@color/colorPrimary"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           app:layout_constraintTop_toBottomOf="@+id/traineeLoginTextView">
+
+                           <androidx.constraintlayout.widget.ConstraintLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:padding="@dimen/_8sdp">
+
+                               <ImageView
+                                   android:id="@+id/traineeLoginImageView"
+                                   android:layout_width="@dimen/_30sdp"
+                                   android:layout_height="@dimen/_30sdp"
+                                   android:src="@drawable/ic_intern"
+                                   app:layout_constraintBottom_toBottomOf="parent"
+                                   app:layout_constraintStart_toStartOf="parent"
+                                   app:layout_constraintTop_toTopOf="parent" />
+
+                               <com.google.android.material.textview.MaterialTextView
+                                   android:layout_width="0dp"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginStart="@dimen/_10sdp"
+                                   android:layout_marginEnd="@dimen/_8sdp"
+                                   android:fontFamily="@font/roboto"
+                                   android:text="Trainee Login For CGC"
+                                   android:textColor="@color/white"
+                                   android:textSize="@dimen/_12sdp"
+                                   app:layout_constraintBottom_toBottomOf="parent"
+                                   app:layout_constraintEnd_toEndOf="parent"
+                                   app:layout_constraintStart_toEndOf="@+id/traineeLoginImageView"
+                                   app:layout_constraintTop_toTopOf="parent"
+                                   tools:ignore="TextSizeCheck" />
+                           </androidx.constraintlayout.widget.ConstraintLayout>
+
+                       </com.google.android.material.card.MaterialCardView>
+
+                   </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
@@ -220,7 +290,7 @@
                     android:src="@drawable/ic_search_makes"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+                    app:layout_constraintTop_toBottomOf="@+id/traineeCardViewLayout" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/homeFooterTextView"
@@ -252,9 +322,9 @@
         android:layout_width="@dimen/_200sdp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextColor="@color/primary_text"
-        app:menu="@menu/navigation_menu"
         android:background="@color/white"
-        app:headerLayout="@layout/navigation_header" />
+        app:headerLayout="@layout/navigation_header"
+        app:itemTextColor="@color/primary_text"
+        app:menu="@menu/navigation_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

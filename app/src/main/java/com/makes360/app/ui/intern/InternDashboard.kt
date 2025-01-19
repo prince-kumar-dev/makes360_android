@@ -1,7 +1,6 @@
 package com.makes360.app.ui.intern
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
@@ -10,7 +9,6 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.makes360.app.BaseActivity
 import com.makes360.app.MainActivity
 import com.makes360.app.R
 import com.makes360.app.adapters.DownloadContentAdapter
@@ -28,6 +27,8 @@ import com.makes360.app.models.InternDetailsRV
 import com.makes360.app.adapters.RoadmapStepAdapter
 import com.makes360.app.models.DownloadContent
 import com.makes360.app.models.RoadmapStep
+import com.makes360.app.ui.AnnouncementList
+import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +41,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class InternDashboard : MainActivity() {
+class InternDashboard : BaseActivity() {
 
     private lateinit var progressOverlay: View
     private lateinit var progressBar: ProgressBar
@@ -52,6 +53,13 @@ class InternDashboard : MainActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
         setContentView(R.layout.activity_intern_dashboard)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.homeToolbar)
@@ -83,7 +91,6 @@ class InternDashboard : MainActivity() {
         val cardView = findViewById<CardView>(R.id.markAsReadCardView)
         val cardViewText = findViewById<TextView>(R.id.markAsReadTxtView)
         val announcementWebView = findViewById<WebView>(R.id.announcementWebView)
-
         announcementWebView.setOnLongClickListener {
             // Do nothing on long press
             true
@@ -123,9 +130,10 @@ class InternDashboard : MainActivity() {
                             .find { it.getString("date") == currentDate }
 
                         // Fallback to the last non-empty message if no announcement is found for the current date
-                        val announcementToShow = currentAnnouncement ?: (announcements.length() - 1 downTo 0)
-                            .map { announcements.getJSONObject(it) }
-                            .find { it.optString("message").isNotEmpty() }
+                        val announcementToShow =
+                            currentAnnouncement ?: (announcements.length() - 1 downTo 0)
+                                .map { announcements.getJSONObject(it) }
+                                .find { it.optString("message").isNotEmpty() }
 
                         withContext(Dispatchers.Main) {
                             hideLoader()
@@ -150,17 +158,21 @@ class InternDashboard : MainActivity() {
                                             R.color.material_core_light_green
                                         )
                                     )
-                                    cardViewText.setTextColor(ContextCompat.getColor(
-                                        this@InternDashboard,
-                                        R.color.primary_text
-                                    ))
+                                    cardViewText.setTextColor(
+                                        ContextCompat.getColor(
+                                            this@InternDashboard,
+                                            R.color.primary_text
+                                        )
+                                    )
                                     cardViewText.text = "Great! You Read It"
                                     cardView.isClickable = false
                                 } else {
-                                    cardViewText.setTextColor(ContextCompat.getColor(
-                                        this@InternDashboard,
-                                        R.color.white
-                                    ))
+                                    cardViewText.setTextColor(
+                                        ContextCompat.getColor(
+                                            this@InternDashboard,
+                                            R.color.white
+                                        )
+                                    )
                                     cardView.setCardBackgroundColor(
                                         ContextCompat.getColor(
                                             this@InternDashboard,
@@ -195,17 +207,21 @@ class InternDashboard : MainActivity() {
                                             R.color.material_core_light_green
                                         )
                                     )
-                                    cardViewText.setTextColor(ContextCompat.getColor(
-                                        this@InternDashboard,
-                                        R.color.primary_text
-                                    ))
+                                    cardViewText.setTextColor(
+                                        ContextCompat.getColor(
+                                            this@InternDashboard,
+                                            R.color.primary_text
+                                        )
+                                    )
                                     cardViewText.text = "Great! You Read It"
                                     cardView.isClickable = false
                                 } else {
-                                    cardViewText.setTextColor(ContextCompat.getColor(
-                                        this@InternDashboard,
-                                        R.color.white
-                                    ))
+                                    cardViewText.setTextColor(
+                                        ContextCompat.getColor(
+                                            this@InternDashboard,
+                                            R.color.white
+                                        )
+                                    )
                                     cardView.setCardBackgroundColor(
                                         ContextCompat.getColor(
                                             this@InternDashboard,
@@ -215,7 +231,12 @@ class InternDashboard : MainActivity() {
                                     cardView.isClickable = true
                                     cardView.setOnClickListener {
                                         if (id != null) {
-                                            markAsRead(certificateNumber, id, cardView, cardViewText)
+                                            markAsRead(
+                                                certificateNumber,
+                                                id,
+                                                cardView,
+                                                cardViewText
+                                            )
                                         }
                                     }
                                 }
@@ -224,7 +245,12 @@ class InternDashboard : MainActivity() {
                     } else {
                         withContext(Dispatchers.Main) {
                             hideLoader()
-                            showToast("Failed to fetch announcements.")
+                            cardView.visibility = View.GONE
+                            announcementWebView.loadData(
+                                "<h1>No announcement for today.</h1>",
+                                "text/html",
+                                "UTF-8"
+                            )
                         }
                     }
                 }
@@ -279,10 +305,12 @@ class InternDashboard : MainActivity() {
                                     R.color.material_core_light_green
                                 )
                             )
-                            cardViewText.setTextColor(ContextCompat.getColor(
-                                this@InternDashboard,
-                                R.color.primary_text
-                            ))
+                            cardViewText.setTextColor(
+                                ContextCompat.getColor(
+                                    this@InternDashboard,
+                                    R.color.primary_text
+                                )
+                            )
                             cardView.isClickable = false
                             cardViewText.text = "Great! You Read It"
                             showToast("Marked as read successfully!")
@@ -316,9 +344,10 @@ class InternDashboard : MainActivity() {
 
     private fun announcementList() {
         val cardView =
-            findViewById<androidx.cardview.widget.CardView>(R.id.previousAnnouncementCardView)
+            findViewById<CardView>(R.id.previousAnnouncementCardView)
         cardView.setOnClickListener {
-            val intent = Intent(this, InternAnnouncementList::class.java)
+            val intent = Intent(this, AnnouncementList::class.java)
+            intent.putExtra("CHECK_CANDIDATE", "Intern")
             startActivity(intent)
         }
     }
@@ -375,6 +404,7 @@ class InternDashboard : MainActivity() {
         val root = "https://www.makes360.com"
         val internDetailsRecyclerView =
             findViewById<RecyclerView>(R.id.detailsRecyclerView)
+
         internDetailsList.add(
             InternDetailsRV(
                 icon = R.drawable.intern_boy,

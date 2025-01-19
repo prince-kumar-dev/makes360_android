@@ -8,10 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
-import com.makes360.app.models.client.ClientProfileCategory
+import com.makes360.app.models.client.ClientTraineeProfileCategory
 
-class ClientProfileAdapter (private val categories: List<ClientProfileCategory>
-) : RecyclerView.Adapter<ClientProfileAdapter.CategoryViewHolder>() {
+class ClientTraineeProfileAdapter (private val categories: List<ClientTraineeProfileCategory>
+) : RecyclerView.Adapter<ClientTraineeProfileAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val categoryName: TextView = itemView.findViewById(R.id.category_name)

@@ -87,7 +87,6 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 app:cardCornerRadius="@dimen/_8sdp"
-                app:cardElevation="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roadmapRecyclerView">
@@ -103,12 +102,13 @@
                         android:padding="@dimen/_8sdp">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/recent_announcement"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_16sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/previousAnnouncementCardView"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,9 +116,9 @@
                             android:id="@+id/previousAnnouncementCardView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:cardCornerRadius="@dimen/_16sdp"
                             android:layout_margin="@dimen/_4sdp"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            app:cardCornerRadius="@dimen/_10sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -131,7 +131,7 @@
                                 android:paddingTop="@dimen/_2sdp"
                                 android:paddingEnd="@dimen/_12sdp"
                                 android:paddingBottom="@dimen/_2sdp"
-                                android:text="View All"
+                                android:text="@string/view_all"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_12sdp"
                                 tools:ignore="TextSizeCheck" />
@@ -140,29 +140,43 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_2sdp"
-                        android:background="@color/darker_gray"/>
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="#DDD" />
 
-                    <WebView
-                        android:id="@+id/announcementWebView"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_8sdp" />
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_margin="@dimen/_8sdp">
+
+                        <WebView
+                            android:id="@+id/announcementWebView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_8sdp"
+                            android:backgroundTint="@color/transparent" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/_4sdp">
+                        android:paddingStart="@dimen/_4sdp"
+                        android:paddingEnd="@dimen/_4sdp"
+                        android:paddingBottom="@dimen/_4sdp">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/markAsReadCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardElevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_16sdp"
-                            android:layout_margin="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_4sdp"
                             android:layout_marginEnd="@dimen/_4sdp"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            app:cardCornerRadius="@dimen/_16sdp"
+                            app:cardElevation="@dimen/_2sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -176,14 +190,12 @@
                                 android:layout_margin="@dimen/_8sdp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/mark_as_read"
-                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_12sdp"
                                 tools:ignore="TextSizeCheck" />
 
                         </com.google.android.material.card.MaterialCardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 </LinearLayout>

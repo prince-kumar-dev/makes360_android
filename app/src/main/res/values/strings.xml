@@ -82,5 +82,39 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="visit_our_website">Visit our website</string>
+    <string name="project_name">Project Name</string>
+    <string name="current_status">Current Status:</string>
+    <string name="in_progress">In Progress 🛠️</string>
+    <string name="start_date">Start Date:</string>
+    <string name="first_renewal_date">First Renewal Date:</string>
+    <string name="renewal_period">Renewal Period:</string>
+    <string name="project_note">Project Note:</string>
+    <string name="gst_no">GST No:</string>
+    <string name="project_list">Project List</string>
+    <string name="view_all">View All</string>
+    <string name="project_assets">Project Assets</string>
+    <string name="other_assets">Other Assets</string>
+    <string name="social_media_assets">Social Media Assets</string>
+    <string name="source_code">Source Code</string>
+    <string name="ssl_certificate">SSL Certificate</string>
+    <string name="database">Database</string>
+    <string name="business_email">Business Email</string>
+    <string name="hosting">Hosting</string>
+    <string name="domain">Domain</string>
+    <string name="refresh_content">Refresh Content</string>
+    <string name="no_project_assets">No Project Assets</string>
+    <string name="no_assets_available_for_this_project_yet">No assets available for this project yet</string>
+    <string name="contact_log">Contact Log</string>
+    <string name="no_contact_log">No Contact Log</string>
+    <string name="no_contact_log_available_for_this_project_yet">No Contact Log available for this project yet.</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="let_s_get_started">Let\'s get started! 🚀</string>
+    <string name="admin_login">Admin Login</string>
+    <string name="ready_to_take_on_the_day">Ready to take on the day? 💪</string>
+    <string name="enter_the_password">Enter the Password</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="announcements">Announcements</string>
+    <string name="offer_letter">Offer Letter</string>
+    <string name="makes360_trainee">Makes360 Trainee</string>
 
 </resources>

@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley
 import com.makes360.app.databinding.ActivityInternLoginBinding
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
+import com.makes360.app.util.NetworkUtils
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.Calendar
@@ -36,6 +37,13 @@ class InternLogin : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (NetworkUtils.isInternetAvailable(this)) {
+            hideNoInternet()
+            loadContent()
+        }
+    }
+
+    private fun loadContent() {
         // Check login state before setting content view or initializing views
         if (isLoggedIn()) {
             navigateToInternTrack()
@@ -147,11 +155,6 @@ class InternLogin : BaseActivity() {
             ).show()
             return
         }
-
-//        if (!checkInternetConnection()) {
-//            showToast("No internet connection. Please check your connection.")
-//            return
-//        }
 
         val email = emailEditText.text.toString().trim()
 

@@ -1,13 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
-        android:iconTint="@null"
-        android:icon="@drawable/ic_nav_home"
-        android:title="@string/home" />
-    <item
-        android:id="@+id/nav_help"
-        android:icon="@drawable/ic_nav_help"
-        android:title="@string/help" />
+        android:id="@+id/nav_admin"
+        android:icon="@drawable/ic_admin"
+        android:title="@string/admin_login" />
     <item
         android:id="@+id/nav_client"
         android:icon="@drawable/ic_nav_client"
