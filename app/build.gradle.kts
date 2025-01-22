@@ -13,8 +13,8 @@ android {
         applicationId = "com.makes360.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 13
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -60,4 +60,5 @@ dependencies {
     implementation (libs.converter.gson)
     implementation (libs.glide)
     annotationProcessor (libs.compiler)
+    implementation (libs.sdp.android)
 }

@@ -85,7 +85,7 @@ class InternLogin : BaseActivity() {
 
     private fun footer() {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-        mBinding.footerTextView.text = "$currentYear © AGI Innovations Makes360 Private Limited"
+        mBinding.footerTextView.text = getString(R.string.footer_text, currentYear)
     }
 
     // Utility function to hide the keyboard
@@ -120,11 +120,6 @@ class InternLogin : BaseActivity() {
 
 
     private fun applyForInternship() {
-//        if (!checkInternetConnection()) {
-//            hideLoader()
-//            showToast("No internet connection. Please check your connection.")
-//            return
-//        }
 
         val url = "https://www.google.com/search?q=internship+makes360"
         val intent = Intent(Intent.ACTION_VIEW).apply {
@@ -220,10 +215,6 @@ class InternLogin : BaseActivity() {
 
     // Function to verify OTP
     private fun verifyOtp() {
-//        if (!checkInternetConnection()) {
-//            showToast("No internet connection. Please check and try again.")
-//            return
-//        }
 
         val enteredOtp = otpEditText.text.toString().trim()
         val email = emailEditText.text.toString().trim()
@@ -287,12 +278,5 @@ class InternLogin : BaseActivity() {
         }
 
         requestQueue.add(stringRequest)
-    }
-
-
-    private fun showToast(message: String) {
-        runOnUiThread {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        }
     }
 }

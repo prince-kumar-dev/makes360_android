@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/slider_root"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_140sdp"
-    android:background="@drawable/bg_gradient_toolbar"
-    android:gravity="bottom"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingStart="@dimen/_12sdp"
-    android:paddingEnd="@dimen/_12sdp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_logo"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:scaleType="fitStart"
-        android:src="@drawable/ic_nav_logo" />
+    <LinearLayout
+        android:id="@+id/slider_root"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        android:background="@drawable/bg_gradient_toolbar"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp">
 
-    <TextView
-        android:id="@+id/txt_navigation_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/default_font"
-        android:paddingTop="8dp"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_logo"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_nav_logo" />
 
-    <TextView
-        android:id="@+id/txt_navigation_detail"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/txt_navigation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/default_font"
+            android:paddingTop="8dp"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/txt_navigation_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/default_font"
+            android:minLines="2"
+            android:text="@string/title_user_website" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:fontFamily="@font/default_font"
-        android:minLines="2"
-        android:text="@string/title_user_website" />
+        android:orientation="vertical" />
+
 </LinearLayout>

@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.R
 import com.makes360.app.models.InternDetailsRV
 import com.makes360.app.ui.intern.InternProfile
@@ -37,12 +39,34 @@ class InternDetailsAdapter(
 
     override fun onBindViewHolder(holder: InternDetailsViewHolder, position: Int) {
         val details = internDetailsList[position]
-        holder.icon.setImageResource(details.icon)
+        if(details.title != "Profile Details") {
+            holder.icon.setImageResource(details.icon)
+        } else {
+            when (details.icon) {
+                0 -> {
+                    holder.icon.setImageResource(R.drawable.intern_girl)
+                }
+
+                1 -> {
+                    holder.icon.setImageResource(R.drawable.intern_boy)
+                }
+
+                2 -> {
+                    // Using Glide with circle crop
+                    Glide.with(context)
+                        .load(details.profilePic)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circle crop transformation
+                        .placeholder(R.drawable.circular_background) // Optional placeholder
+                        .into(holder.icon)
+                }
+            }
+        }
+
         holder.title.text = details.title
 
         // Update card appearance based on conditions
-        if ((details.title == "Resume" && details.resumeLink.isNullOrEmpty() && details.applicationStatus == 1) ||
-            (details.title == "Video Resume" && details.videoResumeLink.isNullOrEmpty() && details.applicationStatus == 1)
+        if ((details.title == "Resume" && (details.resumeLink.isEmpty() || details.resumeLink == "null") && details.applicationStatus == 1) ||
+            (details.title == "Video Resume" && (details.videoResumeLink.isEmpty() || details.resumeLink == "null") && details.applicationStatus == 1)
         ) {
             highlightCard(holder)
         }
@@ -65,6 +89,7 @@ class InternDetailsAdapter(
 
     // --- Profile Handling ---
     private fun handleProfile(details: InternDetailsRV) {
+
         val intent = Intent(context, InternProfile::class.java).apply {
             putExtra("EMAIL", details.email)
         }
@@ -73,7 +98,7 @@ class InternDetailsAdapter(
 
     // --- Offer Letter Handling ---
     private fun handleOfferLetter(details: InternDetailsRV) {
-        if (!details.offerLetterLink.isNullOrEmpty()) {
+        if (!(details.offerLetterLink.isEmpty() || details.offerLetterLink == "null")) {
             openUrl(details.offerLetterLink)
         } else {
             Toast.makeText(
@@ -87,8 +112,8 @@ class InternDetailsAdapter(
     // --- Resume Handling ---
     private fun handleResume(details: InternDetailsRV, holder: InternDetailsViewHolder) {
         when {
-            !details.resumeLink.isNullOrEmpty() -> openUrl(details.resumeLink)
-            details.resumeLink.isNullOrEmpty() && details.applicationStatus == 1 -> {
+            !(details.resumeLink.isEmpty() || details.resumeLink == "null") -> openUrl(details.resumeLink)
+            (details.resumeLink.isEmpty() || details.resumeLink == "null") && details.applicationStatus == 1 -> {
                 highlightCard(holder)
                 openUrl("https://www.makes360.com/internship/apply/profile")
             }
@@ -104,8 +129,8 @@ class InternDetailsAdapter(
     // --- Video Resume Handling ---
     private fun handleVideoResume(details: InternDetailsRV, holder: InternDetailsViewHolder) {
         when {
-            !details.videoResumeLink.isNullOrEmpty() -> openUrl(details.videoResumeLink)
-            details.videoResumeLink.isNullOrEmpty() && details.applicationStatus == 1 -> {
+            !(details.videoResumeLink.isEmpty() || details.videoResumeLink == "null") -> openUrl(details.videoResumeLink)
+            (details.videoResumeLink.isEmpty() || details.videoResumeLink == "null") && details.applicationStatus == 1 -> {
                 highlightCard(holder)
                 openUrl("https://www.makes360.com/internship/apply/profile")
             }
@@ -164,7 +189,7 @@ class InternDetailsAdapter(
     // --- Highlight Card for Attention ---
     private fun highlightCard(holder: InternDetailsViewHolder) {
         holder.cardViewContainer.setCardBackgroundColor(
-            ContextCompat.getColor(context, R.color.material_flat_red)
+            ContextCompat.getColor(context, R.color.material_flat_carrot_dark)
         )
         holder.title.setTextColor(ContextCompat.getColor(context, R.color.white))
     }

@@ -75,10 +75,10 @@ class InternProfile : BaseActivity() {
         // Adding Image to the profileImageView
 
         if (details.profilePic.isEmpty() || details.profilePic == "null") {
-            if (details.gender == "1")
-                profileImageView.setImageResource(R.drawable.intern_boy)
-            else
+            if (details.gender == "0")
                 profileImageView.setImageResource(R.drawable.intern_girl)
+            else
+                profileImageView.setImageResource(R.drawable.intern_boy)
         } else {
             val url =
                 "https://www.makes360.com/internship/apply/file/profile_pic/" + details.profilePic
@@ -88,7 +88,6 @@ class InternProfile : BaseActivity() {
                 .load(url)
                 .apply(RequestOptions.circleCropTransform()) // Apply circle crop transformation
                 .placeholder(R.drawable.circular_background) // Optional placeholder
-//                .error(R.drawable.default_error)             // Optional error image
                 .into(profileImageView)
         }
 

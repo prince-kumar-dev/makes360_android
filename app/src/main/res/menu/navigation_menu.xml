@@ -1,22 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_admin"
-        android:icon="@drawable/ic_admin"
-        android:title="@string/admin_login" />
+        android:title="@string/admin_login"
+        android:icon="@drawable/ic_admin" />
     <item
         android:id="@+id/nav_client"
-        android:icon="@drawable/ic_nav_client"
-        android:title="@string/client_login" />
+        android:title="@string/client_login"
+        android:icon="@drawable/ic_man_client" />
     <item
         android:id="@+id/nav_intern"
-        android:icon="@drawable/ic_nav_intern"
-        android:title="@string/intern_emp_login" />
+        android:title="@string/intern_emp_login"
+        android:icon="@drawable/ic_nav_intern" />
+    <item
+        android:id="@+id/nav_trainee"
+        android:title="@string/trainee_login"
+        android:icon="@drawable/ic_intern" />
     <item
         android:id="@+id/nav_rate_us"
-        android:icon="@drawable/ic_nav_rate_us"
-        android:title="@string/rate_us" />
+        android:title="@string/rate_us"
+        android:icon="@drawable/ic_nav_rate_us" />
     <item
         android:id="@+id/nav_share_us"
-        android:icon="@drawable/ic_nav_share"
-        android:title="@string/share" />
+        android:title="@string/share"
+        android:icon="@drawable/ic_nav_share" />
 </menu>

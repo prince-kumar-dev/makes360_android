@@ -11,15 +11,16 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.makes360.app.BaseActivity
-import com.makes360.app.databinding.ActivityClientLoginBinding
 import com.makes360.app.R
+import com.makes360.app.databinding.ActivityClientLoginBinding
 import com.makes360.app.util.NetworkUtils
+import org.json.JSONException
 import org.json.JSONObject
 import java.util.Calendar
 
@@ -86,7 +87,7 @@ class ClientLogin : BaseActivity() {
 
     private fun footer() {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-        mBinding.footerTextView.text = "$currentYear © AGI Innovations Makes360 Private Limited"
+        mBinding.footerTextView.text = getString(R.string.footer_text, currentYear)
     }
 
     // Utility function to hide the keyboard
@@ -96,12 +97,20 @@ class ClientLogin : BaseActivity() {
         view.clearFocus()
     }
 
-    private fun saveLoginState(email: String, custId: String, firstName: String) {
+    private fun saveLoginState(
+        email: String,
+        custId: String,
+        firstName: String,
+        gender: String,
+        profilePic: String
+    ) {
         val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("client_email", email)
         editor.putString("client_cust_id", custId) // Save custId
         editor.putString("client_first_name", firstName)
+        editor.putString("client_gender", gender)
+        editor.putString("client_profile_pic", profilePic)
         editor.apply()
     }
 
@@ -122,6 +131,16 @@ class ClientLogin : BaseActivity() {
         return sharedPreferences.getString("client_first_name", null)
     }
 
+    private fun getGender(): String? {
+        val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+        return sharedPreferences.getString("client_gender", null)
+    }
+
+    private fun getProfilePic(): String? {
+        val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+        return sharedPreferences.getString("client_profile_pic", null)
+    }
+
 
     // Utility function to navigate to Client Detail activity
     private fun navigateToClientDetail() {
@@ -129,10 +148,15 @@ class ClientLogin : BaseActivity() {
             .getString("client_email", null)
         val custId = getCustId()
         val firstName = getFirstName()
+        val gender = getGender()
+        val profilePic = getProfilePic()
+
         val intent = Intent(this, ClientDashboard::class.java)
         intent.putExtra("EMAIL", email)
         intent.putExtra("CUST_ID", custId)
         intent.putExtra("FIRST_NAME", firstName)
+        intent.putExtra("GENDER", gender)
+        intent.putExtra("PROFILE_PIC", profilePic)
         startActivity(intent)
         finish()
     }
@@ -156,10 +180,19 @@ class ClientLogin : BaseActivity() {
         progressOverlay.visibility = View.GONE
     }
 
-    // Function to send OTP
-    private var sentOtp: String? = null // Store the sent OTP
+
+    private var isOtpRequestInProgress = false
 
     private fun sendOtp() {
+        if (isOtpRequestInProgress) {
+            Toast.makeText(
+                this,
+                "OTP request already in progress. Please wait...",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
         val email = emailEditText.text.toString().trim()
 
         if (email.isEmpty()) {
@@ -167,48 +200,59 @@ class ClientLogin : BaseActivity() {
             return
         }
 
+        isOtpRequestInProgress = true
+        sendOtpButton.isEnabled = false // Disable button
+        showLoader() // Show loader
+
         val url = "https://www.makes360.com/application/makes360/client/send-otp.php"
         val requestQueue: RequestQueue = Volley.newRequestQueue(this)
 
-        showLoader()
+        val jsonBody = JSONObject().apply {
+            put("email", email)
+        }
 
-        val stringRequest = object : StringRequest(
+        val jsonObjectRequest = object : JsonObjectRequest(
             Method.POST,
             url,
-            Response.Listener { response ->
-                hideLoader()
+            jsonBody,
+            { response ->
+                isOtpRequestInProgress = false
+                sendOtpButton.isEnabled = true // Re-enable button
+                hideLoader() // Hide loader
+
                 try {
-                    val jsonResponse = JSONObject(response)
-                    if (jsonResponse.optBoolean("success", false)) {
-                        sentOtp = jsonResponse.optString("otp")
-                        Toast.makeText(this, "OTP sent successfully!", Toast.LENGTH_SHORT).show()
+                    val success = response.optBoolean("success", false)
+                    val message = response.optString("error", "Unknown response from server")
+
+                    if (success) {
+                        Toast.makeText(this, "OTP sent successfully.", Toast.LENGTH_SHORT).show()
                     } else {
-                        val error = jsonResponse.optString("error", "Unknown error occurred")
-                        Toast.makeText(this, "Failed: $error", Toast.LENGTH_SHORT).show()
+                        // Display the specific message returned from the server
+                        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                     }
-                } catch (e: Exception) {
-                    Toast.makeText(this, "Error parsing response: ${e.message}", Toast.LENGTH_SHORT)
+                } catch (e: JSONException) {
+                    hideLoader()
+                    Toast.makeText(this, "Response parsing error: ${e.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
             },
-            Response.ErrorListener { error ->
-                hideLoader()
-                Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            { error ->
+                isOtpRequestInProgress = false
+                sendOtpButton.isEnabled = true // Re-enable button
+                hideLoader() // Hide loader
+                Toast.makeText(
+                    this,
+                    "Network error: ${error.message ?: "Unknown error"}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         ) {
             override fun getHeaders(): MutableMap<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Content-Type"] = "application/json"
-                return headers
-            }
-
-            override fun getBody(): ByteArray {
-                val params = mapOf("email" to email)
-                return JSONObject(params).toString().toByteArray()
+                return mutableMapOf("Content-Type" to "application/json")
             }
         }
 
-        requestQueue.add(stringRequest)
+        requestQueue.add(jsonObjectRequest)
     }
 
     // Function to verify OTP
@@ -221,10 +265,7 @@ class ClientLogin : BaseActivity() {
             return
         }
 
-        if (sentOtp == null) {
-            Toast.makeText(this, "Please request an OTP first.", Toast.LENGTH_SHORT).show()
-            return
-        }
+        showLoader() // Show loader
 
         val url = "https://www.makes360.com/application/makes360/client/verify-otp.php"
         val requestQueue: RequestQueue = Volley.newRequestQueue(this)
@@ -238,24 +279,31 @@ class ClientLogin : BaseActivity() {
                     if (jsonResponse.optBoolean("success", false)) {
                         val custId = jsonResponse.optString("cust_id", null.toString())
                         val firstName = jsonResponse.optString("first_name", null.toString())
-                        saveLoginState(email, custId, firstName)
+                        val gender = jsonResponse.optString("gender", null.toString())
+                        val profilePic = jsonResponse.optString("profile_pic", null.toString())
+                        saveLoginState(email, custId, firstName, gender, profilePic)
                         val intent = Intent(this, ClientDashboard::class.java)
                         intent.putExtra("EMAIL", email)
                         intent.putExtra("CUST_ID", custId)
                         intent.putExtra("FIRST_NAME", firstName)
+                        intent.putExtra("GENDER", gender)
+                        intent.putExtra("PROFILE_PIC", profilePic)
                         Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
                         finish()
                     } else {
+                        hideLoader() // Hide loader
                         val error = jsonResponse.optString("error", "Invalid OTP")
                         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
+                    hideLoader() // Hide loader
                     Toast.makeText(this, "Error parsing response: ${e.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
             },
             Response.ErrorListener { error ->
+                hideLoader() // Hide loader
                 Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         ) {
@@ -267,9 +315,8 @@ class ClientLogin : BaseActivity() {
 
             override fun getBody(): ByteArray {
                 val params = mapOf(
-                    "sentOtp" to sentOtp,
-                    "inputOtp" to enteredOtp,
-                    "email" to email
+                    "email" to email,
+                    "inputOtp" to enteredOtp
                 )
                 return JSONObject(params).toString().toByteArray()
             }
@@ -277,5 +324,4 @@ class ClientLogin : BaseActivity() {
 
         requestQueue.add(stringRequest)
     }
-
 }

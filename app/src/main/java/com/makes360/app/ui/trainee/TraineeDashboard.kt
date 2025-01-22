@@ -1,20 +1,23 @@
 package com.makes360.app.ui.trainee
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
@@ -23,8 +26,14 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
 import com.makes360.app.adapters.trainee.TraineeDetailsAdapter
+import com.makes360.app.databinding.ActivityInternDashboardBinding
+import com.makes360.app.databinding.ActivityTraineeDashboardBinding
 import com.makes360.app.models.trainee.TraineeDetailsData
 import com.makes360.app.ui.AnnouncementList
+import com.makes360.app.ui.client.ClientDashboard
+import com.makes360.app.ui.client.ClientLogin
+import com.makes360.app.ui.intern.InternDashboard
+import com.makes360.app.ui.intern.InternLogin
 import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +44,7 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -44,6 +54,7 @@ class TraineeDashboard : BaseActivity() {
     private lateinit var progressBar: ProgressBar
     private var traineeDetailsList = mutableListOf<TraineeDetailsData>()
     private lateinit var traineeDetailsAdapter: TraineeDetailsAdapter
+    private lateinit var mBinding: ActivityTraineeDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +66,130 @@ class TraineeDashboard : BaseActivity() {
     }
 
     private fun loadContent() {
-        setContentView(R.layout.activity_trainee_dashboard)
+        // Initialize binding
+        mBinding = ActivityTraineeDashboardBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.traineeToolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mBinding.traineeToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        // Set up ActionBarDrawerToggle
+        val toggle = ActionBarDrawerToggle(
+            this,
+            mBinding.drawerLayout,
+            mBinding.traineeToolbar,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
+
+        mBinding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Add hamburger menu icon
+        val actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeAsUpIndicator(R.drawable.ic_menu) // Use your hamburger icon
+
+        mBinding.navigationView.itemIconTintList = null
+
+        val navigationView = mBinding.navigationView
+
+        // List of menu items
+        val menuItems = listOf(
+            Pair(R.drawable.ic_admin, "Admin Login"),
+            Pair(R.drawable.ic_man_client, "Client Login"),
+            Pair(R.drawable.ic_nav_intern, "Intern/Emp Login"),
+            Pair(R.drawable.ic_intern, "Trainee Login"),
+            Pair(R.drawable.ic_nav_rate_us, "Rate Us"),
+            Pair(R.drawable.ic_nav_share, "Share")
+        )
+
+        // Add each custom item to the NavigationView
+        val menuParent =
+            navigationView.getHeaderView(0).findViewById<LinearLayout>(R.id.menu_container)
+
+        menuItems.forEach { (iconRes, title) ->
+            val customView = layoutInflater.inflate(R.layout.item_nav_menu, menuParent, false)
+
+            val iconView = customView.findViewById<ImageView>(R.id.icon)
+            val titleView = customView.findViewById<TextView>(R.id.title)
+
+            // Set icon and title
+            iconView.setImageResource(iconRes)
+            titleView.text = title
+
+            // Add click listener if needed
+            customView.setOnClickListener {
+                val currentActivity = this::class.java
+                when (title) {
+                    "Admin Login" -> {
+                        if (!currentActivity.equals(TraineeAdminLogin::class.java)) {
+                            val intent = Intent(this, TraineeAdminLogin::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+
+                    "Client Login" -> {
+                        if (!currentActivity.equals(ClientDashboard::class.java)) {
+                            val intent = Intent(this, ClientLogin::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+
+                    "Intern/Emp Login" -> {
+                        if (!currentActivity.equals(InternDashboard::class.java)) {
+                            val intent = Intent(this, InternLogin::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+
+                    "Trainee Login" -> {
+                        if (currentActivity != TraineeDashboard::class.java) {
+                            val intent = Intent(this, TraineeLogin::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+
+                    "Rate Us" -> {
+                        try {
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=$packageName")
+                            )
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                            startActivity(intent)
+                        } catch (e: ActivityNotFoundException) {
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                            )
+                            startActivity(intent)
+                        }
+                    }
+
+                    "Share" -> {
+                        // Share the predefined message
+                        val message =
+                            "Makes360 - Your IT Partner\n\nSince 2018, Makes360 has delivered 114+ projects across 12+ industries. We specialize in brand building, marketing, and business consulting with lifetime free maintenance and 24/7 support. Let’s drive your digital success!\n\nDownload our app from Google Play Store. Click the link below:\n" +
+                                    "https://play.google.com/store/apps/details?id=$packageName"
+
+                        val shareIntent = Intent(Intent.ACTION_SEND)
+                        shareIntent.type = "text/plain"
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+                        startActivity(Intent.createChooser(shareIntent, "Share via"))
+                    }
+                }
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            // Add the custom view to the container
+            menuParent.addView(customView)
+        }
 
         progressOverlay = findViewById(R.id.progressOverlay)
         progressBar = findViewById(R.id.progressBar)
@@ -79,6 +209,12 @@ class TraineeDashboard : BaseActivity() {
     private fun setUpViews() {
         imageSlider()
         announcementList()
+        footer()
+    }
+
+    private fun footer() {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        mBinding.footerTextView.text = getString(R.string.footer_text, currentYear)
     }
 
     private fun imageSlider() {
@@ -101,21 +237,19 @@ class TraineeDashboard : BaseActivity() {
         val cardViewText = findViewById<TextView>(R.id.markAsReadTxtView)
         val announcementWebView = findViewById<WebView>(R.id.announcementWebView)
 
+        // Configure WebView settings
+        with(announcementWebView.settings) {
+            javaScriptEnabled = true
+            domStorageEnabled = true
+            loadWithOverviewMode = true
+            useWideViewPort = true
+            textZoom = 220
+        }
+
         announcementWebView.setOnLongClickListener {
             // Do nothing on long press
             true
         }
-
-        // Configure WebView settings
-        val webSettings: WebSettings = announcementWebView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.domStorageEnabled = true
-        webSettings.loadWithOverviewMode = true
-        webSettings.useWideViewPort = true
-        webSettings.textZoom = 220
-
-        // Load content
-        announcementWebView.webViewClient = WebViewClient()
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -134,23 +268,19 @@ class TraineeDashboard : BaseActivity() {
 
                     if (success) {
                         val announcements = jsonResponse.getJSONArray("announcements")
-                        val currentDate = getCurrentDate()
-                        val currentAnnouncement = (0 until announcements.length())
-                            .map { announcements.getJSONObject(it) }
-                            .find { it.getString("date") == currentDate }
 
-                        // Fallback to the last non-empty message if no announcement is found for the current date
-                        val announcementToShow =
-                            currentAnnouncement ?: (announcements.length() - 1 downTo 0)
-                                .map { announcements.getJSONObject(it) }
-                                .find { it.optString("message").isNotEmpty() }
+                        // Find the announcement with the maximum ID
+                        val recentAnnouncement = (0 until announcements.length())
+                            .map { announcements.getJSONObject(it) }
+                            .maxByOrNull { it.getInt("id") }
 
                         withContext(Dispatchers.Main) {
                             hideLoader()
-                            if (currentAnnouncement != null) {
-                                val id = currentAnnouncement.getString("id")
-                                val message = currentAnnouncement.getString("message")
-                                val readBy = currentAnnouncement.getString("read_by")
+
+                            if (recentAnnouncement != null) {
+                                val id = recentAnnouncement.getString("id")
+                                val message = recentAnnouncement.getString("message")
+                                val readBy = recentAnnouncement.getString("read_by")
                                 val isRead = readBy.split(",").contains(email)
 
                                 announcementWebView.loadDataWithBaseURL(
@@ -195,61 +325,12 @@ class TraineeDashboard : BaseActivity() {
                                     }
                                 }
                             } else {
-                                val id = announcementToShow?.getString("id")
-                                val message = announcementToShow?.getString("message")
-                                val readBy = announcementToShow?.getString("read_by")
-                                val isRead = readBy?.split(",")?.contains(email)
-
-                                if (message != null) {
-                                    announcementWebView.loadDataWithBaseURL(
-                                        null,
-                                        message,
-                                        "text/html",
-                                        "UTF-8",
-                                        null
-                                    )
-                                }
-
-                                if (isRead == true) {
-                                    cardView.setCardBackgroundColor(
-                                        ContextCompat.getColor(
-                                            this@TraineeDashboard,
-                                            R.color.material_core_light_green
-                                        )
-                                    )
-                                    cardViewText.setTextColor(
-                                        ContextCompat.getColor(
-                                            this@TraineeDashboard,
-                                            R.color.primary_text
-                                        )
-                                    )
-                                    cardViewText.text = "Great! You Read It"
-                                    cardView.isClickable = false
-                                } else {
-                                    cardViewText.setTextColor(
-                                        ContextCompat.getColor(
-                                            this@TraineeDashboard,
-                                            R.color.white
-                                        )
-                                    )
-                                    cardView.setCardBackgroundColor(
-                                        ContextCompat.getColor(
-                                            this@TraineeDashboard,
-                                            R.color.colorPrimary
-                                        )
-                                    )
-                                    cardView.isClickable = true
-                                    cardView.setOnClickListener {
-                                        if (id != null) {
-                                            markAsRead(
-                                                email,
-                                                id,
-                                                cardView,
-                                                cardViewText
-                                            )
-                                        }
-                                    }
-                                }
+                                cardView.visibility = View.GONE
+                                announcementWebView.loadData(
+                                    "<h1>No announcements available.</h1>",
+                                    "text/html",
+                                    "UTF-8"
+                                )
                             }
                         }
                     } else {
@@ -345,12 +426,6 @@ class TraineeDashboard : BaseActivity() {
         }
     }
 
-    // Helper function to get the current date in "yyyy-MM-dd" format
-    private fun getCurrentDate(): String {
-        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return formatter.format(Date())
-    }
-
 
     private fun announcementList() {
         val cardView =
@@ -389,7 +464,7 @@ class TraineeDashboard : BaseActivity() {
                     runOnUiThread {
                         hideLoader()
                         traineeDetailsRecyclerView(parsedData)
-                        announcementWebView(parsedData.status)
+                        announcementWebView(parsedData.email)
                     }
                 } else {
                     runOnUiThread {
@@ -426,7 +501,11 @@ class TraineeDashboard : BaseActivity() {
         traineeDetailsList.add(
             TraineeDetailsData(
                 title = "Offer Letter",
-                icon = R.drawable.ic_offer_letter
+                icon = if (details.offerLetter == "0") {
+                    R.drawable.ic_question_mark
+                } else {
+                    R.drawable.ic_offer_letter
+                }
             )
         )
 
@@ -439,8 +518,16 @@ class TraineeDashboard : BaseActivity() {
 
         traineeDetailsList.add(
             TraineeDetailsData(
-                title = "Profile Update",
-                icon = R.drawable.ic_update
+                title = if (details.updated == "0") {
+                    "Update Profile"
+                } else {
+                    "Profile Update"
+                },
+                icon = if (details.updated == "0") {
+                    R.drawable.ic_question_mark
+                } else {
+                    R.drawable.ic_update
+                }
             )
         )
 
@@ -454,9 +541,32 @@ class TraineeDashboard : BaseActivity() {
         traineeDetailsList.add(
             TraineeDetailsData(
                 title = "Fee Info",
-                icon = R.drawable.ic_info
+                icon = R.drawable.ic_info,
+                email = details.email
             )
         )
+
+        traineeDetailsList.add(
+            TraineeDetailsData(
+                title = "Support",
+                icon = R.drawable.ic_support
+            )
+        )
+
+        traineeDetailsList.add(
+            TraineeDetailsData(
+                title = "Feedback",
+                icon = R.drawable.ic_feedback
+            )
+        )
+
+        traineeDetailsList.add(
+            TraineeDetailsData(
+                title = "Attendance",
+                icon = R.drawable.ic_attendance
+            )
+        )
+
 
         traineeDetailsAdapter = TraineeDetailsAdapter(this, traineeDetailsList)
         traineeDetailsRecyclerView.layoutManager = GridLayoutManager(this, 3)
@@ -472,8 +582,6 @@ class TraineeDashboard : BaseActivity() {
         val jsonResponse = JSONObject(response)
         return TraineeDetails(
             name = jsonResponse.optString("name", "Unknown"),
-            points = jsonResponse.optString("points", "Unknown"),
-            pointsRemarks = jsonResponse.optString("points_remarks", "Unknown"),
             offerLetter = jsonResponse.optString("offer_letter", "Unknown"),
             motherName = jsonResponse.optString("mother_name", "Unknown"),
             email = jsonResponse.optString("email", "Unknown"),
@@ -487,7 +595,8 @@ class TraineeDashboard : BaseActivity() {
             status = jsonResponse.optString("status", "Unknown"),
             txnId = jsonResponse.optString("txnId", "Unknown"),
             createdAt = jsonResponse.optString("created_at", "Unknown"),
-            updated = jsonResponse.optString("updated", "Unknown")
+            updated = jsonResponse.optString("updated", "Unknown"),
+            lastLogin = jsonResponse.optString("lastLogin", "Unknown")
         )
     }
 
@@ -510,8 +619,6 @@ class TraineeDashboard : BaseActivity() {
 
     data class TraineeDetails(
         val name: String,
-        val points: String,
-        val pointsRemarks: String,
         val offerLetter: String,
         val motherName: String,
         val email: String,
@@ -525,6 +632,15 @@ class TraineeDashboard : BaseActivity() {
         val status: String,
         val txnId: String,
         val createdAt: String,
-        val updated: String
+        val updated: String,
+        val lastLogin: String
     )
+
+    override fun onBackPressed() {
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

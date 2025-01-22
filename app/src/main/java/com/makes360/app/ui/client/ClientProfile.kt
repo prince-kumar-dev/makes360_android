@@ -84,12 +84,11 @@ class ClientProfile : BaseActivity() {
         val profileImageView = findViewById<ImageView>(R.id.clientImg)
 
         // Adding Image to the profileImageView
-
         if (details.profilePic.isEmpty() || details.profilePic == "null") {
             if (details.gender == "0")
-                profileImageView.setImageResource(R.drawable.ic_man_avatar)
+                profileImageView.setImageResource(R.drawable.ic_man_client)
             else
-                profileImageView.setImageResource(R.drawable.ic_female_avatar)
+                profileImageView.setImageResource(R.drawable.ic_female_client)
         } else {
             val url =
                 "https://www.makes360.com/internship/apply/file/profile_pic/" + details.profilePic
@@ -211,7 +210,7 @@ class ClientProfile : BaseActivity() {
     }
 
     private fun updateProfileUI(details: ProfileDetails) {
-        mBinding.clientName.text = details.firstName + " " + details.lastName
+        mBinding.clientName.text = "${details.firstName}  ${details.lastName}"
         mBinding.clientEmail.text = intent.getStringExtra("EMAIL")
         mBinding.clientCompanyTxtView.text = details.companyName
     }

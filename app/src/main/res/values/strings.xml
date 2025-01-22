@@ -116,5 +116,25 @@
     <string name="announcements">Announcements</string>
     <string name="offer_letter">Offer Letter</string>
     <string name="makes360_trainee">Makes360 Trainee</string>
-
+    <string name="trainee_intern">Trainee Intern</string>
+    <string name="last_login">Last Login</string>
+    <string name="fee_info">Fee Info</string>
+    <string name="registration_fee">Registration Fee</string>
+    <string name="trnx_id">Trnx ID:</string>
+    <string name="status">Status:</string>
+    <string name="_1st_installment">1st Installment</string>
+    <string name="_6000">₹ 6000.00</string>
+    <string name="due_details">
+    &#8226; Due in the first week of March.\n&#8226; Details will be shared soon.\n&#8226; All applicable discounts will be applied to this installment.
+    </string>
+    <string name="_2nd_installment">2nd Installment</string>
+    <string name="more_info">More Info</string>
+    <string name="close">Close</string>
+    <string name="support">Support</string>
+    <string name="trainee_login">Trainee Login</string>
+    <string name="trainee_login_all_colleges">Trainee Login (All Colleges)</string>
+    <string name="company_brochure_pdf">Company Brochure (PDF)</string>
+    <string name="footer_text">%1$d © AGI Innovations Makes360 Private Limited</string>
+    <string name="toolbar_title">Hi %1$s</string>
+    <style name="announcement_already_read">"Great! You Read It"</style>
 </resources>

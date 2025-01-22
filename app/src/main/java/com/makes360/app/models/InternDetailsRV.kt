@@ -10,5 +10,7 @@ data class InternDetailsRV(
     val resumeLink: String = "",
     val videoResumeLink: String = "",
     val certificateLink: String = "",
-    val applicationStatus: Int = -1
+    val applicationStatus: Int = -1,
+    val gender: String = "",
+    val profilePic: String = ""
 )

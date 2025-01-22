@@ -5,5 +5,7 @@ data class ClientDetailsData(
     val title: String = "",
     val custId: String = "",
     val projectId: String = "",
-    val projectName: String = ""
+    val projectName: String = "",
+    val email: String = "",
+    val profilePic: String = ""
 )

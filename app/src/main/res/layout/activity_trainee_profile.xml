@@ -80,6 +80,20 @@
                         app:layout_constraintTop_toBottomOf="@+id/traineeName"
                         tools:ignore="TextSizeCheck" />
 
+                    <TextView
+                        android:id="@+id/traineeLastLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/last_login"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintEnd_toEndOf="@+id/traineeEmail"
+                        app:layout_constraintStart_toStartOf="@+id/traineeEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/traineeEmail"
+                        tools:ignore="TextSizeCheck" />
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/traineePositionCardView"
                         android:layout_width="wrap_content"
@@ -88,18 +102,16 @@
                         android:layout_margin="@dimen/_6sdp"
                         app:cardCornerRadius="@dimen/_18sdp"
                         app:cardElevation="@dimen/_1sdp"
-                        app:layout_constraintEnd_toEndOf="@+id/traineeEmail"
-                        app:layout_constraintStart_toStartOf="@+id/traineeEmail"
-                        app:layout_constraintTop_toBottomOf="@+id/traineeEmail">
+                        app:layout_constraintEnd_toEndOf="@+id/traineeLastLogin"
+                        app:layout_constraintStart_toStartOf="@+id/traineeLastLogin"
+                        app:layout_constraintTop_toBottomOf="@+id/traineeLastLogin">
 
                         <TextView
                             android:id="@+id/traineePositionTextView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="@string/makes360_trainee"
+                            android:text="@string/trainee_intern"
                             android:textSize="@dimen/_14sdp"
-                            android:paddingTop="@dimen/_4sdp"
-                            android:paddingBottom="@dimen/_4sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:paddingStart="@dimen/_12sdp"
                             android:paddingEnd="@dimen/_12sdp"

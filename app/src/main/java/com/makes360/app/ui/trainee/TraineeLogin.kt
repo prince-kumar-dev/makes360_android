@@ -84,7 +84,7 @@ class TraineeLogin : BaseActivity() {
 
     private fun footer() {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-        mBinding.footerTextView.text = "$currentYear © AGI Innovations Makes360 Private Limited"
+        mBinding.footerTextView.text = getString(R.string.footer_text, currentYear)
     }
 
     // Utility function to hide the keyboard

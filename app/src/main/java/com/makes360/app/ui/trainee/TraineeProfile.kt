@@ -5,21 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
 import com.makes360.app.adapters.client.ClientTraineeProfileAdapter
-import com.makes360.app.databinding.ActivityClientProfileBinding
 import com.makes360.app.databinding.ActivityTraineeProfileBinding
 import com.makes360.app.models.client.ClientTraineeProfileCategory
-import com.makes360.app.ui.client.ClientLogin
-import com.makes360.app.ui.client.ClientProfile.ProfileDetails
 import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -92,13 +83,13 @@ class TraineeProfile : BaseActivity() {
         val profileImageView = findViewById<ImageView>(R.id.traineeImg)
 
         // Adding Image to the profileImageView
-
-        if (details.gender == "0")
-            profileImageView.setImageResource(R.drawable.intern_girl)
-        else if (details.gender == "1")
-            profileImageView.setImageResource(R.drawable.intern_boy)
-        else
-            profileImageView.setImageResource(R.drawable.ic_question_mark)
+        profileImageView.setImageResource(
+            when (details.gender) {
+                "0" -> R.drawable.intern_girl
+                "1" -> R.drawable.intern_boy
+                else -> R.drawable.ic_question_mark
+            }
+        )
 
         val dob = formatDate(details.dob)
 
@@ -201,6 +192,18 @@ class TraineeProfile : BaseActivity() {
     private fun updateProfileUI(profileDetails: TraineeProfileDetails) {
         mBinding.traineeName.text = profileDetails.name
         mBinding.traineeEmail.text = intent.getStringExtra("EMAIL")
+
+        val lastLoginTimestamp = profileDetails.lastLogin
+
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+        val date = inputFormat.parse(lastLoginTimestamp)
+
+        val outputFormat = SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault())
+
+        val formattedDate = date?.let { outputFormat.format(it) }
+
+        mBinding.traineeLastLogin.text = ("Last Login: $formattedDate")
     }
 
     private fun parseResponse(response: String): TraineeProfileDetails {
@@ -220,7 +223,8 @@ class TraineeProfile : BaseActivity() {
             status = jsonResponse.optString("status", "Unknown"),
             txnId = jsonResponse.optString("txnId", "Unknown"),
             createdAt = jsonResponse.optString("created_at", "Unknown"),
-            updated = jsonResponse.optString("updated", "Unknown")
+            updated = jsonResponse.optString("updated", "Unknown"),
+            lastLogin = jsonResponse.optString("lastLogin", "Unknown")
         )
     }
 
@@ -245,7 +249,8 @@ class TraineeProfile : BaseActivity() {
         val status: String,
         val txnId: String,
         val createdAt: String,
-        val updated: String
+        val updated: String,
+        val lastLogin: String
     )
 
 }

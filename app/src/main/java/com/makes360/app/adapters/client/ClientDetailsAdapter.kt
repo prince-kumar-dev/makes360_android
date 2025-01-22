@@ -10,11 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.R
 import com.makes360.app.models.client.ClientDetailsData
 import com.makes360.app.ui.client.ClientProjectAssets
 import com.makes360.app.ui.client.ClientProjectDetails
 import com.makes360.app.ui.client.ClientContactLog
+import com.makes360.app.ui.client.ClientProfile
 
 class ClientDetailsAdapter(
     private var context: Context,
@@ -38,7 +41,29 @@ class ClientDetailsAdapter(
 
     override fun onBindViewHolder(holder: ClientDetailsViewHolder, position: Int) {
         val details = clientDetailsList[position]
-        holder.icon.setImageResource(details.icon)
+        if (details.title != "Profile Details") {
+            holder.icon.setImageResource(details.icon)
+        } else {
+            when (details.icon) {
+                0 -> {
+                    holder.icon.setImageResource(R.drawable.ic_man_client)
+                }
+
+                1 -> {
+                    holder.icon.setImageResource(R.drawable.ic_female_client)
+                }
+
+                2 -> {
+                    // Using Glide with circle crop
+                    Glide.with(context)
+                        .load(details.profilePic)
+                        .apply(RequestOptions.circleCropTransform()) // Apply circle crop transformation
+                        .placeholder(R.drawable.circular_background) // Optional placeholder
+                        .into(holder.icon)
+                }
+            }
+        }
+
         holder.title.text = details.title
 
         holder.cardViewContainer.setOnClickListener {
@@ -48,6 +73,13 @@ class ClientDetailsAdapter(
 
     private fun handleCardClick(details: ClientDetailsData, title: String) {
         when (title) {
+            "Profile Details" -> {
+                val intent = Intent(context, ClientProfile::class.java).apply {
+                    putExtra("EMAIL", details.email)
+                }
+                context.startActivity(intent)
+            }
+
             "Project Details" -> {
                 if (details.projectId == "") {
                     showToast("Select Project from Project List")

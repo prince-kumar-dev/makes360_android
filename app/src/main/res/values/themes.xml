@@ -18,4 +18,11 @@
         <!-- Tint color for the three-dot icon -->
         <item name="android:tint">@android:color/white</item>
     </style>
+
+    <style name="MenuTextAppearance" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
 </resources>
