@@ -13,8 +13,8 @@ android {
         applicationId = "com.makes360.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 13
-        versionName = "2.0"
+        versionCode = 14
+        versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

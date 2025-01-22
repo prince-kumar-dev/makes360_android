@@ -245,7 +245,7 @@ open class MainActivity : BaseActivity() {
             CompanyProfileData(
                 "Training",
                 R.drawable.ic_training,
-                "https://www.makes360.com/services/"
+                "https://www.makes360.com/training"
             )
         )
     }

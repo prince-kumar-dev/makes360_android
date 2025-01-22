@@ -197,7 +197,7 @@ class ClientDashboard : BaseActivity() {
 
         // Get the email passed from the previous activity
         email = intent.getStringExtra("EMAIL").toString()
-        val custId = 4320561
+        val custId = intent.getStringExtra("CUST_ID")?.toInt()
         val firstName = intent.getStringExtra("FIRST_NAME")
         gender = intent.getStringExtra("GENDER").toString()
         profilePic = intent.getStringExtra("PROFILE_PIC").toString()
@@ -206,7 +206,9 @@ class ClientDashboard : BaseActivity() {
 
         showLoader()
         setUpViews()
-        fetchProjectDetails(custId)
+        if (custId != null) {
+            fetchProjectDetails(custId)
+        }
         announcementWebView(custId.toString())
 
     }
