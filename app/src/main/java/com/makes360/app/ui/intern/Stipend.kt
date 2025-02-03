@@ -46,16 +46,28 @@ class Stipend : BaseActivity() {
         } else {
             showToast("Invalid email! or id! Please try again.")
         }
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null && month != null && year != null) {
+                    setUpViews(email, month, year)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun setUpViews(email: String, month: String, year: String) {

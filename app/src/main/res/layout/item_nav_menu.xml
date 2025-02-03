@@ -7,14 +7,14 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
-    android:paddingStart="@dimen/_10sdp"
-    android:paddingTop="@dimen/_14sdp"
-    android:paddingEnd="@dimen/_10sdp">
+    android:paddingTop="@dimen/_14sdp">
 
     <!-- Actual Menu Item -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp">
 
         <ImageView
             android:id="@+id/icon"
@@ -34,6 +34,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
             android:textSize="@dimen/_12sdp"
+            android:textColor="@color/primary_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/arrow_icon"
             app:layout_constraintStart_toEndOf="@+id/icon"
@@ -43,20 +44,21 @@
 
         <ImageView
             android:id="@+id/arrow_icon"
-            android:layout_width="@dimen/_10sdp"
-            android:layout_height="@dimen/_10sdp"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_right_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorPrimaryDark" />
+            app:tint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_42sdp"
         android:layout_marginTop="@dimen/_14sdp"
         android:background="@color/grey_font" />
 </LinearLayout>

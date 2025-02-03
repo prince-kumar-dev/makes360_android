@@ -1,10 +1,13 @@
 package com.makes360.app.ui.client
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -51,8 +54,160 @@ class ClientProfile : BaseActivity() {
             showToast("Invalid email! Please try again.")
         }
 
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null) {
+                    fetchClientProfile(email)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
+
         mBinding.logOut.setOnClickListener {
-            logout()
+            logOutConfirmationDialog()
+        }
+        mBinding.deleteAccount.setOnClickListener {
+            deleteAccountConfirmationDialog(email)
+        }
+        mBinding.instagramImageView.setOnClickListener {
+            loadUrl("https://www.instagram.com/makes360_india/")
+        }
+        mBinding.facebookImageView.setOnClickListener {
+            loadUrl("https://www.facebook.com/Makes360india/")
+        }
+        mBinding.youtubeImageView.setOnClickListener {
+            loadUrl("https://www.youtube.com/@Makes360_innovations")
+        }
+        mBinding.linkedinImageView.setOnClickListener {
+            loadUrl("https://www.linkedin.com/company/makes360/posts/")
+        }
+        mBinding.xImageView.setOnClickListener {
+            loadUrl("https://x.com/makes360india")
+        }
+        mBinding.pinterestImageView.setOnClickListener {
+            loadUrl("https://www.pinterest.com/makes360/makes360/")
+        }
+    }
+
+    private fun loadUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+    private fun logOutConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Log Out")
+        builder.setMessage("Are you sure you want to log out of your account?")
+
+        // Set up the buttons
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss() // Close the dialog
+            logout() // Proceed with account deletion
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss() // Close the dialog without doing anything
+        }
+
+        // Display the dialog
+        val dialog = builder.create()
+        dialog.show()
+
+        // Optional: Customize the button appearance
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(this, R.color.material_flat_carrot))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(this, R.color.material_core_light_green))
+    }
+
+    private fun deleteAccountConfirmationDialog(email: String?) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete Account")
+        builder.setMessage("Are you sure you want to delete your account? This action cannot be undone.")
+
+        // Set up the buttons
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss() // Close the dialog
+            deleteAccount(email) // Proceed with account deletion
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss() // Close the dialog without doing anything
+        }
+
+        // Display the dialog
+        val dialog = builder.create()
+        dialog.show()
+
+        // Optional: Customize the button appearance
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(this, R.color.material_flat_carrot))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(this, R.color.material_core_light_green))
+    }
+
+    private fun deleteAccount(email: String?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val url =
+                    URL("https://www.makes360.com/application/makes360/client/delete-account.php")
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "POST"
+                connection.connectTimeout = 10000
+                connection.readTimeout = 10000
+                connection.doOutput = true
+                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
+
+                // Write email to request body
+                val requestBody = "email=$email"
+                val outputStream = OutputStreamWriter(connection.outputStream)
+                outputStream.write(requestBody)
+                outputStream.flush()
+                outputStream.close()
+
+                // Read response
+                val responseCode = connection.responseCode
+                val responseMessage = connection.inputStream.bufferedReader().use { it.readText() }
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    // Parse response message
+                    val message = JSONObject(responseMessage).optString("message", "Success")
+                    val error = JSONObject(responseMessage).optString("error", "")
+
+                    runOnUiThread {
+                        hideLoader()
+                        if (error.isNotEmpty()) {
+                            showToast(error)
+                        } else {
+                            showToast(message)
+                        }
+                        val sharedPreferences =
+                            getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.clear() // Clear all stored data
+                        editor.apply()
+
+                        // Redirect to login screen
+                        val intent = Intent(baseContext, ClientLogin::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(intent)
+                    }
+                } else {
+                    runOnUiThread {
+                        hideLoader()
+                        showToast("Failed to fetch profile details. Please try again.")
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                runOnUiThread {
+                    hideLoader()
+                    showToast("Error occurred.")
+                }
+            }
         }
     }
 

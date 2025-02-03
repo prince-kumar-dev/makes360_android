@@ -312,8 +312,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_right_arrow" />
-                            <entry key="sourceFile" value="C:\Users\Prince Kumar\Downloads\ic_toolbar_icon.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_contact" />
+                            <entry key="sourceFile" value="C:\Users\Prince Kumar\Downloads\ic_contact.svg" />
                           </map>
                         </option>
                       </PersistentState>

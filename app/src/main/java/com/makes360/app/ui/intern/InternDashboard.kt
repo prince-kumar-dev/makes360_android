@@ -1,9 +1,17 @@
 package com.makes360.app.ui.intern
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
@@ -13,12 +21,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -50,7 +63,7 @@ import java.net.URL
 class InternDashboard : BaseActivity() {
 
     private lateinit var progressOverlay: View
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private var internDetailsList = mutableListOf<InternDetailsRV>()
     private lateinit var internDetailsAdapter: InternDetailsAdapter
     private lateinit var adapter: DownloadContentAdapter
@@ -196,7 +209,6 @@ class InternDashboard : BaseActivity() {
             menuParent.addView(customView)
         }
 
-
         // Get the email passed from the previous activity
         val email = intent.getStringExtra("EMAIL")
 
@@ -206,7 +218,20 @@ class InternDashboard : BaseActivity() {
         } else {
             showToast("Invalid email! Please try again.")
         }
+
         setUpViews()
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null) {
+                    setUpViews()
+                    fetchInternDetails(email)
+                }
+            } else {
+                showNoInternet()
+            }
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun setUpViews() {
@@ -230,12 +255,8 @@ class InternDashboard : BaseActivity() {
         }
 
         announcementWebView.setOnLongClickListener {
-            // Do nothing on long press
             true
         }
-
-        // Load content
-        // announcementWebView.webViewClient = WebViewClient()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -263,7 +284,7 @@ class InternDashboard : BaseActivity() {
                             hideLoader()
 
                             if (recentAnnouncement != null) {
-                                val id = recentAnnouncement.getString("id")
+                                val id = recentAnnouncement.getInt("id")
                                 val message = recentAnnouncement.getString("message")
                                 val readBy = recentAnnouncement.getString("read_by")
                                 val isRead = readBy.split(",").contains(certificateNumber)
@@ -306,7 +327,12 @@ class InternDashboard : BaseActivity() {
                                     )
                                     cardView.isClickable = true
                                     cardView.setOnClickListener {
-                                        markAsRead(certificateNumber, id, cardView, cardViewText)
+                                        markAsRead(
+                                            certificateNumber,
+                                            id.toString(),
+                                            cardView,
+                                            cardViewText
+                                        )
                                     }
                                 }
                             } else {
@@ -317,16 +343,6 @@ class InternDashboard : BaseActivity() {
                                     "UTF-8"
                                 )
                             }
-                        }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            hideLoader()
-                            cardView.visibility = View.GONE
-                            announcementWebView.loadData(
-                                "<h1>No announcements available.</h1>",
-                                "text/html",
-                                "UTF-8"
-                            )
                         }
                     }
                 }
@@ -344,7 +360,6 @@ class InternDashboard : BaseActivity() {
             }
         }
     }
-
 
     private fun markAsRead(
         certificateNumber: String,
@@ -425,42 +440,52 @@ class InternDashboard : BaseActivity() {
     private fun downloadContent() {
         val downloadContentRV = findViewById<RecyclerView>(R.id.downloadContentRV)
 
-        val downloadContentList = listOf(
+        var downloadContentList = mutableListOf<DownloadContent>()
+
+        downloadContentList.clear()
+
+        downloadContentList = mutableListOf(
             DownloadContent(
                 heading = "Intern Handbook",
                 description = "Conduct rules for all Makes360 interns, coworkers, and subcontractors.",
                 iconResId = R.drawable.intern_handbook,
-                url = "https://www.makes360.com/application/makes360/internship/files/intern-handbook.pdf"
+                url = "https://www.makes360.com/application/makes360/internship/files/intern-handbook.pdf",
+                color = "Red"
             ),
             DownloadContent(
                 heading = "Perks & Benefits",
                 description = "Detailed instructions for completing assigned projects effectively.",
                 iconResId = R.drawable.ic_perks,
-                url = "https://www.makes360.com/application/makes360/internship/files/perks-and-benefits.pdf"
+                url = "https://www.makes360.com/application/makes360/internship/files/perks-and-benefits.pdf",
+                color = "Blue"
             ),
             DownloadContent(
                 heading = "Milestone Benefits",
                 description = "Recognition, rewards, and growth opportunities for achieving milestones at Makes360.",
                 iconResId = R.drawable.ic_goals,
-                url = "https://www.makes360.com/application/makes360/internship/files/milestone-benefits.pdf"
+                url = "https://www.makes360.com/application/makes360/internship/files/milestone-benefits.pdf",
+                color = "Yellow"
             ),
             DownloadContent(
                 heading = "Attendance Policy & Leave",
                 description = "Regular attendance is required. Leaves must be pre-approved, except in emergencies.",
                 iconResId = R.drawable.ic_attendance,
-                url = "https://www.makes360.com/application/makes360/internship/files/attendence-policy.pdf"
+                url = "https://www.makes360.com/application/makes360/internship/files/attendence-policy.pdf",
+                color = "Green"
             ),
             DownloadContent(
                 heading = "Certificate Policy",
                 description = "Internship certificate is awarded upon completing all tasks and meeting performance standards.",
                 iconResId = R.drawable.ic_certificate,
-                url = "https://www.makes360.com/application/makes360/internship/files/certificate-policy.pdf"
+                url = "https://www.makes360.com/application/makes360/internship/files/certificate-policy.pdf",
+                color = "Orange"
             ),
             DownloadContent(
                 heading = "Reimbursement Form",
                 description = "Use this form to claim reimbursement for work related expenses.",
                 iconResId = R.drawable.ic_reimbursement,
-                url = "https://www.makes360.com/application/makes360/internship/files/reimbursement-form.docx"
+                url = "https://www.makes360.com/application/makes360/internship/files/reimbursement-form.docx",
+                color = "Purple"
             )
 
         )
@@ -474,6 +499,8 @@ class InternDashboard : BaseActivity() {
         val root = "https://www.makes360.com"
         val internDetailsRecyclerView =
             findViewById<RecyclerView>(R.id.detailsRecyclerView)
+
+        internDetailsList.clear()
 
         internDetailsList.add(
             InternDetailsRV(
@@ -551,13 +578,14 @@ class InternDashboard : BaseActivity() {
     }
 
     private fun showLoader() {
-        progressOverlay.visibility = View.VISIBLE
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
+        progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
-        progressBar.visibility = View.GONE
     }
 
     private fun imageSlider() {

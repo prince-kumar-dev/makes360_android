@@ -56,7 +56,16 @@ class ClientContactLog : BaseActivity() {
         if (projectId != null && projectName != null) {
             showLoader()
             fetchProjectContactLog(projectId.toInt())
-            // checkSetUp()
+        }
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (projectId != null && projectName != null) {
+                    fetchProjectContactLog(projectId.toInt())
+                }
+            } else {
+                showNoInternet()
+            }
         }
 
         mBinding.backImageView.setOnClickListener {
@@ -97,7 +106,7 @@ class ClientContactLog : BaseActivity() {
                         val contactLogArray: JSONArray = response.getJSONArray("contact_log")
                         contactLog.clear() // Clear the list before adding new data
 
-                        if (contactLogArray.length() == 0) {
+                        if (contactLogArray.length() == 0 || contactLogArray.isNull(0)) {
                             mBinding.noContactLogLayout.visibility = View.VISIBLE
                             mBinding.contactLogRV.visibility = View.GONE
                         } else {

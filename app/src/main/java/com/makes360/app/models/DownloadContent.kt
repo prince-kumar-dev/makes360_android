@@ -4,6 +4,7 @@ data class DownloadContent(
     val heading: String,
     val description: String,
     val iconResId: Int, // Resource ID for the icon image
-    val url: String
+    val url: String,
+    val color: String
 )
 

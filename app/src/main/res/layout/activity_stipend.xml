@@ -36,735 +36,750 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Progress Overlay -->
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stipendToolbar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/_12sdp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stipendToolbar">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_65sdp"
-                android:background="@drawable/table_row_border"
-                android:src="@drawable/makes360_letter_head" />
-
-            <!-- Pay Slip Header -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/stipendSlip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/table_subheading_border"
-                android:fontFamily="@font/roboto_medium"
-                android:gravity="center"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:text="@string/stipend_details"
-                android:textColor="#000"
-                android:textSize="@dimen/_14sdp"
-                tools:ignore="TextSizeCheck" />
-
-
-            <!-- Table Layout -->
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:stretchColumns="1">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_65sdp"
+                    android:background="@drawable/table_row_border"
+                    android:src="@drawable/makes360_letter_head" />
+
+                <!-- Pay Slip Header -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/stipendSlip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/table_row_border"
-                    android:orientation="vertical">
-
-                    <!-- Row 1: Internship ID -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/internship_id"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/internshipId"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/job_role"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/jobRole"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/current_stipend"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/currentStipend"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/log_hour"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/logHour"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/paid_leave"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/paidLeave"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/misinformed_leave"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/unpaidLeave"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/cl_other_leave"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/workFromHome"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:textColor="@color/gray_font"
-                            android:padding="@dimen/_8sdp"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:background="@drawable/table_subheading_border"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/stipend_details"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_14sdp"
+                    tools:ignore="TextSizeCheck" />
 
 
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/deadlines_missed"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-                <LinearLayout
+                <!-- Table Layout -->
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/table_row_border"
-                    android:orientation="vertical">
+                    android:background="#EEEEEE"
+                    android:stretchColumns="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:background="@drawable/table_row_border"
+                        android:orientation="vertical">
+
+                        <!-- Row 1: Internship ID -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/internship_id"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/internshipId"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/job_role"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/jobRole"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/current_stipend"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/currentStipend"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/log_hour"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/logHour"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/paid_leave"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/paidLeave"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/misinformed_leave"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/unpaidLeave"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_140sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/cl_other_leave"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/workFromHome"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TableRow android:background="@drawable/table_small_heading_border">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="start"
+                            android:padding="@dimen/_8sdp"
+                            android:text="@string/deadlines_missed"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_12sdp"
+                            tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_row_border"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/cost"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/deadlinesMissedCost"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_64sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/remarks"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/deadlinesMissedRemarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TableRow android:background="@drawable/table_small_heading_border">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="start"
+                            android:padding="@dimen/_8sdp"
+                            android:text="@string/advance_payment"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_12sdp"
+                            tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_row_border"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_64sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/amount"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/advancePayment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_64sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/remarks"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/advancePaymentRemarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TableRow android:background="@drawable/table_small_heading_border">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="start"
+                            android:padding="@dimen/_8sdp"
+                            android:text="@string/bonus"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_12sdp"
+                            tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_row_border"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_64sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/amount"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/bonus"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_64sdp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/remarks"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/bonusRemarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <TableRow android:background="@drawable/table_small_heading_border">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="start"
+                            android:padding="@dimen/_8sdp"
+                            android:text="@string/payment"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_12sdp"
+                            tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_row_border"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/amount"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/totalStipend"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:textColor="@color/gray_font"
+                                android:text=""
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/payment_status"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/paymentStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/date_of_payment"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/paymentDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/method"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/paymentMethod"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/bank_ac_no"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/bankAcNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="@dimen/_104sdp"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="start"
+                                android:padding="@dimen/_8sdp"
+                                android:text="@string/ifsc_code"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_11sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/ifscCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="start"
+                                android:textColor="@color/gray_font"
+                                android:padding="@dimen/_8sdp"
+                                android:textSize="@dimen/_11sdp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TableRow android:background="@drawable/table_small_heading_border">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/cost"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/deadlinesMissedCost"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_64sdp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/remarks"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/deadlinesMissedRemarks"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/advance_payment"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/table_row_border"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_64sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/amount"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/advancePayment"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_64sdp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/remarks"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/advancePaymentRemarks"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/bonus"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/table_row_border"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_64sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/amount"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/bonus"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_64sdp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
-                            android:text="@string/remarks"
+                            android:text="@string/note"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_12sdp"
                             tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+                    <TableRow android:background="@drawable/table_row_border">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/bonusRemarks"
-                            android:layout_width="match_parent"
+                            android:id="@+id/notes"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
-                            android:padding="@dimen/_8sdp"
                             android:textColor="@color/gray_font"
-                            android:text=""
+                            android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
-                    </LinearLayout>
-                </LinearLayout>
+                    </TableRow>
 
-
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/payment"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/table_row_border"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    <TableRow android:background="@drawable/table_small_heading_border">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="start"
                             android:padding="@dimen/_8sdp"
-                            android:text="@string/amount"
+                            android:text="@string/disclaimer"
                             android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_12sdp"
                             tools:ignore="TextSizeCheck" />
+                    </TableRow>
+
+                    <TableRow android:background="@drawable/table_row_border">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/totalStipend"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/gray_font"
-                            android:text=""
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/payment_status"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/paymentStatus"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:id="@+id/disclaimer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:fontFamily="@font/roboto"
                             android:gravity="start"
                             android:textColor="@color/gray_font"
                             android:padding="@dimen/_8sdp"
                             android:textSize="@dimen/_11sdp" />
 
-                    </LinearLayout>
+                    </TableRow>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                </TableLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/date_of_payment"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/paymentDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:textColor="@color/gray_font"
-                            android:padding="@dimen/_8sdp"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/method"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/paymentMethod"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:textColor="@color/gray_font"
-                            android:padding="@dimen/_8sdp"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/bank_ac_no"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/bankAcNo"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:textColor="@color/gray_font"
-                            android:padding="@dimen/_8sdp"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="@dimen/_104sdp"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_medium"
-                            android:gravity="start"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/ifsc_code"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_11sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/ifscCode"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="start"
-                            android:textColor="@color/gray_font"
-                            android:padding="@dimen/_8sdp"
-                            android:textSize="@dimen/_11sdp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/note"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-                <TableRow android:background="@drawable/table_row_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/notes"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="start"
-                        android:textColor="@color/gray_font"
-                        android:padding="@dimen/_8sdp"
-                        android:textSize="@dimen/_11sdp" />
-
-                </TableRow>
-
-                <TableRow android:background="@drawable/table_small_heading_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="start"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/disclaimer"
-                        android:textColor="@color/primary_text"
-                        android:textSize="@dimen/_12sdp"
-                        tools:ignore="TextSizeCheck" />
-                </TableRow>
-
-                <TableRow android:background="@drawable/table_row_border">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/disclaimer"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="start"
-                        android:textColor="@color/gray_font"
-                        android:padding="@dimen/_8sdp"
-                        android:textSize="@dimen/_11sdp" />
-
-                </TableRow>
-
-            </TableLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    <!-- Progress Overlay -->
     <FrameLayout
         android:id="@+id/progressOverlay"
         android:layout_width="match_parent"
@@ -777,12 +792,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loader" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

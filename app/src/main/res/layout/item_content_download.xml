@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
+    android:id="@+id/downloadContentCardView"
     android:layout_margin="@dimen/_2sdp"
-    app:cardCornerRadius="@dimen/_6sdp">
+    app:cardCornerRadius="@dimen/_8sdp">
 
     <LinearLayout
         android:id="@+id/downloadContentBtn"
@@ -13,6 +14,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/_8sdp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +42,7 @@
                 android:layout_marginStart="@dimen/_6sdp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
+                android:textColor="@color/primary_text"
                 android:text="@string/intern_handbook"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
@@ -66,7 +70,7 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:fontFamily="@font/roboto"
             android:text=""
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

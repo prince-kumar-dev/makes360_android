@@ -18,6 +18,7 @@ import com.makes360.app.ui.client.ClientProjectAssets
 import com.makes360.app.ui.client.ClientProjectDetails
 import com.makes360.app.ui.client.ClientContactLog
 import com.makes360.app.ui.client.ClientProfile
+import com.makes360.app.ui.client.ClientServiceHistory
 
 class ClientDetailsAdapter(
     private var context: Context,
@@ -100,9 +101,21 @@ class ClientDetailsAdapter(
                 navigateToContactLog(details.projectId, details.projectName)
             }
 
-            "Service History" -> showToast("Service History")
+            "Service History" -> if (details.projectId == "") {
+                showToast("Select Project from Project List")
+            } else {
+                navigateToServiceHistory(details.projectId, details.projectName)
+            }
             else -> showToast("Credentials")
         }
+    }
+
+    private fun navigateToServiceHistory(projectId: String, projectName: String) {
+        val intent = Intent(context, ClientServiceHistory::class.java).apply {
+            putExtra("PROJECT_ID", projectId)
+            putExtra("PROJECT_NAME", projectName)
+        }
+        context.startActivity(intent)
     }
 
     private fun showToast(message: String) {

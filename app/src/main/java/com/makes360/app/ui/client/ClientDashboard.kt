@@ -197,7 +197,8 @@ class ClientDashboard : BaseActivity() {
 
         // Get the email passed from the previous activity
         email = intent.getStringExtra("EMAIL").toString()
-        val custId = intent.getStringExtra("CUST_ID")?.toInt()
+        // val custId = intent.getStringExtra("CUST_ID")?.toInt()
+        val custId = 5604672
         val firstName = intent.getStringExtra("FIRST_NAME")
         gender = intent.getStringExtra("GENDER").toString()
         profilePic = intent.getStringExtra("PROFILE_PIC").toString()
@@ -209,6 +210,19 @@ class ClientDashboard : BaseActivity() {
         if (custId != null) {
             fetchProjectDetails(custId)
         }
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (custId != null) {
+                    fetchProjectDetails(custId)
+                    announcementWebView(custId.toString())
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
+
         announcementWebView(custId.toString())
 
     }

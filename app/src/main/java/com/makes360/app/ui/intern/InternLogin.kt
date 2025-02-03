@@ -4,21 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.makes360.app.databinding.ActivityInternLoginBinding
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
+import com.makes360.app.databinding.ActivityInternLoginBinding
 import com.makes360.app.util.NetworkUtils
 import org.json.JSONException
 import org.json.JSONObject
@@ -31,7 +33,7 @@ class InternLogin : BaseActivity() {
     private lateinit var sendOtpButton: Button
     private lateinit var loginButton: Button
     private lateinit var progressOverlay: FrameLayout
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var mBinding: ActivityInternLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,7 +120,6 @@ class InternLogin : BaseActivity() {
         finish()
     }
 
-
     private fun applyForInternship() {
 
         val url = "https://www.google.com/search?q=internship+makes360"
@@ -130,16 +131,18 @@ class InternLogin : BaseActivity() {
 
     private fun showLoader() {
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
         progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
-        progressBar.visibility = View.GONE
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
     }
 
 
     private var isOtpRequestInProgress = false
+    private var cooldownTimer: CountDownTimer? = null
 
     private fun sendOtp() {
         if (isOtpRequestInProgress) {
@@ -160,6 +163,8 @@ class InternLogin : BaseActivity() {
 
         isOtpRequestInProgress = true
         sendOtpButton.isEnabled = false // Disable button
+        sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.primary_text))
+
         showLoader() // Show loader
 
         val url = "https://www.makes360.com/application/makes360/internship/send_otp.php"
@@ -175,33 +180,56 @@ class InternLogin : BaseActivity() {
             jsonBody,
             { response ->
                 isOtpRequestInProgress = false
-                sendOtpButton.isEnabled = true // Re-enable button
                 hideLoader() // Hide loader
 
                 try {
                     val success = response.optBoolean("success", false)
                     val message = response.optString("error", "Unknown response from server")
+                    val retryAfter = response.optInt("retry_after", 0)
 
                     if (success) {
-                        Toast.makeText(this, "OTP sent successfully.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "OTP sent successfully", Toast.LENGTH_SHORT).show()
+                        startCooldownTimer(60) // 60 seconds cooldown
+                    } else if (retryAfter > 0) {
+                        // Handle server-side cooldown
+                        Toast.makeText(
+                            this,
+                            "Please wait $retryAfter seconds before requesting again",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        startCooldownTimer(retryAfter)
                     } else {
-                        // Display the specific message returned from the server
                         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                        sendOtpButton.isEnabled = true // Re-enable button
+                        sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
                     }
                 } catch (e: JSONException) {
                     Toast.makeText(this, "Response parsing error: ${e.message}", Toast.LENGTH_SHORT)
                         .show()
+                    sendOtpButton.isEnabled = true // Re-enable button
+                    sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
                 }
             },
             { error ->
                 isOtpRequestInProgress = false
-                sendOtpButton.isEnabled = true // Re-enable button
                 hideLoader() // Hide loader
-                Toast.makeText(
-                    this,
-                    "Network error: ${error.message ?: "Unknown error"}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                sendOtpButton.isEnabled = true // Re-enable button
+                sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
+
+                val statusCode = error.networkResponse?.statusCode
+                if (statusCode == 429) {
+                    Toast.makeText(
+                        this,
+                        "Too many requests. Please try again later.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Network error: ${error.message ?: "Unknown error"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         ) {
             override fun getHeaders(): MutableMap<String, String> {
@@ -212,6 +240,20 @@ class InternLogin : BaseActivity() {
         requestQueue.add(jsonObjectRequest)
     }
 
+    private fun startCooldownTimer(seconds: Int) {
+        cooldownTimer?.cancel() // Cancel any existing timer
+        cooldownTimer = object : CountDownTimer(seconds * 1000L, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val remainingSeconds = millisUntilFinished / 1000
+                sendOtpButton.text = "Wait ${remainingSeconds}s"
+            }
+
+            override fun onFinish() {
+                sendOtpButton.isEnabled = true
+                sendOtpButton.text = getString(R.string.send_otp)
+            }
+        }.apply { start() }
+    }
 
     // Function to verify OTP
     private fun verifyOtp() {

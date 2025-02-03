@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.trainee.TraineeDashboard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
+            android:overScrollMode="never"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,10 +83,13 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -100,6 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/recent_announcement"
+                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_16sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/previousAnnouncementCardView"
@@ -132,12 +139,13 @@
                             </com.google.android.material.card.MaterialCardView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <!-- Divider -->
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="@dimen/_1sdp"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
-                            android:background="#DDD" />
+                            android:background="@color/grey_font" />
 
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="match_parent"
@@ -154,7 +162,6 @@
 
                         </com.google.android.material.card.MaterialCardView>
 
-
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -169,12 +176,14 @@
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:layout_marginEnd="@dimen/_4sdp"
                                 android:layout_marginBottom="@dimen/_8sdp"
+                                app:cardBackgroundColor="@color/white"
                                 app:cardCornerRadius="@dimen/_16sdp"
                                 app:cardElevation="@dimen/_2sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeWidth="0dp">
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/markAsReadTxtView"
@@ -194,7 +203,6 @@
 
                     </LinearLayout>
 
-
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -204,24 +212,33 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
+                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/_8sdp"
-                    app:elevation="@dimen/_6sdp"
-                    app:layout_constraintBottom_toTopOf="@+id/footerTextView"
+                    app:cardElevation="@dimen/_8sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/announcementCardView">
+                    app:layout_constraintTop_toBottomOf="@+id/announcementCardView"
+                    app:strokeWidth="0dp">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/detailsRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_4sdp"
+                        android:nestedScrollingEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                 </com.google.android.material.card.MaterialCardView>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.95" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/footerTextView"
@@ -229,13 +246,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:fontFamily="@font/primary_font"
-                    android:textSize="@dimen/_11sdp"
+                    android:gravity="center"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/guideline" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -271,6 +290,7 @@
         android:layout_width="@dimen/_220sdp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:backgroundTint="@color/white"
         app:headerLayout="@layout/navigation_header"
         app:itemTextColor="@color/primary_text"
         app:menu="@menu/empty_menu" />

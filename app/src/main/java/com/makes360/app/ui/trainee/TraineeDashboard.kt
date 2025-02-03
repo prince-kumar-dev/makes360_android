@@ -5,10 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebResourceRequest
-import android.webkit.WebSettings
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -26,7 +23,6 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
 import com.makes360.app.adapters.trainee.TraineeDetailsAdapter
-import com.makes360.app.databinding.ActivityInternDashboardBinding
 import com.makes360.app.databinding.ActivityTraineeDashboardBinding
 import com.makes360.app.models.trainee.TraineeDetailsData
 import com.makes360.app.ui.AnnouncementList
@@ -43,10 +39,7 @@ import org.json.JSONObject
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
-import java.util.Locale
 
 class TraineeDashboard : BaseActivity() {
 
@@ -195,8 +188,8 @@ class TraineeDashboard : BaseActivity() {
         progressBar = findViewById(R.id.progressBar)
 
         // Get the email passed from the previous activity
-        val email = intent.getStringExtra("EMAIL")
-
+        // val email = intent.getStringExtra("EMAIL")
+        val email = "gargkumar4848@gmail.com"
         if (email != null) {
             showLoader()
             fetchTraineeDetails(email)

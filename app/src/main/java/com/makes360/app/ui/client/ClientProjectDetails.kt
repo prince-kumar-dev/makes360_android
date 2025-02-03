@@ -1,16 +1,11 @@
 package com.makes360.app.ui.client
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.makes360.app.BaseActivity
-import com.makes360.app.R
 import com.makes360.app.databinding.ActivityClientProjectDetailsBinding
 import com.makes360.app.util.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
@@ -51,6 +46,17 @@ class ClientProjectDetails : BaseActivity() {
         if (projectId != null) {
             showLoader()
             fetchProjectDetails(projectId.toInt())
+        }
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (projectId != null) {
+                    fetchProjectDetails(projectId.toInt())
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
         }
 
         mBinding.backImageView.setOnClickListener {

@@ -57,16 +57,27 @@ class MonthlyStipend : BaseActivity() {
             showToast("Invalid email! Please try again.")
         }
 
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null) {
+                    setUpViews(email)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun setUpViews(email: String) {
@@ -111,7 +122,7 @@ class MonthlyStipend : BaseActivity() {
         if (currentDay in 21..lastDayOfMonth && unpaidDetail != null) {
 
             mBinding.underDraftCardView.visibility = View.VISIBLE
-            mBinding.viewDraftStipend.text = "Draft Ready (${monthsMap[month]} $year)"
+            mBinding.viewDraftStipend.text = "Draft is Ready (${monthsMap[month]} $year)"
 
             mBinding.underDraftCardView.setOnClickListener {
                 val intent = Intent(this, Stipend::class.java)
@@ -412,6 +423,8 @@ class MonthlyStipend : BaseActivity() {
             "11" to "November",
             "12" to "December"
         )
+
+        monthlyStipendParentList.clear()
 
         for (i in details.indices.reversed()) {
             if (details[i].paymentStatus == "1")

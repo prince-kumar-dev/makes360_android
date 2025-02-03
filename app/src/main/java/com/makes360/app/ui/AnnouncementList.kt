@@ -12,6 +12,7 @@ import android.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
@@ -33,7 +34,7 @@ class AnnouncementList : BaseActivity() {
     private lateinit var adapter: AnnouncementListAdapter
     private lateinit var requestQueue: RequestQueue
     private lateinit var progressOverlay: View
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private val announcements = ArrayList<AnnouncementListData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,13 +66,14 @@ class AnnouncementList : BaseActivity() {
     }
 
     private fun showLoader() {
-        progressOverlay.visibility = View.VISIBLE
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
+        progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
-        progressBar.visibility = View.GONE
     }
 
     private fun setUpBackButton() {

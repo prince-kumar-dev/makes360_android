@@ -1,10 +1,16 @@
 package com.makes360.app.ui.trainee
 
 import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
@@ -51,9 +57,73 @@ class TraineeProfile : BaseActivity() {
         }
 
         mBinding.logOut.setOnClickListener {
-            logout()
+            logOutConfirmationDialog()
+        }
+        mBinding.instagramImageView.setOnClickListener {
+            loadUrl("https://www.instagram.com/makes360_india/")
+        }
+        mBinding.facebookImageView.setOnClickListener {
+            loadUrl("https://www.facebook.com/Makes360india/")
+        }
+        mBinding.youtubeImageView.setOnClickListener {
+            loadUrl("https://www.youtube.com/@Makes360_innovations")
+        }
+        mBinding.linkedinImageView.setOnClickListener {
+            loadUrl("https://www.linkedin.com/company/makes360/posts/")
+        }
+        mBinding.xImageView.setOnClickListener {
+            loadUrl("https://x.com/makes360india")
+        }
+        mBinding.pinterestImageView.setOnClickListener {
+            loadUrl("https://www.pinterest.com/makes360/makes360/")
         }
     }
+
+    private fun loadUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+    private fun logOutConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+
+        // Create a custom title TextView
+        val titleView = TextView(this)
+        titleView.text = getString(R.string.log_out)
+        titleView.setTextColor(Color.BLACK) // Set the title text color
+        titleView.textSize = 20f
+        titleView.setPadding(60, 30, 60, 30) // Add padding for better appearance
+        titleView.gravity = Gravity.START
+
+        builder.setCustomTitle(titleView) // Set the custom title
+        builder.setMessage("Are you sure you want to log out of your account?")
+
+        // Set up the buttons
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss() // Close the dialog
+            logout() // Proceed with account deletion
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss() // Close the dialog without doing anything
+        }
+
+        // Display the dialog
+        val dialog = builder.create()
+        dialog.show()
+
+        // Apply rounded corners and background
+        dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+
+        // Customize the button appearance
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_red))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_green_dark))
+
+        // Set message text color to black
+        val textViewMessage = dialog.findViewById<TextView>(android.R.id.message)
+        textViewMessage?.setTextColor(Color.BLACK)
+    }
+
 
     private fun logout() {
         val sharedPreferences = getSharedPreferences("TraineeLoginPrefs", MODE_PRIVATE)

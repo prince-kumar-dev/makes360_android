@@ -136,5 +136,13 @@
     <string name="company_brochure_pdf">Company Brochure (PDF)</string>
     <string name="footer_text">%1$d © AGI Innovations Makes360 Private Limited</string>
     <string name="toolbar_title">Hi %1$s</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="follow_us">Follow Us</string>
+    <string name="view_details">View Details</string>
+    <string name="service_history">Service History</string>
+    <string name="no_service_history_description">No Service History available for this project yet</string>
+    <string name="no_service_history">No Service History</string>
+    <string name="fee_info_reg_info">Fee Info/Reg Info</string>
+
     <style name="announcement_already_read">"Great! You Read It"</style>
 </resources>

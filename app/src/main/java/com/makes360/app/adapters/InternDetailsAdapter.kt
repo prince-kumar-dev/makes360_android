@@ -71,7 +71,7 @@ class InternDetailsAdapter(
             highlightCard(holder)
         }
 
-        holder.itemView.setOnClickListener {
+        holder.cardViewContainer.setOnClickListener {
             when (details.title) {
                 "Profile Details" -> handleProfile(details)
                 "Offer Letter" -> handleOfferLetter(details)

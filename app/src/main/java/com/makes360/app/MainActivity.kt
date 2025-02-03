@@ -1,15 +1,24 @@
 package com.makes360.app
 
+import android.Manifest
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.forEach
 import androidx.recyclerview.widget.GridLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -18,8 +27,8 @@ import com.makes360.app.databinding.ActivityMainBinding
 import com.makes360.app.models.CompanyProfileData
 import com.makes360.app.ui.client.ClientLogin
 import com.makes360.app.ui.intern.InternLogin
-import com.makes360.app.ui.trainee.TraineeAdminDashboard
 import com.makes360.app.ui.trainee.TraineeAdminLogin
+import com.makes360.app.ui.trainee.TraineeDashboard
 import com.makes360.app.ui.trainee.TraineeLogin
 import com.makes360.app.util.NetworkUtils
 import java.util.Calendar
@@ -155,6 +164,15 @@ open class MainActivity : BaseActivity() {
             // Add the custom view to the container
             menuParent.addView(customView)
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                setUpViews()
+            } else {
+                showNoInternet()
+            }
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun setUpViews() {
@@ -164,24 +182,95 @@ open class MainActivity : BaseActivity() {
         setUpCompanyBrochure()
         setUpInternLoginBtn()
         setUpClientLoginBtn()
-        setUpTraineeLoginForCGC()
+        setUpTraineeLogin()
         setUpFooter()
+        setUpNotification()
+    }
+
+    private fun setUpNotification() {
+        // Check if the permission has been requested before
+        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val isPermissionRequested = sharedPreferences.getBoolean("isPermissionRequested", false)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !isPermissionRequested) {
+            // Request notification permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                1001
+            )
+
+            // Mark as requested
+            sharedPreferences.edit().putBoolean("isPermissionRequested", true).apply()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1001) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                Toast.makeText(this, "Notification permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                // Permission denied
+                Toast.makeText(
+                    this,
+                    "You may miss important announcements. Please enable notifications from Settings.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     private fun setUpCompanyBrochure() {
         binding.companyBrochureCardView.setOnClickListener {
-            val url =
-                "https://www.makes360.com/application/makes360/files/Company-Profile-Makes360.pdf"
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(url)
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure to download company brochure?")
+
+            // Set up the buttons
+            builder.setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss() // Close the dialog
+                openUrl()
             }
-            startActivity(intent)
+
+            builder.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss() // Close the dialog without doing anything
+            }
+
+            // Display the dialog
+            val dialog = builder.create()
+            dialog.show()
+
+            // Apply rounded corners and background
+            dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+
+            // Set button colors
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_red))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_green_dark))
+
+            // Set title and message text color to black
+            val textViewMessage = dialog.findViewById<TextView>(android.R.id.message)
+            textViewMessage?.setTextColor(Color.BLACK)
         }
     }
 
-    private fun setUpTraineeLoginForCGC() {
+
+    private fun openUrl() {
+        val url =
+            "https://www.makes360.com/application/makes360/files/Company-Profile-Makes360.pdf"
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+        }
+        startActivity(intent)
+    }
+
+    private fun setUpTraineeLogin() {
         binding.traineeLoginCardViewForCGC.setOnClickListener {
-            val intent = Intent(this, TraineeLogin::class.java)
+            val intent = Intent(this, TraineeDashboard::class.java)
             startActivity(intent)
         }
     }
@@ -206,6 +295,8 @@ open class MainActivity : BaseActivity() {
     }
 
     private fun setUpCompanyProfileList() {
+        companyProfileList.clear()
+
         companyProfileList.add(
             CompanyProfileData(
                 "Services",

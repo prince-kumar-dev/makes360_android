@@ -5,11 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.trainee.TraineeProfile">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +126,7 @@
                         android:id="@+id/profileTopBg"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_250sdp"
+                        android:contentDescription="@string/todo"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -138,6 +142,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_marginBottom="@dimen/_12sdp"
                         android:orientation="vertical"
+                        android:background="@drawable/profile_white_bg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +152,7 @@
                             android:id="@+id/profileRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:nestedScrollingEnabled="false"
                             android:padding="@dimen/_2sdp" />
 
                     </LinearLayout>
@@ -154,20 +160,161 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/logOut"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginEnd="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:layout_marginBottom="@dimen/_12sdp"
-                android:background="@drawable/bg_button"
-                android:elevation="@dimen/_6sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/log_out"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp" />
+                android:backgroundTint="@color/white"
+                android:orientation="vertical">
+
+                <!-- Actual Menu Item -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/logOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="@dimen/_18sdp"
+                    android:paddingTop="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_18sdp"
+                    android:paddingBottom="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/logoutIcon"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_logout"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/logOutTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center_vertical"
+                        android:text="@string/log_out"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/primary_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/logout_arrow_icon"
+                        app:layout_constraintStart_toEndOf="@+id/logoutIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextSizeCheck" />
+
+                    <ImageView
+                        android:id="@+id/logout_arrow_icon"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:background="@color/grey_font" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_18sdp"
+                    android:paddingTop="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_18sdp"
+                    android:paddingBottom="@dimen/_12sdp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/follow_us"
+                    android:textSize="@dimen/_14sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_12sdp">
+
+                    <ImageView
+                        android:id="@+id/instagramImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_instagram" />
+
+                    <ImageView
+                        android:id="@+id/facebookImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_facebook" />
+
+
+                    <ImageView
+                        android:id="@+id/youtubeImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_youtube" />
+
+                    <ImageView
+                        android:id="@+id/linkedinImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_linkedin" />
+
+                    <ImageView
+                        android:id="@+id/xImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_x" />
+
+                    <ImageView
+                        android:id="@+id/pinterestImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/_6sdp"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/ic_pinterest" />
+
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

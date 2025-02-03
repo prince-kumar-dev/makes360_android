@@ -3,7 +3,6 @@ package com.makes360.app.ui.client
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.makes360.app.BaseActivity
 import com.makes360.app.databinding.ActivityClientProjectAssetsBinding
 import com.makes360.app.util.NetworkUtils
@@ -45,6 +44,17 @@ class ClientProjectAssets : BaseActivity() {
         if (projectId != null && projectName != null) {
             showLoader()
             fetchProjectAssetsDetails(projectId.toInt(), projectName)
+        }
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (projectId != null && projectName != null) {
+                    fetchProjectAssetsDetails(projectId.toInt(), projectName)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
         }
 
         mBinding.backImageView.setOnClickListener {
