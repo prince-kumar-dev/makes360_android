@@ -8,7 +8,6 @@ import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -17,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -43,13 +43,14 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
 class ClientDashboard : BaseActivity() {
 
     private lateinit var progressOverlay: View
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var mBinding: ActivityClientDashboardBinding
     private var selectedProjectId: String = ""
     private var selectedProjectName: String = ""
@@ -228,19 +229,26 @@ class ClientDashboard : BaseActivity() {
     }
 
     private fun showLoader() {
-        progressOverlay.visibility = View.VISIBLE
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
+        progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
-        progressBar.visibility = View.GONE
     }
 
     private fun setUpViews() {
         setUpImageSlider()
         setUpClientDetails()
         announcementList()
+        footer()
+    }
+
+    private fun footer() {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        mBinding.footerTextView.text = getString(R.string.footer_text, currentYear)
     }
 
     private fun setUpClientDetails() {
@@ -260,28 +268,28 @@ class ClientDashboard : BaseActivity() {
                 email = email
             ),
             ClientDetailsData(
-                icon = R.drawable.ic_nav_logo,
+                icon = R.drawable.ic_project_details,
                 title = "Project Details",
                 projectId = projectId
             ),
             ClientDetailsData(
-                icon = R.drawable.ic_nav_logo,
+                icon = R.drawable.ic_project_assets,
                 title = "Project Assets",
                 projectId = projectId,
                 projectName = selectedProjectName
             ),
             ClientDetailsData(
-                icon = R.drawable.ic_nav_logo,
+                icon = R.drawable.ic_contact,
                 title = "Contact Log",
                 projectId = projectId
             ),
             ClientDetailsData(
-                icon = R.drawable.ic_nav_logo,
+                icon = R.drawable.ic_service_history,
                 title = "Service History",
                 projectId = projectId
             ),
             ClientDetailsData(
-                icon = R.drawable.ic_nav_logo,
+                icon = R.drawable.ic_credentials,
                 title = "Credentials",
                 projectId = projectId
             ),

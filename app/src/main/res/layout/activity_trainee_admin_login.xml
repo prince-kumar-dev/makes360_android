@@ -169,8 +169,8 @@
         <!-- Progress Overlay -->
         <FrameLayout
             android:id="@+id/progressOverlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#9A000000"
             android:elevation="@dimen/_6sdp"
             android:visibility="gone"
@@ -179,13 +179,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

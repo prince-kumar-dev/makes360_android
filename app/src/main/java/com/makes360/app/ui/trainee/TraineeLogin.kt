@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -31,7 +32,7 @@ class TraineeLogin : BaseActivity() {
     private lateinit var sendOtpButton: Button
     private lateinit var loginButton: Button
     private lateinit var progressOverlay: FrameLayout
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private lateinit var mBinding: ActivityTraineeLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,11 +121,12 @@ class TraineeLogin : BaseActivity() {
 
     private fun showLoader() {
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
         progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
-        progressBar.visibility = View.GONE
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
     }
 

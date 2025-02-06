@@ -106,7 +106,7 @@
     <string name="no_assets_available_for_this_project_yet">No assets available for this project yet</string>
     <string name="contact_log">Contact Log</string>
     <string name="no_contact_log">No Contact Log</string>
-    <string name="no_contact_log_available_for_this_project_yet">No Contact Log available for this project yet.</string>
+    <string name="no_contact_log_available_for_this_project_yet">No Contact Log available for this project yet</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="let_s_get_started">Let\'s get started! 🚀</string>
     <string name="admin_login">Admin Login</string>
@@ -143,6 +143,12 @@
     <string name="no_service_history_description">No Service History available for this project yet</string>
     <string name="no_service_history">No Service History</string>
     <string name="fee_info_reg_info">Fee Info/Reg Info</string>
+    <string name="trainee_support_message">❗ Please avoid texting or calling other office numbers as they are dedicated to other operations.</string>
+    <string name="hr_mail">👉 hr@makes360.com</string>
+    <string name="contact_number">👉 +91 77810 84258 \n(Call Only - 10 AM to 6 PM)</string>
+    <string name="whatsapp_number">👉 +91 98766 81531\n(WhatsApp Only - 24x7)</string>
+    <string name="helpline_for_training">📞 Helpline for Training:</string>
+    <string name="attention_students">📢 Attention Students:</string>
 
     <style name="announcement_already_read">"Great! You Read It"</style>
 </resources>

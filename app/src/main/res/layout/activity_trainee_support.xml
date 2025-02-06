@@ -80,7 +80,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="center"
                     android:textColor="@color/primary_text"
-                    android:text="📢 Attention Students:"
+                    android:text="@string/attention_students"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
 
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_6sdp"
-                    android:text="📞 Helpline for Training:"
+                    android:text="@string/helpline_for_training"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_4sdp"
-                        android:text="👉 +91 98766 81531\n(WhatsApp Only - 24x7)"
+                        android:text="@string/whatsapp_number"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="TextSizeCheck" />
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:text="👉 +91 77810 84258 \n(Call Only - 10 AM to 6 PM)"
+                        android:text="@string/contact_number"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="TextSizeCheck" />
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:text="👉 hr@makes360.com"
+                        android:text="@string/hr_mail"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_12sdp"
                         tools:ignore="TextSizeCheck" />
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:text="❗ Please avoid texting or calling other office numbers as they are dedicated to other operations."
+                    android:text="@string/trainee_support_message"
                     android:textColor="@color/material_core_red"
                     android:textSize="14sp" />
 

@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_text"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:padding="@dimen/_12sdp">
 
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/material_core_blue" />
+        app:tint="@color/colorPrimary" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/no_internet_text"
@@ -26,7 +26,7 @@
         android:fontFamily="@font/default_font"
         android:gravity="center"
         android:text="@string/no_internet_connection"
-        android:textColor="@color/text_white"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_26sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:fontFamily="@font/default_font"
         android:gravity="center"
         android:text="@string/no_internet_message"
-        android:textColor="@color/text_white"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,10 +51,11 @@
         android:id="@+id/refreshContentCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_22sdp"
+        app:strokeWidth="0dp"
         app:cardBackgroundColor="@color/material_core_yellow"
-        app:cardCornerRadius="@dimen/_50sdp"
-        app:cardElevation="@dimen/_4sdp"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_8sdp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

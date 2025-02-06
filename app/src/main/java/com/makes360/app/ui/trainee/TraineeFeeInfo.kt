@@ -115,8 +115,10 @@ class TraineeFeeInfo : BaseActivity() {
         if(feeDetails.status == "Success") {
             mBinding.registrationFeeTextView.text = "Joined with Makes360"
             mBinding.registrationFeeCardView.setCardBackgroundColor(
-                ContextCompat.getColor(this, R.color.material_core_light_green)
+                ContextCompat.getColor(this, R.color.material_core_green)
             )
+            mBinding.registrationCard.strokeColor = ContextCompat.getColor(this, R.color.material_core_green)
+
 
             mBinding.amountFeeTextView.text = "₹ " + feeDetails.amount
             mBinding.txnIdFeeTextView.text = feeDetails.txnId
@@ -138,7 +140,7 @@ class TraineeFeeInfo : BaseActivity() {
         if(feeDetails.firstInst.isEmpty()) {
             mBinding.firstInstallmentFeeTextView.text = "Not Paid"
             mBinding.firstInstallmentFeeCardView.setCardBackgroundColor(
-                ContextCompat.getColor(this, R.color.material_flat_carrot)
+                ContextCompat.getColor(this, R.color.material_core_red)
             )
             mBinding.firstInstallmentStatusImageView.setOnClickListener { view ->
                 showPopup(view, "First installment has not yet been paid.")
@@ -148,6 +150,7 @@ class TraineeFeeInfo : BaseActivity() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
             }
+            mBinding.registrationCard.strokeColor = ContextCompat.getColor(this, R.color.material_core_red)
         } else {
             mBinding.payFeeCardView.visibility = View.GONE
 
@@ -164,11 +167,12 @@ class TraineeFeeInfo : BaseActivity() {
                             "First installment has been paid. Our team will review and approve it shortly. Rest assured, there's nothing to worry about."
                         )
                     }
+                    mBinding.registrationCard.strokeColor = ContextCompat.getColor(this, R.color.material_core_yellow)
                 }
                 "0" -> {
                     mBinding.firstInstallmentFeeTextView.text = "Payment Rejected"
                     mBinding.firstInstallmentFeeCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(this, R.color.material_flat_carrot)
+                        ContextCompat.getColor(this, R.color.material_core_red)
                     )
                     mBinding.firstInstallmentStatusImageView.setOnClickListener { view ->
                         showPopup(
@@ -176,16 +180,18 @@ class TraineeFeeInfo : BaseActivity() {
                             "Your payment has not been approved. Please reach out to support for assistance."
                         )
                     }
+                    mBinding.registrationCard.strokeColor = ContextCompat.getColor(this, R.color.material_core_red)
                 }
                 "1" -> {
                     mBinding.firstInstallmentFeeCardView.setCardBackgroundColor(
-                        ContextCompat.getColor(this, R.color.material_core_light_green)
+                        ContextCompat.getColor(this, R.color.material_core_green)
                     )
                     mBinding.firstInstallmentFeeTextView.text = "Successfully Paid"
 
                     mBinding.firstInstallmentStatusImageView.setOnClickListener { view ->
                         showPopup(view, "First installment has been paid and successfully verified.")
                     }
+                    mBinding.registrationCard.strokeColor = ContextCompat.getColor(this, R.color.material_core_green)
                 }
             }
         }
@@ -222,13 +228,14 @@ class TraineeFeeInfo : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun showToast(message: String) {

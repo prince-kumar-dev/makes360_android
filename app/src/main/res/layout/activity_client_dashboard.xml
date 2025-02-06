@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.client.ClientDashboard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:fillViewport="true"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -84,13 +87,16 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.google.android.material.card.MaterialCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/projectListCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_8sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -106,6 +112,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_medium"
                                     android:text="@string/project_list"
+                                    android:textColor="@color/primary_text"
                                     android:textSize="@dimen/_16sdp"
                                     tools:ignore="TextSizeCheck" />
 
@@ -113,20 +120,23 @@
                                     android:id="@+id/projectListRV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_6sdp" />
+                                    android:layout_marginTop="@dimen/_6sdp"
+                                    android:nestedScrollingEnabled="false" />
 
                             </LinearLayout>
 
-                        </com.google.android.material.card.MaterialCardView>
+                        </androidx.cardview.widget.CardView>
 
-
-                        <com.google.android.material.card.MaterialCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/announcementCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_8sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/projectListCardView">
@@ -146,6 +156,7 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/roboto_medium"
                                         android:text="@string/recent_announcement"
+                                        android:textColor="@color/primary_text"
                                         android:textSize="@dimen/_16sdp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/previousAnnouncementCardView"
@@ -179,12 +190,13 @@
                                     </com.google.android.material.card.MaterialCardView>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                                <!-- Divider -->
                                 <View
                                     android:layout_width="match_parent"
-                                    android:layout_height="1dp"
+                                    android:layout_height="@dimen/_1sdp"
                                     android:layout_marginStart="@dimen/_8sdp"
                                     android:layout_marginEnd="@dimen/_8sdp"
-                                    android:background="#DDD" />
+                                    android:background="@color/grey_font" />
 
                                 <com.google.android.material.card.MaterialCardView
                                     android:layout_width="match_parent"
@@ -209,13 +221,14 @@
                                     android:paddingEnd="@dimen/_4sdp"
                                     android:paddingBottom="@dimen/_4sdp">
 
-                                    <com.google.android.material.card.MaterialCardView
+                                    <androidx.cardview.widget.CardView
                                         android:id="@+id/markAsReadCardView"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/_4sdp"
                                         android:layout_marginEnd="@dimen/_4sdp"
                                         android:layout_marginBottom="@dimen/_8sdp"
+                                        app:cardBackgroundColor="@color/white"
                                         app:cardCornerRadius="@dimen/_16sdp"
                                         app:cardElevation="@dimen/_2sdp"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -234,26 +247,25 @@
                                             android:textSize="@dimen/_12sdp"
                                             tools:ignore="TextSizeCheck" />
 
-                                    </com.google.android.material.card.MaterialCardView>
+                                    </androidx.cardview.widget.CardView>
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                             </LinearLayout>
 
-                        </com.google.android.material.card.MaterialCardView>
+                        </androidx.cardview.widget.CardView>
 
-                        <com.google.android.material.card.MaterialCardView
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/clientDetailsCardView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:layout_marginTop="@dimen/_12sdp"
                             android:layout_marginEnd="@dimen/_8sdp"
-                            android:layout_marginBottom="@dimen/_8sdp"
+                            app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="@dimen/_8sdp"
-                            app:elevation="@dimen/_6sdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:cardElevation="@dimen/_8sdp"
+                            app:layout_constraintBottom_toTopOf="@+id/guideline"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/announcementCardView">
@@ -263,11 +275,34 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/_4sdp"
+                                android:nestedScrollingEnabled="false"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-                        </com.google.android.material.card.MaterialCardView>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.96" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/footerTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:fontFamily="@font/primary_font"
+                            android:gravity="center"
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -289,13 +324,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -305,6 +341,7 @@
         android:layout_width="@dimen/_220sdp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:backgroundTint="@color/white"
         app:headerLayout="@layout/navigation_header"
         app:itemTextColor="@color/primary_text"
         app:menu="@menu/empty_menu" />

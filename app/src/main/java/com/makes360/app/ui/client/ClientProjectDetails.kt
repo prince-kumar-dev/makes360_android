@@ -65,13 +65,14 @@ class ClientProjectDetails : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun updateProjectUI(project: ProjectDetails) {
@@ -142,7 +143,11 @@ class ClientProjectDetails : BaseActivity() {
 
         // Animate and set GST No
         mBinding.gstNo.apply {
-            text = project.gstNo
+            text = if(project.gstNo == "0") {
+                "Will be Updated"
+            } else {
+                project.gstNo
+            }
         }
 
 //        // Scale up-down animation on card container

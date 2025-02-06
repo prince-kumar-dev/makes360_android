@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.client.ClientProjectDetails">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <ImageView
             android:id="@+id/backImageView"
@@ -49,7 +49,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clientProjectDetailsToolbar">
@@ -57,6 +56,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -64,10 +64,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <TextView
                         android:id="@+id/projectName"
@@ -77,6 +79,7 @@
                         android:gravity="center"
                         android:padding="@dimen/_12sdp"
                         android:text="@string/project_name"
+                        android:textColor="@color/primary_text"
                         android:textSize="@dimen/_16sdp" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -84,10 +87,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -102,6 +107,7 @@
                             android:layout_marginBottom="@dimen/_6sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/current_status"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_14sdp" />
 
                         <ProgressBar
@@ -121,6 +127,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
                             android:text="@string/in_progress"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_12sdp"
                             tools:ignore="TextSizeCheck" />
                     </LinearLayout>
@@ -131,10 +138,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -148,6 +157,7 @@
                             android:fontFamily="@font/roboto_medium"
                             android:paddingBottom="@dimen/_6sdp"
                             android:text="@string/start_date"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_14sdp" />
 
                         <TextView
@@ -157,6 +167,7 @@
                             android:layout_marginStart="@dimen/_8sdp"
                             android:fontFamily="@font/roboto"
                             android:paddingBottom="@dimen/_6sdp"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -165,10 +176,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,6 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/first_renewal_date"
+                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_14sdp" />
 
                             <TextView
@@ -195,6 +209,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_8sdp"
                                 android:fontFamily="@font/roboto"
+                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_12sdp" />
                         </LinearLayout>
 
@@ -208,6 +223,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/renewal_period"
+                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_14sdp" />
 
                             <TextView
@@ -216,6 +232,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_8sdp"
                                 android:fontFamily="@font/roboto"
+                                android:textColor="@color/primary_text"
                                 android:textSize="@dimen/_12sdp" />
 
                         </LinearLayout>
@@ -228,10 +245,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -245,14 +264,15 @@
                             android:fontFamily="@font/roboto_medium"
                             android:paddingBottom="@dimen/_6sdp"
                             android:text="@string/project_note"
-                            android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/primary_text"
+                            android:textSize="@dimen/_14sdp" />
 
                         <TextView
                             android:id="@+id/projectNote"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_12sdp"
                             tools:ignore="TextSizeCheck" />
                     </LinearLayout>
@@ -262,10 +282,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_12sdp"
-                    app:cardElevation="@dimen/_4sdp">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -278,6 +300,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/gst_no"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_14sdp" />
 
                         <TextView
@@ -286,6 +309,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_8sdp"
                             android:fontFamily="@font/roboto"
+                            android:textColor="@color/primary_text"
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -294,7 +318,7 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
+    <!-- Progress Overlay -->
     <FrameLayout
         android:id="@+id/progressOverlay"
         android:layout_width="match_parent"
@@ -307,13 +331,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loader" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,6 +55,7 @@
             android:padding="@dimen/_2sdp">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/registration_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -62,7 +63,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
-                app:strokeWidth="0dp">
+                app:strokeColor="@color/material_core_green">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -346,13 +347,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/first_installment_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_8sdp"
                 app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
-                app:strokeWidth="0dp">
+                app:strokeColor="@color/material_core_green">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -367,10 +369,7 @@
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingStart="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingEnd="@dimen/_8sdp"
-                        android:paddingBottom="@dimen/_4sdp">
+                        android:padding="@dimen/_8sdp">
 
                         <ImageView
                             android:id="@+id/first_installment_category_icon"
@@ -394,7 +393,6 @@
                             android:id="@+id/payFeeCardView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_6sdp"
                             android:backgroundTint="@color/colorPrimary"
                             app:cardCornerRadius="@dimen/_18sdp"
                             app:strokeWidth="0dp">
@@ -564,13 +562,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/second_installment_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/_8sdp"
                 app:cardElevation="@dimen/_4sdp"
                 app:cardUseCompatPadding="true"
-                app:strokeWidth="0dp">
+                app:strokeColor="@color/material_core_blue">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -647,6 +646,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Progress Overlay -->
     <FrameLayout
         android:id="@+id/progressOverlay"
         android:layout_width="match_parent"
@@ -659,13 +659,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loader" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

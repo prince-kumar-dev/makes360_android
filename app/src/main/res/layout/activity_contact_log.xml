@@ -5,17 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.client.ClientContactLog">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/contactLogToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:menu="@menu/filter_menu"
         android:background="@drawable/bg_gradient_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/filter_menu">
 
         <ImageView
             android:id="@+id/backImageView"
@@ -55,7 +56,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contactLogToolbar">
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contactLogRV"
                 android:layout_width="match_parent"
@@ -69,7 +69,8 @@
                 android:id="@+id/noContactLogLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
+                android:visibility="visible"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,7 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_marginTop="@dimen/_32sdp"
                     android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_contact_log"
+                    android:src="@drawable/ic_contact"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -93,6 +94,7 @@
                     android:layout_margin="@dimen/_18sdp"
                     android:fontFamily="@font/default_font"
                     android:gravity="center"
+                    android:textColor="@color/primary_text"
                     android:text="@string/no_contact_log"
                     android:textSize="@dimen/_26sdp"
                     android:textStyle="bold"
@@ -102,13 +104,14 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/no_internet_message"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_22sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:fontFamily="@font/default_font"
                     android:gravity="center"
+                    android:textColor="@color/primary_text"
                     android:text="@string/no_contact_log_available_for_this_project_yet"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -133,13 +136,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loader" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -238,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.95" />
+                    app:layout_constraintGuide_percent="0.96" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/footerTextView"
@@ -246,7 +246,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_4sdp"
                     android:fontFamily="@font/primary_font"
                     android:gravity="center"
                     android:textColor="@color/primary_text"
@@ -273,13 +272,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader" />
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

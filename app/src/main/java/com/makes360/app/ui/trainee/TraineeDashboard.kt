@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -44,7 +45,7 @@ import java.util.Calendar
 class TraineeDashboard : BaseActivity() {
 
     private lateinit var progressOverlay: View
-    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: LottieAnimationView
     private var traineeDetailsList = mutableListOf<TraineeDetailsData>()
     private lateinit var traineeDetailsAdapter: TraineeDetailsAdapter
     private lateinit var mBinding: ActivityTraineeDashboardBinding
@@ -595,13 +596,14 @@ class TraineeDashboard : BaseActivity() {
 
 
     private fun showLoader() {
-        progressOverlay.visibility = View.VISIBLE
         progressBar.visibility = View.VISIBLE
+        progressBar.playAnimation()
+        progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        progressBar.cancelAnimation()
         progressOverlay.visibility = View.GONE
-        progressBar.visibility = View.GONE
     }
 
     private fun showToast(message: String) {

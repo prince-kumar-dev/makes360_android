@@ -226,13 +226,14 @@ class ClientProfile : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun profileCategory(details: ProfileDetails) {

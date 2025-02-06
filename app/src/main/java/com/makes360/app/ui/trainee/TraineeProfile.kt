@@ -2,6 +2,7 @@ package com.makes360.app.ui.trainee
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -92,8 +93,9 @@ class TraineeProfile : BaseActivity() {
         titleView.text = getString(R.string.log_out)
         titleView.setTextColor(Color.BLACK) // Set the title text color
         titleView.textSize = 20f
-        titleView.setPadding(60, 30, 60, 30) // Add padding for better appearance
+        titleView.setPadding(60, 60, 60, 10) // Add padding for better appearance
         titleView.gravity = Gravity.START
+        titleView.setTypeface(null, Typeface.BOLD) // Set text to bold
 
         builder.setCustomTitle(titleView) // Set the custom title
         builder.setMessage("Are you sure you want to log out of your account?")
@@ -140,13 +142,14 @@ class TraineeProfile : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun profileCategory(details: TraineeProfileDetails) {

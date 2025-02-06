@@ -381,7 +381,6 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-
     <!-- Progress Overlay -->
     <FrameLayout
         android:id="@+id/progressOverlay"

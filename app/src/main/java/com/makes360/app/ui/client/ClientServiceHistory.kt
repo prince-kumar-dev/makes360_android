@@ -13,22 +13,12 @@ import com.android.volley.toolbox.Volley
 import com.makes360.app.BaseActivity
 import com.makes360.app.R
 import com.makes360.app.adapters.client.ClientServiceHistoryAdapter
-import com.makes360.app.adapters.client.ContactLogAdapter
 import com.makes360.app.databinding.ActivityClientServiceHistoryBinding
 import com.makes360.app.models.client.ClientServiceHistoryData
-import com.makes360.app.models.client.ContactLogData
 import com.makes360.app.util.NetworkUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -162,13 +152,14 @@ class ClientServiceHistory : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -227,7 +218,7 @@ class ClientServiceHistory : BaseActivity() {
                 adapter.setServiceHistory(filteredList)
                 mBinding.serviceHistoryRV.scrollToPosition(0)
             } else {
-                Toast.makeText(this, "No announcements found for this date", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "No service history found for this date", Toast.LENGTH_SHORT)
                     .show()
             }
         } catch (e: Exception) {

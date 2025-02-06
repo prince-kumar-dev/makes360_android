@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.client.ClientProfile">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -19,6 +20,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +138,7 @@
                             android:layout_marginEnd="@dimen/_8sdp"
                             android:layout_marginBottom="@dimen/_12sdp"
                             android:orientation="vertical"
+                            android:background="@drawable/profile_white_bg"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +148,7 @@
                                 android:id="@+id/profileRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="@dimen/_2sdp" />
+                                android:nestedScrollingEnabled="false" />
 
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -189,6 +193,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/log_out"
                             android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/logout_arrow_icon"
                             app:layout_constraintStart_toEndOf="@+id/logoutIcon"
@@ -204,7 +209,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/colorPrimaryDark" />
+                            app:tint="@color/black" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -238,6 +243,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/delete_account"
                             android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/primary_text"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/delete_arrow_icon"
                             app:layout_constraintStart_toEndOf="@+id/deleteIcon"
@@ -253,7 +259,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/colorPrimaryDark" />
+                            app:tint="@color/black" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!-- Divider -->
@@ -270,6 +276,7 @@
                         android:paddingTop="@dimen/_12sdp"
                         android:paddingEnd="@dimen/_18sdp"
                         android:paddingBottom="@dimen/_12sdp"
+                        android:textColor="@color/primary_text"
                         android:text="@string/follow_us"
                         android:textSize="@dimen/_14sdp" />
 
@@ -372,13 +379,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_36sdp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:layout_gravity="center"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loader" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

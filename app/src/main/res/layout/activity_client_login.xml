@@ -94,6 +94,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_your_email"
                     android:textColorHint="@color/gray_font"
+                    android:textColor="@color/primary_text"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +132,7 @@
                     android:background="@drawable/edit_text_background"
                     android:drawableStart="@drawable/ic_otp"
                     android:textColorHint="@color/gray_font"
+                    android:textColor="@color/primary_text"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/enter_the_otp"
                     android:inputType="number"
@@ -195,23 +197,24 @@
         <!-- Progress Overlay -->
         <FrameLayout
             android:id="@+id/progressOverlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="#9A000000"
-            android:visibility="gone"
             android:elevation="@dimen/_6sdp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/progressBar"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_gravity="center"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/progress_bar_gradient" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loader" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -74,13 +74,14 @@ class ClientContactLog : BaseActivity() {
     }
 
     private fun showLoader() {
-        mBinding.progressOverlay.visibility = View.VISIBLE
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
+        mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
-        mBinding.progressBar.visibility = View.GONE
     }
 
     private fun fetchProjectContactLog(projectId: Int) {
@@ -127,6 +128,8 @@ class ClientContactLog : BaseActivity() {
                         hideLoader() // Hide loader after data is successfully fetched
                     } else {
                         hideLoader()
+                        mBinding.noContactLogLayout.visibility = View.VISIBLE
+                        mBinding.contactLogRV.visibility = View.GONE
                         val errorMessage = response.optString("error", "No contact log found.")
                         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                     }

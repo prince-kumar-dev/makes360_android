@@ -45,7 +45,6 @@
                 android:textColor="@color/primary_text"
                 android:text="@string/intern_handbook"
                 android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iconImg"
                 app:layout_constraintTop_toTopOf="parent" />

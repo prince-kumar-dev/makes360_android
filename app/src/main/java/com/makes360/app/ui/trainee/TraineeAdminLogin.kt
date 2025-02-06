@@ -5,26 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.makes360.app.BaseActivity
-import com.makes360.app.R
 import com.makes360.app.databinding.ActivityTraineeAdminLoginBinding
-import com.makes360.app.databinding.ActivityTraineeLoginBinding
 import com.makes360.app.util.NetworkUtils
-import org.json.JSONException
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
@@ -93,11 +77,12 @@ class TraineeAdminLogin : BaseActivity() {
 
     private fun showLoader() {
         mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.progressBar.playAnimation()
         mBinding.progressOverlay.visibility = View.VISIBLE
     }
 
     private fun hideLoader() {
-        mBinding.progressBar.visibility = View.GONE
+        mBinding.progressBar.cancelAnimation()
         mBinding.progressOverlay.visibility = View.GONE
     }
 

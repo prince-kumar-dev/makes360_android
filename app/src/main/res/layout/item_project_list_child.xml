@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:strokeWidth="0dp"
+    app:cardElevation="@dimen/_1sdp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -17,11 +20,12 @@
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_project_list" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/project_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textColor="@color/primary_text"
             android:fontFamily="@font/roboto"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/_10sdp"
