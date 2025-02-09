@@ -149,6 +149,13 @@
     <string name="whatsapp_number">👉 +91 98766 81531\n(WhatsApp Only - 24x7)</string>
     <string name="helpline_for_training">📞 Helpline for Training:</string>
     <string name="attention_students">📢 Attention Students:</string>
+    <string name="completed">Completed 🎯</string>
+    <string name="awaiting_feedback">Awaiting Feedback 📩</string>
+    <string name="not_started">Not Started ⏳</string>
+    <string name="testing">Testing ⚙️</string>
+    <string name="no_tasks_found">No Tasks Found</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date_new">Start Date</string>
 
     <style name="announcement_already_read">"Great! You Read It"</style>
 </resources>

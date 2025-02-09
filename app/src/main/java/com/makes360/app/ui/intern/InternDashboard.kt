@@ -1,31 +1,18 @@
 package com.makes360.app.ui.intern
 
-import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.cardview.widget.CardView
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.core.text.HtmlCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -570,6 +557,13 @@ class InternDashboard : BaseActivity() {
                 email = details.email,
                 certificateLink = details.certificateStatus,
                 applicationStatus = details.applicationStatus
+            )
+        )
+        internDetailsList.add(
+            InternDetailsRV(
+                icon = R.drawable.ic_service_history,
+                title = "Task List",
+                email = details.email
             )
         )
         internDetailsAdapter = InternDetailsAdapter(this, internDetailsList)

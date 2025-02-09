@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="status_options">
+        <item>Not Started</item>
+        <item>In Progress</item>
+        <item>Testing</item>
+        <item>Awaiting Feedback</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="priority_options">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Urgent</item>
+    </string-array>
+</resources>

@@ -1,0 +1,177 @@
+<!-- res/layout/item_task.xml -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/internTaskCardView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardUseCompatPadding="true"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginStart="@dimen/_4sdp"
+    android:layout_marginEnd="@dimen/_4sdp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="@color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_12sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dueAlertTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Task Due Alert"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/material_flat_red"
+            android:textSize="@dimen/_14sdp"
+            app:fontFamily="@font/roboto_medium" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/taskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Task Name"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_14sdp"
+            app:fontFamily="@font/roboto_medium" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/taskDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:visibility="gone"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="@dimen/_2sdp"
+            tools:text="Task description goes here"
+            android:textColor="@color/gray_font"
+            android:textSize="@dimen/_11sdp"
+            tools:ignore="TextSizeCheck" />
+
+        <ProgressBar
+            android:id="@+id/internTaskStatusProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/status_progress_bar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/taskPriorityCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_14sdp"
+                app:cardBackgroundColor="@color/light_red"
+                app:strokeColor="@color/material_flat_red">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/taskPriorityTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_18sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_11sdp"
+                    tools:ignore="TextSizeCheck"
+                    tools:text="High" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/taskStatusCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                app:cardBackgroundColor="@color/light_red"
+                app:strokeColor="@color/material_flat_red">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/taskStatusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_18sdp"
+                    android:paddingTop="@dimen/_4sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/_11sdp"
+                    tools:ignore="TextSizeCheck"
+                    tools:text="High" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:contentDescription="@string/start_date"
+                android:src="@drawable/ic_start_due_calender"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:tint="@color/primary_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextSizeCheck"
+                tools:text="Start: 14 Oct 2022" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:contentDescription="@string/start_date"
+                android:src="@drawable/ic_start_due_calender"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/startDate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primary_text"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dueDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextSizeCheck"
+                tools:text="Due: 14 Oct 2022" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

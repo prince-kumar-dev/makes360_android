@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.R
 import com.makes360.app.models.InternDetailsRV
 import com.makes360.app.ui.intern.InternProfile
+import com.makes360.app.ui.intern.InternTaskAssign
 import com.makes360.app.ui.intern.MonthlyStipend
 
 class InternDetailsAdapter(
@@ -79,11 +80,19 @@ class InternDetailsAdapter(
                 "Video Resume" -> handleVideoResume(details, holder)
                 "Stipend" -> handleStipend(details)
                 "Certificate" -> handleCertificate(details)
+                "Task List" -> handleTaskList(details)
                 else -> {
                     Toast.makeText(context, "No valid action available!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    private fun handleTaskList(details: InternDetailsRV) {
+        val intent = Intent(context, InternTaskAssign::class.java).apply {
+            putExtra("EMAIL", details.email)
+        }
+        context.startActivity(intent)
     }
 
 

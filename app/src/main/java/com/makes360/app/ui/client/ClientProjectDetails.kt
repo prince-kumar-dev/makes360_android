@@ -149,12 +149,6 @@ class ClientProjectDetails : BaseActivity() {
                 project.gstNo
             }
         }
-
-//        // Scale up-down animation on card container
-//        val cardContainer = mBinding.cardContainer // Replace with your card container ID
-//        cardContainer.setOnClickListener {
-//            cardContainer.startAnimation(scaleUpDown)
-//        }
     }
 
 
