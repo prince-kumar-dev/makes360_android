@@ -54,13 +54,13 @@ class ClientServiceHistory : BaseActivity() {
 
         if (projectId != null && projectName != null) {
             showLoader()
-            fetchProjectServiceHistory(projectId.toInt())
+            fetchProjectServiceHistory(projectId)
         }
 
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             if (NetworkUtils.isInternetAvailable(this)) {
                 if (projectId != null && projectName != null) {
-                    fetchProjectServiceHistory(projectId.toInt())
+                    fetchProjectServiceHistory(projectId)
                 }
             } else {
                 showNoInternet()
@@ -74,7 +74,7 @@ class ClientServiceHistory : BaseActivity() {
     }
 
 
-    private fun fetchProjectServiceHistory(projectId: Int) {
+    private fun fetchProjectServiceHistory(projectId: String) {
         val url = "https://www.makes360.com/application/makes360/client/service-history.php"
 
         // Create a JSON object for the POST request body
@@ -94,20 +94,28 @@ class ClientServiceHistory : BaseActivity() {
                 try {
                     // Check if the response contains success and handle accordingly
                     if (response.optBoolean("success", false)) {
-                        val serviceHistoryArray: JSONArray = response.getJSONArray("service_history")
+                        val serviceHistoryArray: JSONArray =
+                            response.getJSONArray("service_history")
                         clientServiceHistoryDataList.clear() // Clear the list before adding new data
 
-                        if (serviceHistoryArray.length() == 0) {
-                            mBinding.noProjectHistoryLayout.visibility = View.VISIBLE
+                        if (serviceHistoryArray.length() == 0 || serviceHistoryArray.isNull(0)) {
                             mBinding.serviceHistoryRV.visibility = View.GONE
+                            mBinding.noProjectHistoryLayout.visibility = View.VISIBLE
                         } else {
+
+                            Toast.makeText(this, "Length > 0", Toast.LENGTH_SHORT).show()
                             // Loop through the service history array
                             for (i in 0 until serviceHistoryArray.length()) {
                                 val item = serviceHistoryArray.getJSONObject(i)
                                 val serviceDate = item.getString("service_date")
                                 val service = item.getString("service")
 
-                                clientServiceHistoryDataList.add(ClientServiceHistoryData(serviceDate, service))
+                                clientServiceHistoryDataList.add(
+                                    ClientServiceHistoryData(
+                                        serviceDate,
+                                        service
+                                    )
+                                )
                             }
 
                             // Set the adapter with fetched data

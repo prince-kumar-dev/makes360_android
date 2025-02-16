@@ -57,6 +57,17 @@ class TraineeProfile : BaseActivity() {
             showToast("Invalid email! Please try again.")
         }
 
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null) {
+                    fetchTraineeProfile(email)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
+
         mBinding.logOut.setOnClickListener {
             logOutConfirmationDialog()
         }

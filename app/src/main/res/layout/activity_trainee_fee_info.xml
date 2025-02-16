@@ -38,133 +38,200 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:overScrollMode="never"
-        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feeInfoToolbar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/_2sdp">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feeInfoToolbar">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/registration_card"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:cardElevation="@dimen/_4sdp"
-                app:cardUseCompatPadding="true"
-                app:strokeColor="@color/material_core_green">
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/registration_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeColor="@color/material_core_green">
 
-                    <!-- Header (Category Name with Arrow) -->
                     <LinearLayout
-                        android:id="@+id/registration_header_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_8sdp">
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/registration_category_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_info" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_6sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="@string/registration_fee"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_14sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                    </LinearLayout>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_8sdp"
-                        app:cardElevation="@dimen/_2sdp"
-                        app:cardUseCompatPadding="true"
-                        app:strokeWidth="0dp">
-
-                        <!-- Expandable Content -->
+                        <!-- Header (Category Name with Arrow) -->
                         <LinearLayout
-                            android:id="@+id/registration_expandable_content"
+                            android:id="@+id/registration_header_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_6sdp"
-                            android:visibility="visible">
+                            android:background="?attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_8sdp">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <ImageView
+                                android:id="@+id/registration_category_icon"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/ic_info" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/registration_fee"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_14sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_2sdp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeWidth="0dp">
+
+                            <!-- Expandable Content -->
+                            <LinearLayout
+                                android:id="@+id/registration_expandable_content"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
+                                android:orientation="vertical"
+                                android:padding="@dimen/_6sdp"
+                                android:visibility="visible">
 
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView1"
-                                    android:layout_width="0dp"
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/status"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline1"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
-
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
-
-                                <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/registrationFeeCardView"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginEnd="@dimen/_8sdp"
-                                    app:cardBackgroundColor="@color/white"
-                                    app:cardCornerRadius="@dimen/_20sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/registrationStatusImageView"
-                                    app:layout_constraintStart_toEndOf="@+id/guideline1"
-                                    app:layout_constraintTop_toTopOf="parent">
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
 
                                     <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/registrationFeeTextView"
-                                        android:layout_width="match_parent"
+                                        android:id="@+id/materialTextView1"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/status"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
+
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/registrationFeeCardView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_8sdp"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_20sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/registrationStatusImageView"
+                                        app:layout_constraintStart_toEndOf="@+id/guideline1"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/registrationFeeTextView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto"
+                                            android:padding="@dimen/_4sdp"
+                                            android:paddingStart="@dimen/_16sdp"
+                                            android:paddingEnd="@dimen/_16sdp"
+                                            android:textColor="@color/primary_text"
+                                            android:textSize="@dimen/_12sdp"
+                                            tools:ignore="TextSizeCheck,TooDeepLayout"
+                                            tools:text="Fee Status Text" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <ImageView
+                                        android:id="@+id/registrationStatusImageView"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:contentDescription="@string/todo"
+                                        android:src="@drawable/ic_info_circle"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/materialTextView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/amount"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
+
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/amountFeeTextView"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/roboto"
                                         android:padding="@dimen/_4sdp"
@@ -172,479 +239,426 @@
                                         android:paddingEnd="@dimen/_16sdp"
                                         android:textColor="@color/primary_text"
                                         android:textSize="@dimen/_12sdp"
-                                        tools:ignore="TextSizeCheck,TooDeepLayout"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/guideline2"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck"
                                         tools:text="Fee Status Text" />
 
-                                </com.google.android.material.card.MaterialCardView>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <ImageView
-                                    android:id="@+id/registrationStatusImageView"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/ic_info_circle"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/amount"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
-
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline2"
-                                    android:layout_width="wrap_content"
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
 
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/amountFeeTextView"
-                                    android:layout_width="0dp"
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/materialTextView2"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/trnx_id"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
+
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/txnIdFeeTextView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:padding="@dimen/_4sdp"
+                                        android:paddingStart="@dimen/_16sdp"
+                                        android:paddingEnd="@dimen/_16sdp"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/guideline3"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck"
+                                        tools:text="Fee Status Text" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:padding="@dimen/_4sdp"
-                                    android:paddingStart="@dimen/_16sdp"
-                                    android:paddingEnd="@dimen/_16sdp"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/guideline2"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck"
-                                    tools:text="Fee Status Text" />
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="Date:"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
 
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView2"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/trnx_id"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/registrationDateTextView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:padding="@dimen/_4sdp"
+                                        android:paddingStart="@dimen/_16sdp"
+                                        android:paddingEnd="@dimen/_16sdp"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/guideline6"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck"
+                                        tools:text="Fee Status Text" />
 
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/txnIdFeeTextView"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:padding="@dimen/_4sdp"
-                                    android:paddingStart="@dimen/_16sdp"
-                                    android:paddingEnd="@dimen/_16sdp"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/guideline3"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck"
-                                    tools:text="Fee Status Text" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="Date:"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
-
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline6"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/registrationDateTextView"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:padding="@dimen/_4sdp"
-                                    android:paddingStart="@dimen/_16sdp"
-                                    android:paddingEnd="@dimen/_16sdp"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="@+id/guideline6"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck"
-                                    tools:text="Fee Status Text" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/first_installment_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_8sdp"
-                app:cardElevation="@dimen/_4sdp"
-                app:cardUseCompatPadding="true"
-                app:strokeColor="@color/material_core_green">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header (Category Name with Arrow) -->
-                    <LinearLayout
-                        android:id="@+id/first_installment_header_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_8sdp">
-
-                        <ImageView
-                            android:id="@+id/first_installment_category_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_info" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_6sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="@string/_1st_installment"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_14sdp"
-                            tools:ignore="TextSizeCheck" />
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/payFeeCardView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimary"
-                            app:cardCornerRadius="@dimen/_18sdp"
-                            app:strokeWidth="0dp">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/payFeeTextView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:fontFamily="@font/roboto_medium"
-                                android:paddingStart="@dimen/_14sdp"
-                                android:paddingTop="@dimen/_2sdp"
-                                android:paddingEnd="@dimen/_14sdp"
-                                android:paddingBottom="@dimen/_2sdp"
-                                android:text="Pay Now"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_14sdp" />
+                            </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
 
                     </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/first_installment_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeColor="@color/material_core_green">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_8sdp"
-                        app:cardElevation="@dimen/_2sdp"
-                        app:cardUseCompatPadding="true"
-                        app:strokeWidth="0dp">
+                        android:orientation="vertical">
 
-                        <!-- Expandable Content -->
+                        <!-- Header (Category Name with Arrow) -->
                         <LinearLayout
-                            android:id="@+id/first_installment_expandable_content"
+                            android:id="@+id/first_installment_header_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_6sdp"
-                            android:visibility="visible">
+                            android:background="?attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_8sdp">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
+                            <ImageView
+                                android:id="@+id/first_installment_category_icon"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/ic_info" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/_1st_installment"
+                                android:textColor="@color/primary_text"
+                                android:textSize="@dimen/_14sdp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/payFeeCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimary"
+                                app:cardCornerRadius="@dimen/_18sdp"
+                                app:strokeWidth="0dp">
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView3"
-                                    android:layout_width="0dp"
+                                    android:id="@+id/payFeeTextView"
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1"
                                     android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/status"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
+                                    android:paddingStart="@dimen/_14sdp"
+                                    android:paddingTop="@dimen/_2sdp"
+                                    android:paddingEnd="@dimen/_14sdp"
+                                    android:paddingBottom="@dimen/_2sdp"
+                                    android:text="Pay Now"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_14sdp" />
 
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline4"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
+                            </com.google.android.material.card.MaterialCardView>
 
-                                <com.google.android.material.card.MaterialCardView
-                                    android:id="@+id/firstInstallmentFeeCardView"
-                                    android:layout_width="0dp"
+                        </LinearLayout>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_2sdp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeWidth="0dp">
+
+                            <!-- Expandable Content -->
+                            <LinearLayout
+                                android:id="@+id/first_installment_expandable_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_6sdp"
+                                android:visibility="visible">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/_8sdp"
-                                    android:layout_marginEnd="@dimen/_8sdp"
-                                    app:cardBackgroundColor="@color/white"
-                                    app:cardCornerRadius="@dimen/_20sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/firstInstallmentStatusImageView"
-                                    app:layout_constraintStart_toEndOf="@+id/guideline4"
-                                    app:layout_constraintTop_toTopOf="parent">
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
 
                                     <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/firstInstallmentFeeTextView"
-                                        android:layout_width="match_parent"
+                                        android:id="@+id/materialTextView3"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/status"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
+
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/firstInstallmentFeeCardView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_8sdp"
+                                        android:layout_marginEnd="@dimen/_8sdp"
+                                        app:cardBackgroundColor="@color/white"
+                                        app:cardCornerRadius="@dimen/_20sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/firstInstallmentStatusImageView"
+                                        app:layout_constraintStart_toEndOf="@+id/guideline4"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/firstInstallmentFeeTextView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto"
+                                            android:padding="@dimen/_4sdp"
+                                            android:paddingStart="@dimen/_16sdp"
+                                            android:paddingEnd="@dimen/_16sdp"
+                                            android:textColor="@color/primary_text"
+                                            android:textSize="@dimen/_12sdp"
+                                            tools:ignore="TextSizeCheck"
+                                            tools:text="Fee Status Text" />
+
+                                    </com.google.android.material.card.MaterialCardView>
+
+                                    <ImageView
+                                        android:id="@+id/firstInstallmentStatusImageView"
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:contentDescription="@string/todo"
+                                        android:src="@drawable/ic_info_circle"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingStart="@dimen/_8sdp"
+                                    android:paddingTop="@dimen/_4sdp"
+                                    android:paddingEnd="@dimen/_8sdp"
+                                    android:paddingBottom="@dimen/_4sdp">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/materialTextView4"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:gravity="center_vertical"
+                                        android:text="@string/amount"
+                                        android:textColor="@color/primary_text"
+                                        android:textSize="@dimen/_12sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
+
+                                    <androidx.constraintlayout.widget.Guideline
+                                        android:id="@+id/guideline5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        app:layout_constraintGuide_percent="0.20" />
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/firstInstallmentAmountFeeTextView"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/roboto"
                                         android:padding="@dimen/_4sdp"
                                         android:paddingStart="@dimen/_16sdp"
                                         android:paddingEnd="@dimen/_16sdp"
+                                        android:text="@string/_6000"
                                         android:textColor="@color/primary_text"
                                         android:textSize="@dimen/_12sdp"
-                                        tools:ignore="TextSizeCheck"
-                                        tools:text="Fee Status Text" />
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/guideline5"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:ignore="TextSizeCheck" />
 
-                                </com.google.android.material.card.MaterialCardView>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <ImageView
-                                    android:id="@+id/firstInstallmentStatusImageView"
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/ic_info_circle"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                            </LinearLayout>
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/_8sdp"
-                                android:paddingTop="@dimen/_4sdp"
-                                android:paddingEnd="@dimen/_8sdp"
-                                android:paddingBottom="@dimen/_4sdp">
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView4"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/amount"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
-
-                                <androidx.constraintlayout.widget.Guideline
-                                    android:id="@+id/guideline5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    app:layout_constraintGuide_percent="0.20" />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/firstInstallmentAmountFeeTextView"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/roboto"
-                                    android:padding="@dimen/_4sdp"
-                                    android:paddingStart="@dimen/_16sdp"
-                                    android:paddingEnd="@dimen/_16sdp"
-                                    android:text="@string/_6000"
-                                    android:textColor="@color/primary_text"
-                                    android:textSize="@dimen/_12sdp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="@+id/guideline5"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="TextSizeCheck" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/second_installment_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_8sdp"
-                app:cardElevation="@dimen/_4sdp"
-                app:cardUseCompatPadding="true"
-                app:strokeColor="@color/material_core_blue">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Header (Category Name with Arrow) -->
-                    <LinearLayout
-                        android:id="@+id/second_installment_header_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/_8sdp">
-
-                        <ImageView
-                            android:id="@+id/second_installment_category_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:contentDescription="@string/todo"
-                            android:src="@drawable/ic_info" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_6sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="@string/_2nd_installment"
-                            android:textColor="@color/primary_text"
-                            android:textSize="@dimen/_14sdp"
-                            tools:ignore="TextSizeCheck" />
+                        </com.google.android.material.card.MaterialCardView>
 
                     </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/second_installment_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    app:cardElevation="@dimen/_4sdp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeColor="@color/material_core_blue">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_8sdp"
-                        app:cardElevation="@dimen/_2sdp"
-                        app:cardUseCompatPadding="true"
-                        app:strokeWidth="0dp">
+                        android:orientation="vertical">
 
-                        <!-- Expandable Content -->
+                        <!-- Header (Category Name with Arrow) -->
                         <LinearLayout
-                            android:id="@+id/second_installment_expandable_content"
+                            android:id="@+id/second_installment_header_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_6sdp"
-                            android:visibility="visible">
+                            android:background="?attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_8sdp">
+
+                            <ImageView
+                                android:id="@+id/second_installment_category_icon"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/ic_info" />
 
                             <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto"
-                                android:padding="@dimen/_8sdp"
-                                android:text="@string/due_details"
+                                android:layout_marginStart="@dimen/_6sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/_2nd_installment"
                                 android:textColor="@color/primary_text"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_14sdp"
                                 tools:ignore="TextSizeCheck" />
 
                         </LinearLayout>
 
-                    </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="@dimen/_8sdp"
+                            app:cardElevation="@dimen/_2sdp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeWidth="0dp">
 
-                </LinearLayout>
+                            <!-- Expandable Content -->
+                            <LinearLayout
+                                android:id="@+id/second_installment_expandable_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_6sdp"
+                                android:visibility="visible">
 
-            </com.google.android.material.card.MaterialCardView>
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:padding="@dimen/_8sdp"
+                                    android:text="@string/due_details"
+                                    android:textColor="@color/primary_text"
+                                    android:textSize="@dimen/_12sdp"
+                                    tools:ignore="TextSizeCheck" />
 
-        </LinearLayout>
+                            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     <!-- Progress Overlay -->
     <FrameLayout

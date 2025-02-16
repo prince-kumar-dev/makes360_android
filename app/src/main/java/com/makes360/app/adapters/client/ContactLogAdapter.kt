@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ class ContactLogAdapter(
 
     inner class ContactLogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactDateTxt: TextView = itemView.findViewById(R.id.contactDateTxt)
-        val tagsTextView: TextView = itemView.findViewById(R.id.tagsTextView)
         val expandableContent: LinearLayout = itemView.findViewById(R.id.expandable_content)
     }
 
@@ -43,7 +41,7 @@ class ContactLogAdapter(
 
         // Set date
         val inputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val outputDateFormat = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+        val outputDateFormat = SimpleDateFormat("dd - MMM - yyyy", Locale.getDefault())
 
         try {
             val date = inputDateFormat.parse(data.date)
@@ -76,19 +74,6 @@ class ContactLogAdapter(
         contactLogWebView.loadDataWithBaseURL(null, data.message, "text/html", "UTF-8", null)
 
         holder.expandableContent.addView(detailLayout)
-
-        // "Pending," "Resolved," or "Follow-up"
-
-        holder.tagsTextView.text = "Resolved ✅"
-//        holder.expandableContent.visibility = if (data.isExpanded) View.VISIBLE else View.GONE
-//        holder.arrowIcon.setImageResource(
-//            if (data.isExpanded) R.drawable.ic_arrow_up else R.drawable.ic_arrow_down
-//        )
-//
-//        holder.itemView.findViewById<LinearLayout>(R.id.header_layout).setOnClickListener {
-//            data.isExpanded = !data.isExpanded
-//            notifyItemChanged(position)
-//        }
 
     }
 }

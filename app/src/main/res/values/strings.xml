@@ -156,6 +156,14 @@
     <string name="no_tasks_found">No Tasks Found</string>
     <string name="end_date">End Date</string>
     <string name="start_date_new">Start Date</string>
+    <string name="tasks_list">Tasks List</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="urgent">Urgent</string>
+    <string name="credentials">Credentials</string>
+    <string name="no_credentials">No Credentials</string>
+    <string name="no_credentials_found_for_this_project">No Credentials Found for this project.</string>
 
     <style name="announcement_already_read">"Great! You Read It"</style>
 </resources>

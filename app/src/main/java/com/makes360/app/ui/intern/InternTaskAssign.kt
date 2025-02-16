@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -29,6 +28,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class InternTaskAssign : BaseActivity() {
@@ -71,21 +71,7 @@ class InternTaskAssign : BaseActivity() {
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             if (NetworkUtils.isInternetAvailable(this)) {
                 email?.let {
-                    // Clear UI filter selections
-                    selectedStatuses.clear()
-                    selectedPriorities.clear()
-                    startDate = null
-                    endDate = null
-
                     resetAllFiltersUI() // A function to reset UI filters (explained below)
-
-                    // Restore original task list
-                    adapter.updateTaskList(taskList)
-
-                    // Hide the "No task found" layout when refreshing
-                    mBinding.noTaskFoundLayout.visibility = View.GONE
-
-                    // Fetch fresh data
                     showLoader()
                     fetchTaskDetails(it)
                 }
@@ -112,7 +98,8 @@ class InternTaskAssign : BaseActivity() {
             }
 
             R.id.menu_clear_filter -> {
-                // clearFilter()
+                resetAllFiltersUI()
+                Toast.makeText(this, "Filters cleared", Toast.LENGTH_SHORT).show()
                 return true
             }
         }
@@ -126,6 +113,18 @@ class InternTaskAssign : BaseActivity() {
     }
 
     private fun resetAllFiltersUI() {
+        // Clear UI filter selections
+        selectedStatuses.clear()
+        selectedPriorities.clear()
+        startDate = null
+        endDate = null
+
+        // Restore original task list
+        adapter.updateTaskList(taskList)
+
+        // Hide the "No task found" layout when refreshing
+        mBinding.noTaskFoundLayout.visibility = View.GONE
+
         val allFilters = listOf(
             Pair(mBinding.filterNotStarted, mBinding.filterNotStartedTextView),
             Pair(mBinding.filterInProgress, mBinding.filterInProgressTextView),
@@ -194,7 +193,8 @@ class InternTaskAssign : BaseActivity() {
         // Apply filtering logic
         filteredTaskList.addAll(taskList.filter { task ->
             val statusMatch = selectedStatuses.isEmpty() || selectedStatuses.contains(task.status)
-            val priorityMatch = selectedPriorities.isEmpty() || selectedPriorities.contains(task.priority)
+            val priorityMatch =
+                selectedPriorities.isEmpty() || selectedPriorities.contains(task.priority)
             val dateMatch = isWithinDateRange(task.startDate)
 
             statusMatch && priorityMatch && dateMatch
@@ -217,18 +217,20 @@ class InternTaskAssign : BaseActivity() {
     private fun isWithinDateRange(taskStartDate: String): Boolean {
         if (startDate == null || endDate == null) return true // No filter applied
 
-        val sdf = SimpleDateFormat("dd - MMM - yyyy", Locale.getDefault())
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val filterFormat = SimpleDateFormat("dd - MMM - yyyy", Locale.getDefault())
 
         return try {
-            val taskDate = sdf.parse(taskStartDate)?.time ?: return false
-            val start = sdf.parse(startDate!!)?.time ?: Long.MIN_VALUE
-            val end = sdf.parse(endDate!!)?.time ?: Long.MAX_VALUE
+            val taskDate = inputFormat.parse(taskStartDate)!!
+            val start = filterFormat.parse(startDate!!)!!
+            val end = filterFormat.parse(endDate!!)!!
 
             taskDate in start..end
         } catch (e: Exception) {
             false
         }
     }
+
 
     // Helper function to highlight selected filter
     private fun applyFilter(card: MaterialCardView, textView: MaterialTextView) {

@@ -66,6 +66,7 @@ class ClientContactLog : BaseActivity() {
             } else {
                 showNoInternet()
             }
+            mBinding.swipeRefreshLayout.isRefreshing = false
         }
 
         mBinding.backImageView.setOnClickListener {

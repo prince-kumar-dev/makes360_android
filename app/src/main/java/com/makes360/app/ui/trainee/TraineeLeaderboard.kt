@@ -33,6 +33,15 @@ class TraineeLeaderboard : BaseActivity() {
         setContentView(mBinding.root)
 
         setUpLeaderboardWebView()
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                setUpLeaderboardWebView()
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
         setUpBackButton()
     }
 

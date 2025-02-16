@@ -56,17 +56,6 @@
                     android:text="@string/category_name"
                     android:textSize="@dimen/_12sdp"
                     tools:ignore="TextSizeCheck" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tagsTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/primary_text"
-                    android:text="@string/project_name"
-                    android:textSize="@dimen/_12sdp"
-                    tools:ignore="TextSizeCheck" />
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView

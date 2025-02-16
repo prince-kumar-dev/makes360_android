@@ -199,7 +199,7 @@ class ClientDashboard : BaseActivity() {
         // Get the email passed from the previous activity
         email = intent.getStringExtra("EMAIL").toString()
         // val custId = intent.getStringExtra("CUST_ID")?.toInt()
-        val custId = 5604672
+        val custId = 6268068
         val firstName = intent.getStringExtra("FIRST_NAME")
         gender = intent.getStringExtra("GENDER").toString()
         profilePic = intent.getStringExtra("PROFILE_PIC").toString()
@@ -209,13 +209,13 @@ class ClientDashboard : BaseActivity() {
         showLoader()
         setUpViews()
         if (custId != null) {
-            fetchProjectDetails(custId)
+            fetchAllProjectDetails(custId)
         }
 
         mBinding.swipeRefreshLayout.setOnRefreshListener {
             if (NetworkUtils.isInternetAvailable(this)) {
                 if (custId != null) {
-                    fetchProjectDetails(custId)
+                   fetchAllProjectDetails(custId)
                     announcementWebView(custId.toString())
                 }
             } else {
@@ -300,19 +300,24 @@ class ClientDashboard : BaseActivity() {
         mBinding.detailsRecyclerView.adapter = adapter
     }
 
-    private fun setUpProjectListRecyclerView(projectDetailsList: List<ProjectList>) {
+    private fun setUpProjectListRecyclerViewWithDetails(projectDetailsList: List<ProjectDetails>) {
 
         val projectsList = projectDetailsList.map { project ->
             ProjectListDetailsData(
                 title = project.projectName,
                 details = mapOf(
                     "Project ID" to project.projectId.toString(),
-                ),
-                icon = R.drawable.ic_project_list
+                    "Start Date" to project.startDate,
+                    "Renewal Period" to project.renewalPeriod,
+                    "First Renewal Date" to project.firstRenewalDate,
+                    "Current Status" to project.currentStatus,
+                    "Project Note" to project.projectNote,
+                    "GST No" to project.gstNo
+                )
             )
         }
 
-        val adapter = ClientProjectListAdapter(this, projectsList) { projectId, projectName ->
+        val adapter = ClientProjectListAdapter(this, projectsList.toMutableList()) { projectId, projectName ->
             selectedProjectId = projectId
             selectedProjectName = projectName
             setUpClientDetails()
@@ -595,8 +600,7 @@ class ClientDashboard : BaseActivity() {
         }
     }
 
-
-    private fun fetchProjectDetails(custId: Int) {
+    private fun fetchAllProjectDetails(custId: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val url =
@@ -607,27 +611,39 @@ class ClientDashboard : BaseActivity() {
                 connection.readTimeout = 10000
                 connection.doOutput = true
 
-                // Write custId to request body
                 val requestBody = "cust_id=$custId"
                 val outputStream = OutputStreamWriter(connection.outputStream)
                 outputStream.write(requestBody)
                 outputStream.flush()
                 outputStream.close()
 
-                // Check response code
                 if (connection.responseCode == HttpURLConnection.HTTP_OK) {
                     val response = connection.inputStream.bufferedReader().readText()
-                    val projectDetailsList = parseProjectResponse(response)
+                    val projectList = parseProjectListResponse(response)
 
-                    // Update UI on the main thread
-                    runOnUiThread {
-                        hideLoader()
-                        setUpProjectListRecyclerView(projectDetailsList)
+                    if (projectList.isNotEmpty()) {
+                        val projectDetailsList = mutableListOf<ProjectDetails>()
+
+                        // Fetch details for each project
+                        for (project in projectList) {
+                             val projectDetails = fetchProjectDetailsSync(project.projectId)
+                             projectDetails?.let { projectDetailsList.add(it) }
+                        }
+
+                        // Update UI with all project details
+                        runOnUiThread {
+                            setUpProjectListRecyclerViewWithDetails(projectDetailsList.toList())
+                        }
+                    } else {
+                        runOnUiThread {
+                            hideLoader()
+                            showToast("No projects found.")
+                        }
                     }
                 } else {
                     runOnUiThread {
                         hideLoader()
-                        showToast("Failed to fetch project details. Please try again.")
+                        showToast("Failed to fetch project list. Please try again.")
                     }
                 }
             } catch (e: Exception) {
@@ -640,7 +656,62 @@ class ClientDashboard : BaseActivity() {
         }
     }
 
-    private fun parseProjectResponse(response: String): List<ProjectList> {
+    private fun fetchProjectDetailsSync(projectId: Int): ProjectDetails? {
+        return try {
+            val url =
+                URL("https://www.makes360.com/application/makes360/client/project-details.php")
+            val connection = url.openConnection() as HttpURLConnection
+            connection.requestMethod = "POST"
+            connection.connectTimeout = 10000
+            connection.readTimeout = 10000
+            connection.doOutput = true
+
+            val requestBody = "project_id=$projectId"
+            val outputStream = OutputStreamWriter(connection.outputStream)
+            outputStream.write(requestBody)
+            outputStream.flush()
+            outputStream.close()
+
+            if (connection.responseCode == HttpURLConnection.HTTP_OK) {
+                val response = connection.inputStream.bufferedReader().readText()
+                parseProjectResponse(response)
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun parseProjectResponse(response: String): ProjectDetails? {
+        val jsonResponse = JSONObject(response)
+
+        return if (jsonResponse.optBoolean("success", false)) {
+            val projectJson = jsonResponse.optJSONObject("project")
+            if (projectJson != null) {
+                ProjectDetails(
+                    projectId = projectJson.optInt("project_id"),
+                    currentStatus = projectJson.optString("current_status", "Unknown"),
+                    projectName = projectJson.optString("project_name", "Unknown"),
+                    startDate = projectJson.optString("start_date", "Unknown"),
+                    renewalPeriod = projectJson.optString("renewal_period", "Unknown"),
+                    firstRenewalDate = projectJson.optString("first_renewal_date", "Unknown"),
+                    projectNote = projectJson.optString("project_note", "Unknown"),
+                    gstNo = projectJson.optString("gst_no", "Unknown")
+                )
+            } else {
+                null
+            }
+        } else {
+            runOnUiThread {
+                showToast(jsonResponse.optString("error", "Unknown error occurred."))
+            }
+            null
+        }
+    }
+
+    private fun parseProjectListResponse(response: String): List<ProjectList> {
         val projectList = mutableListOf<ProjectList>()
         val jsonResponse = JSONObject(response)
 
@@ -665,16 +736,27 @@ class ClientDashboard : BaseActivity() {
         return projectList
     }
 
+    data class ProjectList(
+        val projectId: Int,
+        val projectName: String
+    )
+
+    data class ProjectDetails(
+        val projectId: Int,
+        val currentStatus: String,
+        val projectName: String,
+        val startDate: String,
+        val renewalPeriod: String,
+        val firstRenewalDate: String,
+        val projectNote: String,
+        val gstNo: String
+    )
+
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
     }
-
-    data class ProjectList(
-        val projectId: Int,
-        val projectName: String
-    )
 
     override fun onBackPressed() {
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {

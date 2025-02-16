@@ -270,7 +270,7 @@ open class MainActivity : BaseActivity() {
 
     private fun setUpTraineeLogin() {
         binding.traineeLoginCardViewForCGC.setOnClickListener {
-            val intent = Intent(this, TraineeDashboard::class.java)
+            val intent = Intent(this, TraineeLogin::class.java)
             startActivity(intent)
         }
     }

@@ -40,7 +40,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center_vertical"
-                android:text="Task List"
+                android:text="@string/tasks_list"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -79,8 +79,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
                         android:text="@string/not_started"
                         android:textColor="@color/primary_text" />
 
@@ -102,8 +102,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
                         android:text="@string/in_progress"
                         android:textColor="@color/primary_text" />
 
@@ -126,8 +126,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
                         android:text="@string/testing"
                         android:textColor="@color/primary_text" />
 
@@ -149,8 +149,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
                         android:text="@string/awaiting_feedback"
                         android:textColor="@color/primary_text" />
 
@@ -172,8 +172,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
                         android:text="@string/completed"
                         android:textColor="@color/primary_text" />
 
@@ -215,9 +215,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:text="Low"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:text="@string/low"
                         android:textColor="@color/primary_text" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -238,9 +238,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:text="Medium"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:text="@string/medium"
                         android:textColor="@color/primary_text" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -262,9 +262,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:text="High"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:text="@string/high"
                         android:textColor="@color/primary_text" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -285,9 +285,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingTop="@dimen/_4sdp"
-                        android:paddingBottom="@dimen/_4sdp"
-                        android:text="Urgent"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:text="@string/urgent"
                         android:textColor="@color/primary_text" />
 
                 </com.google.android.material.card.MaterialCardView>

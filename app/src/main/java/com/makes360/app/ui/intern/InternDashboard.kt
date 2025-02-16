@@ -562,7 +562,7 @@ class InternDashboard : BaseActivity() {
         internDetailsList.add(
             InternDetailsRV(
                 icon = R.drawable.ic_service_history,
-                title = "Task List",
+                title = "Tasks List",
                 email = details.email
             )
         )

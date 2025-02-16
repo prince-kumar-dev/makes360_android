@@ -8,7 +8,6 @@ import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -189,8 +188,8 @@ class TraineeDashboard : BaseActivity() {
         progressBar = findViewById(R.id.progressBar)
 
         // Get the email passed from the previous activity
-        // val email = intent.getStringExtra("EMAIL")
-        val email = "gargkumar4848@gmail.com"
+        val email = intent.getStringExtra("EMAIL")
+
         if (email != null) {
             showLoader()
             fetchTraineeDetails(email)
@@ -198,6 +197,18 @@ class TraineeDashboard : BaseActivity() {
             showToast("Invalid email! Please try again.")
         }
         setUpViews()
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                if (email != null) {
+                    setUpViews()
+                    fetchTraineeDetails(email)
+                }
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun setUpViews() {
@@ -479,6 +490,8 @@ class TraineeDashboard : BaseActivity() {
     private fun traineeDetailsRecyclerView(details: TraineeDetails) {
         val traineeDetailsRecyclerView =
             findViewById<RecyclerView>(R.id.detailsRecyclerView)
+
+        traineeDetailsList.clear()
 
         traineeDetailsList.add(
             TraineeDetailsData(

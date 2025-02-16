@@ -104,23 +104,31 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:padding="@dimen/_8sdp">
+                                android:orientation="vertical">
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_medium"
                                     android:text="@string/project_list"
+                                    android:layout_margin="@dimen/_8sdp"
                                     android:textColor="@color/primary_text"
                                     android:textSize="@dimen/_16sdp"
                                     tools:ignore="TextSizeCheck" />
+
+                                <!-- Divider -->
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:layout_marginStart="@dimen/_8sdp"
+                                    android:layout_marginEnd="@dimen/_8sdp"
+                                    android:background="@color/grey_font" />
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/projectListRV"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_6sdp"
+                                    android:layout_margin="@dimen/_8sdp"
                                     android:nestedScrollingEnabled="false" />
 
                             </LinearLayout>
@@ -209,6 +217,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/_8sdp"
+                                        android:scrollbars="none"
                                         android:backgroundTint="@color/transparent" />
 
                                 </com.google.android.material.card.MaterialCardView>

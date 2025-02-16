@@ -98,11 +98,11 @@
     <color name="checked_border">#4CAF50</color> <!-- Green border -->
     <color name="unchecked_background">#F8D7DA</color>
 
-    <color name="light_red">#FFCCCC</color>
-    <color name="light_blue">#CCEEFF</color>
-    <color name="light_yellow">#FFFFCC</color>
-    <color name="light_green">#CCFFCC</color>
-    <color name="light_orange">#FFE5CC</color>
-    <color name="light_purple">#E6CCFF</color>
+    <color name="light_red">#FFEEEE</color>
+    <color name="light_blue">#E6F7FF</color>
+    <color name="light_yellow">#FFFFE6</color>
+    <color name="light_green">#E6FFE6</color>
+    <color name="light_orange">#FFF2E6</color>
+    <color name="light_purple">#F2E6FF</color>
 
 </resources>

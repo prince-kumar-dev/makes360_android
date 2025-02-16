@@ -40,7 +40,7 @@ class InternDetailsAdapter(
 
     override fun onBindViewHolder(holder: InternDetailsViewHolder, position: Int) {
         val details = internDetailsList[position]
-        if(details.title != "Profile Details") {
+        if (details.title != "Profile Details") {
             holder.icon.setImageResource(details.icon)
         } else {
             when (details.icon) {
@@ -80,7 +80,7 @@ class InternDetailsAdapter(
                 "Video Resume" -> handleVideoResume(details, holder)
                 "Stipend" -> handleStipend(details)
                 "Certificate" -> handleCertificate(details)
-                "Task List" -> handleTaskList(details)
+                "Tasks List" -> handleTaskList(details)
                 else -> {
                     Toast.makeText(context, "No valid action available!", Toast.LENGTH_SHORT).show()
                 }
@@ -138,7 +138,10 @@ class InternDetailsAdapter(
     // --- Video Resume Handling ---
     private fun handleVideoResume(details: InternDetailsRV, holder: InternDetailsViewHolder) {
         when {
-            !(details.videoResumeLink.isEmpty() || details.videoResumeLink == "null") -> openUrl(details.videoResumeLink)
+            !(details.videoResumeLink.isEmpty() || details.videoResumeLink == "null") -> openUrl(
+                details.videoResumeLink
+            )
+
             (details.videoResumeLink.isEmpty() || details.videoResumeLink == "null") && details.applicationStatus == 1 -> {
                 highlightCard(holder)
                 openUrl("https://www.makes360.com/internship/apply/profile")
@@ -168,6 +171,7 @@ class InternDetailsAdapter(
                     // Certificate allotted, open the URL
                     openUrl("https://www.makes360.com/certificate/internship/")
                 }
+
                 "0" -> {
                     // Certificate explicitly marked as not allotted
                     Toast.makeText(
@@ -176,6 +180,7 @@ class InternDetailsAdapter(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
                 else -> {
                     // Default case for null or unexpected values
                     Toast.makeText(

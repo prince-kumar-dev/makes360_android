@@ -1,16 +1,11 @@
 package com.makes360.app.adapters
 
 import android.animation.ObjectAnimator
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -18,7 +13,9 @@ import com.google.android.material.textview.MaterialTextView
 import com.makes360.app.R
 import com.makes360.app.models.InternTaskAssignData
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class InternTaskAssignAdapter(
@@ -32,7 +29,7 @@ class InternTaskAssignAdapter(
 
     inner class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val internTaskCardView: MaterialCardView = view.findViewById(R.id.internTaskCardView)
-        val dueAlertTextView: MaterialTextView = view.findViewById(R.id.dueAlertTextView)
+        val taskMessageTextView: MaterialTextView = view.findViewById(R.id.taskMessageTextView)
         val taskName: MaterialTextView = view.findViewById(R.id.taskName)
         val taskDescription: MaterialTextView = view.findViewById(R.id.taskDescription)
         val taskPriorityCardView: MaterialCardView = view.findViewById(R.id.taskPriorityCardView)
@@ -41,6 +38,8 @@ class InternTaskAssignAdapter(
         val taskStatus: MaterialTextView = view.findViewById(R.id.taskStatusTextView)
         val startDate: MaterialTextView = view.findViewById(R.id.startDate)
         val dueDate: MaterialTextView = view.findViewById(R.id.dueDate)
+        val finishDate: MaterialTextView = view.findViewById(R.id.finishDate)
+        val finishDateLayout: View = view.findViewById(R.id.finishDateLayout)
         val progressBar: ProgressBar = view.findViewById(R.id.internTaskStatusProgress)
     }
 
@@ -62,7 +61,11 @@ class InternTaskAssignAdapter(
         holder.taskPriority.text = task.priority
         holder.taskStatus.text = task.status
         holder.startDate.text = "Start: ${formatDate(task.startDate)}"
-        holder.dueDate.text = "Due: ${formatDate(task.dueDate)}"
+        holder.dueDate.text = if(task.dueDate != "Not Given") {
+            "Due: ${formatDate(task.dueDate)}"
+        } else {
+            "Daily Task"
+        }
 
         // Set priority color
         setPriorityColors(holder, task)
@@ -74,8 +77,9 @@ class InternTaskAssignAdapter(
         if (task.dueDate != "Not Given") {
             val daysLeft = getDaysLeft(task.dueDate)
             if (daysLeft <= 5 && task.status != "Completed") {
-                holder.dueAlertTextView.visibility = View.VISIBLE
-                holder.dueAlertTextView.text = when {
+                holder.taskMessageTextView.visibility = View.VISIBLE
+                holder.taskMessageTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.material_flat_red))
+                holder.taskMessageTextView.text = when {
                     daysLeft > 0 -> "Due in $daysLeft days ⏳"
                     daysLeft == 0L -> "Due today ⚠️"
                     else -> "Task Overdue ⏰"
@@ -86,7 +90,7 @@ class InternTaskAssignAdapter(
                 }
             } else {
                 // Reset card color when not due soon
-                holder.dueAlertTextView.visibility = View.GONE
+                holder.taskMessageTextView.visibility = View.GONE
                 holder.internTaskCardView.apply {
                     strokeColor = ContextCompat.getColor(
                         context,
@@ -102,10 +106,37 @@ class InternTaskAssignAdapter(
             }
         } else {
             // Reset card color for tasks with no due date
-            holder.dueAlertTextView.visibility = View.GONE
+            holder.taskMessageTextView.visibility = View.GONE
             holder.internTaskCardView.apply {
                 strokeColor = ContextCompat.getColor(context, R.color.black)
                 setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
+        }
+
+        if(task.status == "Completed") {
+            if(task.finishDate != "null") {
+                holder.finishDateLayout.visibility = View.VISIBLE
+                holder.finishDate.text = "Finish: ${formatDate(task.finishDate)}"
+                holder.taskMessageTextView.visibility = View.VISIBLE
+
+                val messages = listOf(
+                    "Well done! Task completed ✅",
+                    "Awesome! Task finished 🎉",
+                    "Mission accomplished! ✅",
+                    "Great job! Task done 💪",
+                    "Success! Task completed 🎯",
+                    "Task finished smoothly ✅",
+                    "All set! Task wrapped up 🎊",
+                    "You did it! Task completed 🚀",
+                    "Nice work! Task accomplished 👏",
+                    "Task successfully done! ✅"
+                )
+                holder.taskMessageTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.material_flat_green_dark))
+
+                holder.taskMessageTextView.text = messages.random()
+
+            } else {
+                holder.finishDateLayout.visibility = View.GONE
             }
         }
 

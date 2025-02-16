@@ -99,7 +99,7 @@ class ClientProjectAssets : BaseActivity() {
                     // Update UI on the main thread
                     runOnUiThread {
                         hideLoader()
-                        if (projectDetailsList != null) {
+                        if (projectDetailsList != null && !response.isNullOrEmpty()) {
                             mBinding.projectAssetsLayout.visibility = View.VISIBLE
                             updateProjectUI(projectDetailsList, projectName)
                         } else {

@@ -21,13 +21,12 @@
         android:padding="@dimen/_12sdp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/dueAlertTextView"
+            android:id="@+id/taskMessageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Task Due Alert"
             android:visibility="gone"
             android:layout_marginBottom="@dimen/_12sdp"
-            android:textColor="@color/material_flat_red"
             android:textSize="@dimen/_14sdp"
             app:fontFamily="@font/roboto_medium" />
 
@@ -172,6 +171,36 @@
                 tools:text="Due: 14 Oct 2022" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/finishDateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_8sdp">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:contentDescription="@string/start_date"
+                android:src="@drawable/ic_start_due_calender"
+                app:tint="@color/primary_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/finishDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextSizeCheck"
+                tools:text="Start: 14 Oct 2022" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

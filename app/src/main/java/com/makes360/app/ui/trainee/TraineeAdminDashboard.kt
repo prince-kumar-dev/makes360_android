@@ -37,7 +37,21 @@ class TraineeAdminDashboard : BaseActivity() {
         setContentView(mBinding.root)
 
         setUpTraineePointsAdminWebView()
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            if (NetworkUtils.isInternetAvailable(this)) {
+                setUpTraineePointsAdminWebView()
+            } else {
+                showNoInternet()
+            }
+            mBinding.swipeRefreshLayout.isRefreshing = false
+        }
+
         setUpLogOut()
+
+        mBinding.backImageView.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setUpLogOut() {
