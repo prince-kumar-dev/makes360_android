@@ -13,8 +13,11 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class ContactLogAdapter(
-    private var contactLogs: List<ContactLogData>
+    private var allContactLogs: List<ContactLogData>
 ) : RecyclerView.Adapter<ContactLogAdapter.ContactLogViewHolder>() {
+
+    // Current list to display. Initially, it’s the full list.
+    private var filteredContactLogs: List<ContactLogData> = allContactLogs
 
     inner class ContactLogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val contactDateTxt: TextView = itemView.findViewById(R.id.contactDateTxt)
@@ -22,7 +25,22 @@ class ContactLogAdapter(
     }
 
     fun setContactLogs(newContactLogs: List<ContactLogData>) {
-        this.contactLogs = newContactLogs
+        this.allContactLogs = newContactLogs
+        this.filteredContactLogs = newContactLogs
+        notifyDataSetChanged()
+    }
+
+    // Call this method from your search listener passing the search query
+    fun filter(query: String) {
+        filteredContactLogs = if (query.isEmpty()) {
+            allContactLogs
+        } else {
+            allContactLogs.filter { data ->
+                // Remove HTML tags from message (if desired) before filtering
+                val plainTextMessage = android.text.Html.fromHtml(data.message, android.text.Html.FROM_HTML_MODE_LEGACY).toString()
+                plainTextMessage.contains(query, ignoreCase = true)
+            }
+        }
         notifyDataSetChanged()
     }
 
@@ -33,16 +51,15 @@ class ContactLogAdapter(
     }
 
     override fun getItemCount(): Int {
-        return contactLogs.size
+        return filteredContactLogs.size
     }
 
     override fun onBindViewHolder(holder: ContactLogViewHolder, position: Int) {
-        val data = contactLogs[position]
+        val data = filteredContactLogs[position]
 
         // Set date
         val inputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val outputDateFormat = SimpleDateFormat("dd - MMM - yyyy", Locale.getDefault())
-
         try {
             val date = inputDateFormat.parse(data.date)
             holder.contactDateTxt.text = date?.let { outputDateFormat.format(it) } ?: "Invalid Date"
@@ -51,13 +68,10 @@ class ContactLogAdapter(
         }
 
         holder.expandableContent.removeAllViews()
-
         val detailLayout = LayoutInflater.from(holder.itemView.context)
             .inflate(R.layout.item_contact_log_child, null) as LinearLayout
 
         val contactLogWebView = detailLayout.findViewById<WebView>(R.id.contactLogWebView)
-
-        // Configure WebView settings
         with(contactLogWebView.settings) {
             javaScriptEnabled = true
             domStorageEnabled = true
@@ -65,15 +79,11 @@ class ContactLogAdapter(
             useWideViewPort = true
             textZoom = 220
         }
-
         contactLogWebView.setOnLongClickListener {
             // Do nothing on long press
             true
         }
-
         contactLogWebView.loadDataWithBaseURL(null, data.message, "text/html", "UTF-8", null)
-
         holder.expandableContent.addView(detailLayout)
-
     }
 }

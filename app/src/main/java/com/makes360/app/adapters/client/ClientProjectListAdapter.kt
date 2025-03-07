@@ -40,7 +40,6 @@ class ClientProjectListAdapter(
 
     override fun onBindViewHolder(holder: ProjectListViewHolder, position: Int) {
         val project = projectList[position]
-
         holder.projectName.text = project.title
         holder.selectedIcon.visibility =
             if (position == selectedPosition) View.VISIBLE else View.GONE

@@ -69,4 +69,5 @@ dependencies {
     implementation (libs.glide)
     implementation (libs.logging.interceptor)
     implementation (libs.lottie)
+    implementation (libs.androidx.biometric)
 }

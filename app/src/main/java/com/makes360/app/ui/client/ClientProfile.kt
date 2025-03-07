@@ -1,10 +1,14 @@
 package com.makes360.app.ui.client
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -98,7 +102,18 @@ class ClientProfile : BaseActivity() {
 
     private fun logOutConfirmationDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Log Out")
+
+        // Create a custom title TextView
+        val titleView = TextView(this)
+        titleView.text = getString(R.string.log_out)
+        titleView.setTextColor(Color.BLACK) // Set the title text color
+        titleView.textSize = 20f
+        titleView.setPadding(60, 60, 60, 10) // Add padding for better appearance
+        titleView.gravity = Gravity.START
+        titleView.setTypeface(null, Typeface.BOLD) // Set text to bold
+
+
+        builder.setCustomTitle(titleView)
         builder.setMessage("Are you sure you want to log out of your account?")
 
         // Set up the buttons
@@ -115,16 +130,34 @@ class ClientProfile : BaseActivity() {
         val dialog = builder.create()
         dialog.show()
 
-        // Optional: Customize the button appearance
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(ContextCompat.getColor(this, R.color.material_flat_carrot))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(ContextCompat.getColor(this, R.color.material_core_light_green))
+        // Apply rounded corners and background
+        dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+
+        // Customize the button appearance
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_red))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_green_dark))
+
+        // Set title and message text color to black
+        val textViewMessage = dialog.findViewById<TextView>(android.R.id.message)
+        val textViewTitle = dialog.findViewById<TextView>(android.R.id.title)
+        textViewMessage?.setTextColor(Color.BLACK)
+        textViewTitle?.setTextColor(Color.BLACK)
     }
 
     private fun deleteAccountConfirmationDialog(email: String?) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete Account")
+
+        // Create a custom title TextView
+        val titleView = TextView(this)
+        titleView.text = getString(R.string.delete_account)
+        titleView.setTextColor(Color.BLACK) // Set the title text color
+        titleView.textSize = 20f
+        titleView.setPadding(60, 60, 60, 10) // Add padding for better appearance
+        titleView.gravity = Gravity.START
+        titleView.setTypeface(null, Typeface.BOLD) // Set text to bold
+
+
+        builder.setCustomTitle(titleView)
         builder.setMessage("Are you sure you want to delete your account? This action cannot be undone.")
 
         // Set up the buttons
@@ -141,11 +174,18 @@ class ClientProfile : BaseActivity() {
         val dialog = builder.create()
         dialog.show()
 
-        // Optional: Customize the button appearance
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(ContextCompat.getColor(this, R.color.material_flat_carrot))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            .setTextColor(ContextCompat.getColor(this, R.color.material_core_light_green))
+        // Apply rounded corners and background
+        dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_dialog_bg)
+
+        // Customize the button appearance
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_red))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(ContextCompat.getColor(this, R.color.material_flat_green_dark))
+
+        // Set title and message text color to black
+        val textViewMessage = dialog.findViewById<TextView>(android.R.id.message)
+        val textViewTitle = dialog.findViewById<TextView>(android.R.id.title)
+        textViewMessage?.setTextColor(Color.BLACK)
+        textViewTitle?.setTextColor(Color.BLACK)
     }
 
     private fun deleteAccount(email: String?) {

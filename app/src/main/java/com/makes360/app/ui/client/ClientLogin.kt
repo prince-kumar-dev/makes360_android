@@ -2,6 +2,7 @@ package com.makes360.app.ui.client
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,8 +11,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -25,6 +28,7 @@ import com.makes360.app.util.NetworkUtils
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.Calendar
+import java.util.concurrent.Executor
 
 class ClientLogin : BaseActivity() {
 
@@ -35,6 +39,11 @@ class ClientLogin : BaseActivity() {
     private lateinit var progressOverlay: FrameLayout
     private lateinit var progressBar: LottieAnimationView
     private lateinit var mBinding: ActivityClientLoginBinding
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private val AUTH_TIMEOUT = 60 * 1000 // 30 seconds in milliseconds
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +57,15 @@ class ClientLogin : BaseActivity() {
     private fun loadContent() {
         // Check login state before setting content view or initializing views
         if (isLoggedIn()) {
-            navigateToClientDetail()
+            // Initialize SharedPreferences
+            sharedPreferences = getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+
+            // Check if authentication is needed
+            if (isAuthenticationRequired()) {
+                setupBiometricAuthentication()
+            } else {
+                navigateToClientPanel() // Directly load credentials if within the timeout period
+            }
             return
         }
 
@@ -60,6 +77,76 @@ class ClientLogin : BaseActivity() {
         initializeViews()
         setClickListeners()
         footer()
+    }
+
+    private fun isAuthenticationRequired(): Boolean {
+        val lastAuthTime = sharedPreferences.getLong("last_auth_time", 0)
+        val currentTime = System.currentTimeMillis()
+        return (currentTime - lastAuthTime) > AUTH_TIMEOUT
+    }
+
+    private fun saveAuthenticationTime() {
+        sharedPreferences.edit().putLong("last_auth_time", System.currentTimeMillis()).apply()
+    }
+
+    private fun setupBiometricAuthentication() {
+        val biometricManager = BiometricManager.from(this)
+        when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                showBiometricPrompt()
+            }
+
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE,
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE,
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                Toast.makeText(
+                    this,
+                    "Biometric authentication not available. Use device credentials.",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun showBiometricPrompt() {
+        val executor: Executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt =
+            BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    saveAuthenticationTime() // Save authentication time on success
+                    Toast.makeText(
+                        applicationContext,
+                        "Authentication Successful!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    navigateToClientPanel()
+                }
+
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(
+                        applicationContext,
+                        "Authentication Error: $errString",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finish()
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(applicationContext, "Authentication Failed", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Authenticate to Access Panel")
+            .setSubtitle("Use fingerprint or device credentials to continue")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+            .build()
+
+        biometricPrompt.authenticate(promptInfo)
     }
 
     private fun initializeViews() {
@@ -106,7 +193,7 @@ class ClientLogin : BaseActivity() {
         gender: String,
         profilePic: String
     ) {
-        val sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("client_email", email)
         editor.putString("client_cust_id", custId) // Save custId
@@ -144,8 +231,8 @@ class ClientLogin : BaseActivity() {
     }
 
 
-    // Utility function to navigate to Client Detail activity
-    private fun navigateToClientDetail() {
+    // Utility function to navigate to Client Panel activity
+    private fun navigateToClientPanel() {
         val email = getSharedPreferences("ClientLoginPrefs", MODE_PRIVATE)
             .getString("client_email", null)
         val custId = getCustId()
@@ -205,6 +292,7 @@ class ClientLogin : BaseActivity() {
 
         isOtpRequestInProgress = true
         sendOtpButton.isEnabled = false // Disable button
+        sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.primary_text))
         showLoader() // Show loader
 
         val url = "https://www.makes360.com/application/makes360/client/send-otp.php"
@@ -232,26 +320,38 @@ class ClientLogin : BaseActivity() {
                         startCooldownTimer(60) // 60 seconds cooldown
                     } else if (retryAfter > 0) {
                         // Handle server-side cooldown
-                        Toast.makeText(this, "Please wait $retryAfter seconds before requesting again", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            "Please wait $retryAfter seconds before requesting again",
+                            Toast.LENGTH_LONG
+                        ).show()
                         startCooldownTimer(retryAfter)
                     } else {
                         // Generic error message
                         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                         sendOtpButton.isEnabled = true // Re-enable button
+                        sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
                     }
                 } catch (e: JSONException) {
-                    Toast.makeText(this, "Response parsing error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Response parsing error: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
                     sendOtpButton.isEnabled = true // Re-enable button
+                    sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
                 }
             },
             { error ->
                 isOtpRequestInProgress = false
                 hideLoader() // Hide loader
                 sendOtpButton.isEnabled = true // Re-enable button
+                sendOtpButton.setTextColor(ContextCompat.getColor(this, R.color.white))
 
                 val statusCode = error.networkResponse?.statusCode
                 if (statusCode == 429) {
-                    Toast.makeText(this, "Too many requests. Please try again later.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Too many requests. Please try again later.",
+                        Toast.LENGTH_LONG
+                    ).show()
                 } else {
                     Toast.makeText(
                         this,

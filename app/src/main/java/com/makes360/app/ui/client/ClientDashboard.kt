@@ -198,8 +198,7 @@ class ClientDashboard : BaseActivity() {
 
         // Get the email passed from the previous activity
         email = intent.getStringExtra("EMAIL").toString()
-        // val custId = intent.getStringExtra("CUST_ID")?.toInt()
-        val custId = 6268068
+        val custId = intent.getStringExtra("CUST_ID")?.toInt()
         val firstName = intent.getStringExtra("FIRST_NAME")
         gender = intent.getStringExtra("GENDER").toString()
         profilePic = intent.getStringExtra("PROFILE_PIC").toString()
@@ -266,11 +265,6 @@ class ClientDashboard : BaseActivity() {
                 profilePic = "https://www.makes360.com/internship/apply/file/profile_pic/$profilePic",
                 title = "Profile Details",
                 email = email
-            ),
-            ClientDetailsData(
-                icon = R.drawable.ic_project_details,
-                title = "Project Details",
-                projectId = projectId
             ),
             ClientDetailsData(
                 icon = R.drawable.ic_project_assets,

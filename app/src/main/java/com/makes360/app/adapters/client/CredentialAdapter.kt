@@ -1,4 +1,5 @@
 package com.makes360.app.adapters.client
+
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.makes360.app.R
 import com.makes360.app.models.client.CredentialData
@@ -66,6 +66,10 @@ class CredentialAdapter(private val credentials: List<CredentialData>, private v
             name.contains("email", true) -> R.drawable.ic_email
             name.contains("facebook", true) -> R.drawable.ic_facebook
             name.contains("instagram", true) -> R.drawable.ic_instagram
+            name.contains("linkedin", true) -> R.drawable.ic_linkedin
+            name.contains("pinterest", true) -> R.drawable.ic_pinterest
+            name.contains("twitter", true) -> R.drawable.ic_x
+            name.contains("youtube", true) -> R.drawable.ic_youtube
             else -> R.drawable.ic_key
         }
     }
@@ -75,6 +79,5 @@ class CredentialAdapter(private val credentials: List<CredentialData>, private v
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(label, text)
         clipboard.setPrimaryClip(clip)
-        Toast.makeText(context, "$label copied!", Toast.LENGTH_SHORT).show()
     }
 }

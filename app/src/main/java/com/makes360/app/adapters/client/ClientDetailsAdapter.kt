@@ -14,11 +14,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.makes360.app.R
 import com.makes360.app.models.client.ClientDetailsData
-import com.makes360.app.ui.client.ClientProjectAssets
-import com.makes360.app.ui.client.ClientProjectDetails
 import com.makes360.app.ui.client.ClientContactLog
 import com.makes360.app.ui.client.ClientCredentials
 import com.makes360.app.ui.client.ClientProfile
+import com.makes360.app.ui.client.ClientProjectAssets
 import com.makes360.app.ui.client.ClientServiceHistory
 
 class ClientDetailsAdapter(
@@ -82,14 +81,6 @@ class ClientDetailsAdapter(
                 context.startActivity(intent)
             }
 
-            "Project Details" -> {
-                if (details.projectId == "") {
-                    showToast("Select Project from Project List")
-                } else {
-                    navigateToProjectDetails(details.projectId)
-                }
-            }
-
             "Project Assets" -> if (details.projectId == "") {
                 showToast("Select Project from Project List")
             } else {
@@ -134,13 +125,6 @@ class ClientDetailsAdapter(
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun navigateToProjectDetails(projectId: String) {
-        val intent = Intent(context, ClientProjectDetails::class.java).apply {
-            putExtra("PROJECT_ID", projectId)
-        }
-        context.startActivity(intent)
     }
 
     private fun navigateToProjectAssets(projectId: String, projectName: String) {

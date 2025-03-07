@@ -56,22 +56,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contactLogToolbar">
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/black">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:iconifiedByDefault="false"
+                    app:queryHint="Search by keyword or date" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contactLogRV"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/noContactLogLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="gone"
                 android:background="@color/white"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,8 +122,8 @@
                     android:layout_margin="@dimen/_18sdp"
                     android:fontFamily="@font/default_font"
                     android:gravity="center"
-                    android:textColor="@color/primary_text"
                     android:text="@string/no_contact_log"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/_26sdp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -112,14 +139,27 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:fontFamily="@font/default_font"
                     android:gravity="center"
-                    android:textColor="@color/primary_text"
                     android:text="@string/no_contact_log_available_for_this_project_yet"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/no_internet_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Floating Action Button for Export -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabExport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_export"
+                app:backgroundTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
